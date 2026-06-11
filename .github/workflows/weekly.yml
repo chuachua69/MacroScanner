@@ -1,0 +1,31 @@
+name: weekly-refresh
+
+on:
+  schedule:
+    - cron: "30 11 * * 1"   # every Monday 11:30 UTC
+  workflow_dispatch: {}      # manual run button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run liquidity pipeline
+        run: python pipeline/liquidity.py
+      - name: Commit refreshed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/liquidity.json
+          git diff --cached --quiet || git commit -m "data: weekly liquidity refresh"
+          git push

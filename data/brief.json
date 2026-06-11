@@ -1,0 +1,20 @@
+{
+ "written_utc": "2026-06-11T00:00:00+00:00",
+ "week_of": "2026-06-10",
+ "headline": "Flat liquidity, calm credit — stay selective, not aggressive",
+ "body": [
+  "Regime: Neutral (+1). Translation: conditions aren't hostile, but the liquidity tide isn't rising hard enough to justify full-size bets. Half-size pilot positions, and only in names with strong fundamentals.",
+  "Net liquidity sits at $5.84T — essentially flat over the past quarter (+0.48%). The Fed's balance sheet is $6.71T and the Treasury's account holds $0.88T. The big structural story: the reverse repo facility is now empty (~$0). For two years, cash draining out of RRP quietly offset the Fed's tightening and propped markets up. That cushion is gone. From here, net liquidity moves one-for-one with what the Fed and the Treasury do — there is no buffer left. Expect this gauge to get more volatile and more honest.",
+  "Credit is calm: high-yield spreads at 2.78%, having tightened another 0.31pp this quarter. The bond market sees zero stress. One honest caveat — spreads this tight are near historic lows. They confirm calm, but they can't get much calmer, so the information from here is asymmetric: little room to improve, plenty of room to snap wider.",
+  "The dollar (120.1) is drifting slightly higher but inside the noise band, and the yield curve (+0.42%) is un-inverted and modestly positive. Neither is sending a signal this week."
+ ],
+ "watch": [
+  "Net liquidity trend is a hair below the Risk-On threshold (+0.48% vs +0.50%). One decent week could flip the regime. Let the data confirm — don't front-run it.",
+  "Treasury General Account: with RRP empty, any Treasury cash rebuild toward $1T+ now drains markets directly. This is the main downside lever to watch.",
+  "High-yield spreads above ~3.5% would be the early-warning tripwire (the crisis override fires at 6%)."
+ ],
+ "change_my_mind": [
+  "To Risk-On: net liquidity rising more than +0.5% on the quarter while credit stays calm — we are one good week away.",
+  "To Risk-Off: liquidity falling more than −0.5% on the quarter plus either spreads widening +0.3pp or the dollar up over 1%. None of those are present today."
+ ]
+}
