@@ -1,12 +1,12 @@
-== pipeline run 2026-06-11T13:45:07Z ==
+== pipeline run 2026-06-11T14:03:00Z ==
 Traceback (most recent call last):
-  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 196, in <module>
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 214, in <module>
     main()
-  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 99, in main
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 117, in main
     raw[sid] = fetch(sid, start)
                ^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 48, in fetch
-    with urllib.request.urlopen(req, timeout=60) as resp:
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 64, in fetch
+    with urllib.request.urlopen(req, timeout=90) as resp:
          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
     return opener.open(url, data, timeout)
@@ -45,46 +45,86 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TimeoutError: The read operation timed out
 LIQUIDITY FAILED exit=1
+  WARN fetch_json https://www.sec.gov/files/company_tickers.json: 403 Client Error: Forbidden for url: https://www.sec.gov/files/company_tickers.json
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/U: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/USD-per-shares/CY2025.json
   frame missing: EarningsPerShareDiluted CY2025
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/U: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/USD-per-shares/CY2024.json
   frame missing: EarningsPerShareDiluted CY2024
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/U: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/USD-per-shares/CY2026Q1.json
   frame missing: EarningsPerShareDiluted CY2026Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/U: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/USD-per-shares/CY2025Q1.json
   frame missing: EarningsPerShareDiluted CY2025Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/U: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/EarningsPerShareDiluted/USD-per-shares/CY2024Q1.json
   frame missing: EarningsPerShareDiluted CY2024Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCu: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCustomerExcludingAssessedTax/USD/CY2025.json
   frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2025
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2025.json: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2025.json
   frame missing: Revenues CY2025
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCu: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCustomerExcludingAssessedTax/USD/CY2024.json
   frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2024
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2024.json: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2024.json
   frame missing: Revenues CY2024
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCu: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCustomerExcludingAssessedTax/USD/CY2026Q1.json
   frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2026Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2026Q1.jso: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2026Q1.json
   frame missing: Revenues CY2026Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCu: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCustomerExcludingAssessedTax/USD/CY2025Q1.json
   frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2025Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2025Q1.jso: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2025Q1.json
   frame missing: Revenues CY2025Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCu: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/RevenueFromContractWithCustomerExcludingAssessedTax/USD/CY2024Q1.json
   frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2024Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2024Q1.jso: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/Revenues/USD/CY2024Q1.json
   frame missing: Revenues CY2024Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2025.: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2025.json
   frame missing: NetIncomeLoss CY2025
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2024.: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2024.json
   frame missing: NetIncomeLoss CY2024
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2026Q: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2026Q1.json
   frame missing: NetIncomeLoss CY2026Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2025Q: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2025Q1.json
   frame missing: NetIncomeLoss CY2025Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2024Q: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/NetIncomeLoss/USD/CY2024Q1.json
   frame missing: NetIncomeLoss CY2024Q1
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/StockholdersEquity/USD/CY: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/StockholdersEquity/USD/CY2026Q1I.json
   frame missing: StockholdersEquity CY2026Q1I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/StockholdersEquity/USD/CY: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/StockholdersEquity/USD/CY2025Q4I.json
   frame missing: StockholdersEquity CY2025Q4I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebtNoncurrent/US: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebtNoncurrent/USD/CY2026Q1I.json
   frame missing: LongTermDebtNoncurrent CY2026Q1I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebt/USD/CY2026Q1: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebt/USD/CY2026Q1I.json
   frame missing: LongTermDebt CY2026Q1I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebtNoncurrent/US: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebtNoncurrent/USD/CY2025Q4I.json
   frame missing: LongTermDebtNoncurrent CY2025Q4I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebt/USD/CY2025Q4: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/us-gaap/LongTermDebt/USD/CY2025Q4I.json
   frame missing: LongTermDebt CY2025Q4I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/dei/EntityCommonStockSharesOutsta: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/dei/EntityCommonStockSharesOutstanding/shares/CY2026Q1I.json
   frame missing: EntityCommonStockSharesOutstanding CY2026Q1I
+  WARN fetch_json https://data.sec.gov/api/xbrl/frames/dei/EntityCommonStockSharesOutsta: 403 Client Error: Forbidden for url: https://data.sec.gov/api/xbrl/frames/dei/EntityCommonStockSharesOutstanding/shares/CY2025Q4I.json
   frame missing: EntityCommonStockSharesOutstanding CY2025Q4I
 Screening as of CY2026Q1 | universe 515
 pre-filter survivors: 0 (fetching prices...)
 OK  0 GARP candidates -> /home/runner/work/MacroScanner/MacroScanner/data/screen.json
+  WARN get https://data.sec.gov/submissions/CIK0001536411.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001536411.json
 WARNING: CIK 1536411 resolved to '', expected 'DUQUESNE' — skipping Duquesne Family Office (Druckenmiller)
+  WARN get https://data.sec.gov/submissions/CIK0001656456.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001656456.json
 WARNING: CIK 1656456 resolved to '', expected 'APPALOOSA' — skipping Appaloosa (Tepper)
+  WARN get https://data.sec.gov/submissions/CIK0001336528.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001336528.json
 WARNING: CIK 1336528 resolved to '', expected 'PERSHING SQUARE' — skipping Pershing Square (Ackman)
+  WARN get https://data.sec.gov/submissions/CIK0001040273.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001040273.json
 WARNING: CIK 1040273 resolved to '', expected 'THIRD POINT' — skipping Third Point (Loeb)
+  WARN get https://data.sec.gov/submissions/CIK0001079114.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001079114.json
 WARNING: CIK 1079114 resolved to '', expected 'GREENLIGHT' — skipping Greenlight Capital (Einhorn)
+  WARN get https://data.sec.gov/submissions/CIK0001061768.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001061768.json
 WARNING: CIK 1061768 resolved to '', expected 'BAUPOST' — skipping Baupost Group (Klarman)
+  WARN get https://data.sec.gov/submissions/CIK0001061165.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001061165.json
 WARNING: CIK 1061165 resolved to '', expected 'LONE PINE' — skipping Lone Pine Capital
+  WARN get https://data.sec.gov/submissions/CIK0001167483.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001167483.json
 WARNING: CIK 1167483 resolved to '', expected 'TIGER GLOBAL' — skipping Tiger Global
+  WARN get https://data.sec.gov/submissions/CIK0001135730.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001135730.json
 WARNING: CIK 1135730 resolved to '', expected 'COATUE' — skipping Coatue Management
+  WARN get https://data.sec.gov/submissions/CIK0001541617.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001541617.json
 WARNING: CIK 1541617 resolved to '', expected 'ALTIMETER' — skipping Altimeter Capital
+  WARN get https://data.sec.gov/submissions/CIK0001602119.json: 403 Client Error: Forbidden for url: https://data.sec.gov/submissions/CIK0001602119.json
 WARNING: CIK 1602119 resolved to '', expected 'DRAGONEER' — skipping Dragoneer Investment Group
 OK  0/11 funds tracked, 0 overlap names -> /home/runner/work/MacroScanner/MacroScanner/data/funds.json
