@@ -33,7 +33,8 @@ jobs:
             echo "== pipeline run $(date -u +%FT%TZ) =="
             python pipeline/liquidity.py 2>&1 || echo "LIQUIDITY FAILED exit=$?"
             python pipeline/screener.py  2>&1 || echo "SCREENER FAILED exit=$?"
-            python pipeline/funds.py     2>&1 || echo "FUNDS FAILED exit=$?"
+            # funds.py runs locally via the Monday Claude routine (SEC EDGAR
+            # blocks GitHub Actions IPs at the network level — home IP is fine)
           } | tee data/run_log.txt
       - name: Commit refreshed data
         if: always()
