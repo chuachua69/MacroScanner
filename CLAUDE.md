@@ -12,23 +12,34 @@ plain English, jargon explained. **Not a product; never add auth/payments.**
 4. **Free data only** unless owner explicitly approves a paid source.
 
 ## Layout
-- `pipeline/liquidity.py` — Stage 1 robot. Fetches FRED, computes Net Liquidity
-  + regime score, writes `data/liquidity.json`. Run: `python pipeline/liquidity.py`
+- `pipeline/liquidity.py` — Stage 1 robot. FRED → Net Liquidity + regime score
+  → `data/liquidity.json`. Run: `python pipeline/liquidity.py`
+- `pipeline/screener.py` — Stage 2 robot. SEC XBRL frames (fundamentals) +
+  Yahoo chart API (prices) → Lynch GARP screen → `data/screen.json`.
+- `pipeline/funds.py` — Stage 2b robot. EDGAR 13Fs for 11 tracked funds →
+  top holdings, new buys, cross-fund overlap → `data/funds.json`. CIKs are
+  name-validated at runtime; ok=false means CIK mismatch, fix the FUNDS table.
+- `pipeline/build_universe.py` — regenerates `data/universe.csv` (S&P 500 +
+  ADR shortlist). Run occasionally, not weekly.
 - `index.html` — static phone-first dashboard (GitHub Pages serves repo root).
-- `data/liquidity.json` — robot output (committed; refreshed by Actions weekly).
+- `data/*.json` — robot outputs, committed weekly by Actions.
 - `data/brief.json` — Claude-written plain-English weekly brief. Schema:
   `{written_utc, week_of, headline, body[], watch[], change_my_mind[]}`
-- `.github/workflows/weekly.yml` — Monday cron + manual trigger.
+- `.github/workflows/weekly.yml` — Monday cron + manual + on pipeline push.
+- NOTE: SEC blocks this home IP sometimes (rate-threshold page). The pipeline
+  is designed to run in GitHub Actions; don't debug SEC 403s locally.
 
 ## Weekly Claude routine (the "thinking half")
-After the robot refreshes data: read `data/liquidity.json`, write a NEW
-`data/brief.json` — what changed this week, what it means, regime rationale,
-2–4 things to watch, what would flip the regime call. Teach, don't lecture.
-Commit as `brief: week of YYYY-MM-DD`.
+After the robot refreshes data: read `data/liquidity.json`, `data/screen.json`
+and `data/funds.json`, then write a NEW `data/brief.json` — what changed this
+week, regime rationale, NEW screen entrants worth a look (evaluate the
+anonymized metrics BEFORE looking at the ticker — anti-hype rule), notable
+smart-money moves/overlap, 2–4 things to watch, what would flip the regime
+call. Teach, don't lecture. Commit as `brief: week of YYYY-MM-DD` and push.
 
 ## Roadmap
 - [x] Phase 1 — liquidity monitor + dashboard
-- [ ] Phase 2 — GARP screener (Lynch criteria, anonymized scoring) + 13F tracker
+- [x] Phase 2 — GARP screener (Lynch criteria, anonymized scoring) + 13F tracker
 - [ ] Phase 3 — Damodaran health check + supply-chain bottleneck tracing (10-Ks)
 - [ ] Phase 4 — guardrails: pilot-trade checklist, position-sizing discipline
 

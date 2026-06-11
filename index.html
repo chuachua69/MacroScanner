@@ -62,6 +62,12 @@
   <h2>This week's brief</h2>
   <div class="card brief" id="brief"><p class="sizing">No brief yet — the weekly Claude routine writes this.</p></div>
 
+  <h2>GARP screen <span style="font-weight:400;text-transform:none;letter-spacing:0">— Lynch criteria</span></h2>
+  <div id="screen"><div class="card"><p class="sizing">No screen data yet — runs Mondays.</p></div></div>
+
+  <h2>Smart money — 13F tracker</h2>
+  <div id="funds"><div class="card"><p class="sizing">No 13F data yet — runs Mondays.</p></div></div>
+
   <h2>Liquidity metrics</h2>
   <div id="metrics"></div>
 
@@ -122,6 +128,44 @@ async function load(path) {
       (b.watch?.length ? `<p><b>Watching:</b></p><ul>${b.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : "") +
       (b.change_my_mind?.length ? `<p><b>What would change the regime call:</b></p><ul>${b.change_my_mind.map(w => `<li>${w}</li>`).join("")}</ul>` : "") +
       `<p class="sizing" style="font-size:12px">Written by Claude · ${b.written_utc.slice(0, 10)}</p>`;
+  }
+
+  const s = await load("data/screen.json");
+  const f = await load("data/funds.json");
+
+  const smartNames = new Set();
+  if (f) for (const fd of f.funds.filter(x => x.ok)) {
+    for (const h of [...(fd.top || []), ...(fd.big_adds || [])]) smartNames.add(h.issuer.split(" ")[0].toUpperCase());
+    for (const nb of fd.new_buys || []) smartNames.add(nb.split(" ")[0].toUpperCase());
+  }
+
+  if (s && s.candidates?.length) {
+    const tick = c => Object.entries(c.checks).map(([k, v]) =>
+      `<span style="color:${v === true ? "var(--green)" : v === false ? "var(--red)" : "var(--dim)"}">${v === true ? "✓" : v === false ? "✗" : "–"} ${k.replace(/_/g, " ")}</span>`).join(" · ");
+    document.getElementById("screen").innerHTML = s.candidates.slice(0, 15).map(c => {
+      const smart = smartNames.has(c.name.split(" ")[0].toUpperCase());
+      return `<div class="card metric">
+        <span class="name">${c.ticker} <span style="color:var(--dim);font-weight:400">· ${c.name}</span>${smart ? " <span style='color:var(--amber)'>★</span>" : ""}</span>
+        <span class="val">PEG ${c.peg}</span>
+        <span class="sizing">${c.sector} · score ${c.score}/5${smart ? " · ★ held by tracked funds (≈name match)" : ""}</span>
+        <span class="chg flat">+${c.eps_growth_pct}% EPS</span>
+        <details><summary>details</summary>
+          P/E ${c.pe} · EPS growth ${c.eps_growth_pct}% · revenue ${c.rev_growth_pct ?? "?"}% · ROE ${c.roe_pct ?? "?"}% · D/E ${c.de ?? "?"} · mcap $${c.mcap_b ?? "?"}B<br>${tick(c)}
+        </details></div>`;
+    }).join("") + `<p class="meta">Quarter ${s.quarter} · ${s.coverage.candidates} candidates from ${s.coverage.universe} names · ${s.coverage.no_usgaap_data} lacked US-GAAP data (mostly foreign ADRs)</p>`;
+  }
+
+  if (f && f.funds?.some(x => x.ok)) {
+    const ov = f.overlap?.length ?
+      `<div class="card"><span class="name">Conviction overlap</span><p class="sizing" style="margin:4px 0 8px">Same stock in the top-50 of 3+ tracked funds:</p>${
+        f.overlap.slice(0, 10).map(o => `<div class="comp"><span>${o.issuer}</span><b class="pos">${o.n} funds</b></div>`).join("")}</div>` : "";
+    document.getElementById("funds").innerHTML = ov + f.funds.filter(x => x.ok).map(fd => `
+      <div class="card"><details><summary style="color:var(--text);font-weight:600">${fd.name} <span style="color:var(--dim);font-weight:400">· $${fd.portfolio_b}B · Q ending ${fd.period}</span></summary>
+        <div style="margin-top:8px">${fd.top.slice(0, 5).map(h => `<div class="comp"><span>${h.issuer}</span><b class="flat">${h.pct}%</b></div>`).join("")}
+        ${fd.new_buys?.length ? `<p class="sizing" style="margin-top:8px"><b>New buys:</b> ${fd.new_buys.slice(0, 6).join(", ")}</p>` : ""}
+        ${fd.big_adds?.length ? `<p class="sizing"><b>Big adds:</b> ${fd.big_adds.slice(0, 4).map(a => `${a.issuer} (+${a.shares_chg_pct}%)`).join(", ")}</p>` : ""}
+        </div></details></div>`).join("") +
+      `<p class="meta">${f.note}</p>`;
   }
 
   const colors = { net_liquidity: "#3fb96f", hy_oas: "#e5534b", dollar: "#5b9bd5" };

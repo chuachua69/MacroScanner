@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "30 11 * * 1"   # every Monday 11:30 UTC
   workflow_dispatch: {}      # manual run button
+  push:
+    branches: [main]
+    paths: ["pipeline/**", ".github/workflows/weekly.yml"]  # re-run on code changes
 
 permissions:
   contents: write
@@ -22,10 +25,15 @@ jobs:
           python-version: "3.12"
       - name: Run liquidity pipeline
         run: python pipeline/liquidity.py
+      - name: Run GARP screener
+        run: python pipeline/screener.py
+      - name: Run 13F tracker
+        run: python pipeline/funds.py
       - name: Commit refreshed data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/liquidity.json
-          git diff --cached --quiet || git commit -m "data: weekly liquidity refresh"
+          git add data/liquidity.json data/screen.json data/funds.json
+          git diff --cached --quiet || git commit -m "data: weekly refresh"
+          git pull --rebase origin main
           git push
