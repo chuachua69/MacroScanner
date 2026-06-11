@@ -1,18 +1,16 @@
 {
- "generated_utc": "2026-06-11T14:04:40+00:00",
- "quarter": "CY2026Q1",
+ "generated_utc": "2026-06-11T14:13:30+00:00",
+ "source": "Yahoo Finance (quarterly trailing YoY metrics)",
  "criteria": {
-  "growth_sweet": "EPS growth (TTM vs prior TTM) between 10% and 40% \u2014 fast but sustainable (Lynch)",
-  "peg_ok": "PEG (P/E divided by EPS growth) at or below 1.5",
-  "rev_confirms": "Revenue growth at least 5% \u2014 earnings growth backed by real sales",
-  "roe_strong": "Return on equity at least 12%",
-  "debt_ok": "Long-term debt / equity at or below 1.0 (skipped for Financials)"
+  "growth_sweet": "EPS growth (trailing quarterly YoY) between 10 % and 40 % \u2014 fast but not frothy (Lynch sweet spot)",
+  "peg_ok": "PEG ratio \u2264 1.5 \u2014 the primary gate; you're not paying up for growth",
+  "rev_confirms": "Revenue growth \u2265 5 % \u2014 earnings growth backed by real sales",
+  "roe_strong": "Return on equity \u2265 12 % \u2014 management generating returns above cost of capital",
+  "debt_ok": "Debt/equity \u2264 1.0 (skipped for Financials where leverage is structural)"
  },
  "coverage": {
   "universe": 515,
-  "no_usgaap_data": 515,
-  "outside_growth_band": 0,
-  "priced_and_screened": 0,
+  "no_data": 515,
   "candidates": 0
  },
  "candidates": []
