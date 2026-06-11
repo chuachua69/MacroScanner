@@ -1,0 +1,84 @@
+{
+ "generated_utc": "2026-06-11T13:54:16+00:00",
+ "note": "13Fs lag up to 45 days; US long equities only. Confirmation, not copy-trade.",
+ "funds": [
+  {
+   "name": "Duquesne Family Office (Druckenmiller)",
+   "tier": 1,
+   "cik": 1536411,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Appaloosa (Tepper)",
+   "tier": 1,
+   "cik": 1656456,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Pershing Square (Ackman)",
+   "tier": 1,
+   "cik": 1336528,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Third Point (Loeb)",
+   "tier": 1,
+   "cik": 1040273,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Greenlight Capital (Einhorn)",
+   "tier": 1,
+   "cik": 1079114,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Baupost Group (Klarman)",
+   "tier": 1,
+   "cik": 1061768,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Lone Pine Capital",
+   "tier": 1,
+   "cik": 1061165,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Tiger Global",
+   "tier": 1,
+   "cik": 1167483,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Coatue Management",
+   "tier": 2,
+   "cik": 1135730,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Altimeter Capital",
+   "tier": 2,
+   "cik": 1541617,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  },
+  {
+   "name": "Dragoneer Investment Group",
+   "tier": 2,
+   "cik": 1602119,
+   "ok": false,
+   "note": "CIK mismatch: SEC says ''"
+  }
+ ],
+ "overlap": []
+}

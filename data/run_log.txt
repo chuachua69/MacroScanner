@@ -1,0 +1,90 @@
+== pipeline run 2026-06-11T13:45:07Z ==
+Traceback (most recent call last):
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 196, in <module>
+    main()
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 99, in main
+    raw[sid] = fetch(sid, start)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 48, in fetch
+    with urllib.request.urlopen(req, timeout=60) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 1392, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 1348, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/http/client.py", line 1450, in getresponse
+    response.begin()
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/http/client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/http/client.py", line 297, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: The read operation timed out
+LIQUIDITY FAILED exit=1
+  frame missing: EarningsPerShareDiluted CY2025
+  frame missing: EarningsPerShareDiluted CY2024
+  frame missing: EarningsPerShareDiluted CY2026Q1
+  frame missing: EarningsPerShareDiluted CY2025Q1
+  frame missing: EarningsPerShareDiluted CY2024Q1
+  frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2025
+  frame missing: Revenues CY2025
+  frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2024
+  frame missing: Revenues CY2024
+  frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2026Q1
+  frame missing: Revenues CY2026Q1
+  frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2025Q1
+  frame missing: Revenues CY2025Q1
+  frame missing: RevenueFromContractWithCustomerExcludingAssessedTax CY2024Q1
+  frame missing: Revenues CY2024Q1
+  frame missing: NetIncomeLoss CY2025
+  frame missing: NetIncomeLoss CY2024
+  frame missing: NetIncomeLoss CY2026Q1
+  frame missing: NetIncomeLoss CY2025Q1
+  frame missing: NetIncomeLoss CY2024Q1
+  frame missing: StockholdersEquity CY2026Q1I
+  frame missing: StockholdersEquity CY2025Q4I
+  frame missing: LongTermDebtNoncurrent CY2026Q1I
+  frame missing: LongTermDebt CY2026Q1I
+  frame missing: LongTermDebtNoncurrent CY2025Q4I
+  frame missing: LongTermDebt CY2025Q4I
+  frame missing: EntityCommonStockSharesOutstanding CY2026Q1I
+  frame missing: EntityCommonStockSharesOutstanding CY2025Q4I
+Screening as of CY2026Q1 | universe 515
+pre-filter survivors: 0 (fetching prices...)
+OK  0 GARP candidates -> /home/runner/work/MacroScanner/MacroScanner/data/screen.json
+WARNING: CIK 1536411 resolved to '', expected 'DUQUESNE' — skipping Duquesne Family Office (Druckenmiller)
+WARNING: CIK 1656456 resolved to '', expected 'APPALOOSA' — skipping Appaloosa (Tepper)
+WARNING: CIK 1336528 resolved to '', expected 'PERSHING SQUARE' — skipping Pershing Square (Ackman)
+WARNING: CIK 1040273 resolved to '', expected 'THIRD POINT' — skipping Third Point (Loeb)
+WARNING: CIK 1079114 resolved to '', expected 'GREENLIGHT' — skipping Greenlight Capital (Einhorn)
+WARNING: CIK 1061768 resolved to '', expected 'BAUPOST' — skipping Baupost Group (Klarman)
+WARNING: CIK 1061165 resolved to '', expected 'LONE PINE' — skipping Lone Pine Capital
+WARNING: CIK 1167483 resolved to '', expected 'TIGER GLOBAL' — skipping Tiger Global
+WARNING: CIK 1135730 resolved to '', expected 'COATUE' — skipping Coatue Management
+WARNING: CIK 1541617 resolved to '', expected 'ALTIMETER' — skipping Altimeter Capital
+WARNING: CIK 1602119 resolved to '', expected 'DRAGONEER' — skipping Dragoneer Investment Group
+OK  0/11 funds tracked, 0 overlap names -> /home/runner/work/MacroScanner/MacroScanner/data/funds.json

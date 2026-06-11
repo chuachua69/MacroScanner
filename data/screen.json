@@ -1,0 +1,19 @@
+{
+ "generated_utc": "2026-06-11T13:52:03+00:00",
+ "quarter": "CY2026Q1",
+ "criteria": {
+  "growth_sweet": "EPS growth (TTM vs prior TTM) between 10% and 40% \u2014 fast but sustainable (Lynch)",
+  "peg_ok": "PEG (P/E divided by EPS growth) at or below 1.5",
+  "rev_confirms": "Revenue growth at least 5% \u2014 earnings growth backed by real sales",
+  "roe_strong": "Return on equity at least 12%",
+  "debt_ok": "Long-term debt / equity at or below 1.0 (skipped for Financials)"
+ },
+ "coverage": {
+  "universe": 515,
+  "no_usgaap_data": 515,
+  "outside_growth_band": 0,
+  "priced_and_screened": 0,
+  "candidates": 0
+ },
+ "candidates": []
+}
