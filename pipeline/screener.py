@@ -16,15 +16,29 @@ import csv
 import json
 import sys
 import time
-import urllib.error
-import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
 ROOT = Path(__file__).resolve().parents[1]
-SEC_UA = {"User-Agent": "MacroScanner personal research chuachua69@users.noreply.github.com"}
-YH_UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 FRAMES = "https://data.sec.gov/api/xbrl/frames/{tax}/{tag}/{unit}/{frame}.json"
+
+# SEC requires: "name email" — a real-looking contact, not noreply
+SEC_UA = "MacroScanner/1.0 chuachua69@users.noreply.github.com"
+YH_UA  = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+def _make_session(ua: str) -> requests.Session:
+    s = requests.Session()
+    s.headers.update({"User-Agent": ua})
+    retry = Retry(total=4, backoff_factor=1.5, status_forcelist=[429, 500, 502, 503, 504])
+    s.mount("https://", HTTPAdapter(max_retries=retry))
+    return s
+
+_sec = _make_session(SEC_UA)
+_yh  = _make_session(YH_UA)
 
 MIN_MCAP_B = 2.0
 CRITERIA_DOC = {
@@ -36,24 +50,22 @@ CRITERIA_DOC = {
 }
 
 
-def fetch_json(url: str, ua: dict, tries: int = 3) -> dict | None:
-    for i in range(tries):
-        try:
-            req = urllib.request.Request(url, headers=ua)
-            with urllib.request.urlopen(req, timeout=90) as r:
-                return json.loads(r.read())
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                return None
-            time.sleep(2.0 * (i + 1))
-        except Exception:
-            time.sleep(2.0 * (i + 1))
-    return None
+def fetch_json(url: str, session: requests.Session) -> dict | None:
+    try:
+        r = session.get(url, timeout=90)
+        time.sleep(0.15)
+        if r.status_code == 404:
+            return None
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"  WARN fetch_json {url[:70]}: {e}", file=sys.stderr)
+        return None
 
 
 def frame_map(tax: str, tag: str, unit: str, frame: str) -> dict[int, float]:
     """One XBRL frame -> {cik: value}."""
-    data = fetch_json(FRAMES.format(tax=tax, tag=tag, unit=unit, frame=frame), SEC_UA)
+    data = fetch_json(FRAMES.format(tax=tax, tag=tag, unit=unit, frame=frame), _sec)
     time.sleep(0.15)  # SEC fair-access pacing
     if not data:
         print(f"  frame missing: {tag} {frame}", file=sys.stderr)
@@ -114,7 +126,7 @@ def instant_map(tags: list[tuple[str, str, str]], y: int, n: int) -> dict[int, f
 def yahoo_price(ticker: str) -> float | None:
     sym = ticker.replace(".", "-")
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}?range=5d&interval=1d"
-    data = fetch_json(url, YH_UA, tries=2)
+    data = fetch_json(url, _yh)
     time.sleep(0.12)
     try:
         return float(data["chart"]["result"][0]["meta"]["regularMarketPrice"])
@@ -126,7 +138,7 @@ def main() -> None:
     universe = list(csv.DictReader((ROOT / "data" / "universe.csv").open(encoding="utf-8")))
 
     # resolve missing CIKs from SEC's ticker map
-    tickmap = fetch_json("https://www.sec.gov/files/company_tickers.json", SEC_UA) or {}
+    tickmap = fetch_json("https://www.sec.gov/files/company_tickers.json", _sec) or {}
     by_ticker = {v["ticker"].upper(): int(v["cik_str"]) for v in tickmap.values()}
     for row in universe:
         row["cik_i"] = int(row["cik"]) if row["cik"].strip() else by_ticker.get(

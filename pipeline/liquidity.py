@@ -12,13 +12,18 @@ from __future__ import annotations
 import csv
 import io
 import json
+import os
 import sys
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={start}"
+FRED_API = ("https://api.stlouisfed.org/fred/series/observations"
+            "?series_id={sid}&observation_start={start}&api_key={key}"
+            "&file_type=json&sort_order=asc")
 HEADERS = {"User-Agent": "Mozilla/5.0 MacroScanner/0.1 (personal research tool)"}
+FRED_API_KEY = os.environ.get("FRED_API_KEY", "").strip()
 
 WEEKS_SHOWN = 104  # ~2 years of weekly history for the dashboard sparklines
 LOOKBACK_W = 13    # regime trend window = one quarter
@@ -43,16 +48,29 @@ HY_CRISIS_LEVEL = 6.0  # HY OAS above this forces Risk-Off regardless of score
 
 
 def fetch(sid: str, start: date) -> list[tuple[date, float]]:
-    url = FRED_CSV.format(sid=sid, start=start.isoformat())
-    req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        text = resp.read().decode("utf-8-sig")
     out: list[tuple[date, float]] = []
-    for row in list(csv.reader(io.StringIO(text)))[1:]:
-        if len(row) >= 2 and row[1] not in (".", ""):
-            out.append((date.fromisoformat(row[0]), float(row[1])))
+    if FRED_API_KEY:
+        url = FRED_API.format(sid=sid, start=start.isoformat(), key=FRED_API_KEY)
+        req = urllib.request.Request(url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            data = json.loads(resp.read())
+        for obs in data.get("observations", []):
+            if obs["value"] not in (".", ""):
+                out.append((date.fromisoformat(obs["date"]), float(obs["value"])))
+    else:
+        # fallback: web CSV (works locally; may time out from cloud CI without key)
+        url = FRED_CSV.format(sid=sid, start=start.isoformat())
+        req = urllib.request.Request(url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=90) as resp:
+            text = resp.read().decode("utf-8-sig")
+        for row in list(csv.reader(io.StringIO(text)))[1:]:
+            if len(row) >= 2 and row[1] not in (".", ""):
+                out.append((date.fromisoformat(row[0]), float(row[1])))
     if not out:
-        raise RuntimeError(f"FRED returned no observations for {sid}")
+        raise RuntimeError(
+            f"FRED returned no observations for {sid}. "
+            + ("" if FRED_API_KEY else "Set FRED_API_KEY env var for reliable CI access.")
+        )
     return out
 
 

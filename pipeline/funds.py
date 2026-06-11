@@ -18,14 +18,25 @@ import json
 import re
 import sys
 import time
-import urllib.error
-import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
 ROOT = Path(__file__).resolve().parents[1]
-UA = {"User-Agent": "MacroScanner personal research chuachua69@users.noreply.github.com"}
+_UA = "MacroScanner/1.0 chuachua69@users.noreply.github.com"
+
+def _make_session() -> requests.Session:
+    s = requests.Session()
+    s.headers.update({"User-Agent": _UA})
+    retry = Retry(total=4, backoff_factor=1.5, status_forcelist=[429, 500, 502, 503, 504])
+    s.mount("https://", HTTPAdapter(max_retries=retry))
+    return s
+
+_s = _make_session()
 
 # (display name, tier, CIK, keyword that must appear in the SEC entity name)
 FUNDS = [
@@ -43,25 +54,25 @@ FUNDS = [
 ]
 
 
-def get(url: str, tries: int = 3) -> bytes | None:
-    for i in range(tries):
-        try:
-            req = urllib.request.Request(url, headers=UA)
-            with urllib.request.urlopen(req, timeout=90) as r:
-                time.sleep(0.15)
-                return r.read()
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                return None
-            time.sleep(2.0 * (i + 1))
-        except Exception:
-            time.sleep(2.0 * (i + 1))
-    return None
+def get(url: str) -> bytes | None:
+    try:
+        r = _s.get(url, timeout=90)
+        time.sleep(0.15)
+        if r.status_code == 404:
+            return None
+        r.raise_for_status()
+        return r.content
+    except Exception as e:
+        print(f"  WARN get {url[:70]}: {e}", file=sys.stderr)
+        return None
 
 
 def get_json(url: str) -> dict | None:
     raw = get(url)
-    return json.loads(raw) if raw else None
+    try:
+        return json.loads(raw) if raw else None
+    except Exception:
+        return None
 
 
 def latest_13fs(cik: int, count: int = 2) -> tuple[str, list[dict]]:

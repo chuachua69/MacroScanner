@@ -6,188 +6,407 @@
 <meta name="theme-color" content="#0e1116">
 <title>Macro Scanner</title>
 <style>
-  :root {
-    --bg: #0e1116; --card: #161c24; --card2: #1c2430; --line: #2a3442;
-    --text: #e6edf3; --dim: #8b98a5; --green: #3fb96f; --amber: #d8a637; --red: #e5534b;
-  }
-  * { box-sizing: border-box; margin: 0; }
-  body {
-    background: var(--bg); color: var(--text);
-    font: 16px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
-    padding: 16px 14px calc(28px + env(safe-area-inset-bottom));
-    max-width: 640px; margin: 0 auto;
-  }
-  header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
-  h1 { font-size: 20px; letter-spacing: .3px; }
-  #week { color: var(--dim); font-size: 12px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
-  .regime { text-align: center; }
-  .pill { display: inline-block; font-size: 22px; font-weight: 700; padding: 8px 26px; border-radius: 999px; margin: 4px 0 8px; }
-  .pill.on  { background: rgba(63,185,111,.15); color: var(--green); border: 1px solid var(--green); }
-  .pill.neu { background: rgba(216,166,55,.12); color: var(--amber); border: 1px solid var(--amber); }
-  .pill.off { background: rgba(229,83,75,.12);  color: var(--red);   border: 1px solid var(--red); }
-  .sizing { color: var(--dim); font-size: 14px; }
-  .comp { display: flex; justify-content: space-between; font-size: 13.5px; padding: 7px 0; border-top: 1px solid var(--line); }
-  .comp:first-of-type { margin-top: 10px; }
-  .comp b.pos { color: var(--green); } .comp b.neg { color: var(--red); } .comp b.flat { color: var(--dim); }
-  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--dim); margin: 18px 2px 8px; }
-  .brief p { margin-bottom: 10px; font-size: 15px; }
-  .brief .headline { font-size: 17px; font-weight: 650; margin-bottom: 10px; }
-  .brief ul { padding-left: 20px; margin-bottom: 8px; }
-  .brief li { margin-bottom: 4px; font-size: 14.5px; }
-  .metric { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; }
-  .metric .name { font-weight: 600; }
-  .metric .val { font-size: 20px; font-weight: 700; text-align: right; }
-  .metric .chg { font-size: 12.5px; text-align: right; }
-  .chg.pos { color: var(--green); } .chg.neg { color: var(--red); } .chg.flat { color: var(--dim); }
-  .spark { grid-column: 1 / -1; margin-top: 6px; }
-  details { grid-column: 1 / -1; margin-top: 8px; font-size: 13.5px; color: var(--dim); }
-  summary { cursor: pointer; color: #5b9bd5; font-size: 13px; list-style: none; }
-  summary::before { content: "ⓘ "; }
-  .meta, .foot { color: var(--dim); font-size: 12px; text-align: center; margin-top: 16px; }
-  #err { color: var(--amber); text-align: center; padding: 24px 10px; display: none; }
+:root {
+  --bg:#0e1116; --card:#161c24; --card2:#1c2430; --line:#2a3442;
+  --text:#e6edf3; --dim:#8b98a5; --green:#3fb96f; --amber:#d8a637; --red:#e5534b; --blue:#5b9bd5;
+}
+*{box-sizing:border-box;margin:0;}
+body{
+  background:var(--bg);color:var(--text);
+  font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;
+  padding:16px 14px 0;max-width:640px;margin:0 auto;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom));
+}
+header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
+h1{font-size:20px;letter-spacing:.3px;}
+#week{color:var(--dim);font-size:12px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);margin:20px 2px 8px;}
+
+/* REGIME */
+.regime{text-align:center;}
+.pill{display:inline-block;font-size:21px;font-weight:700;padding:8px 24px;border-radius:999px;margin:4px 0 8px;}
+.pill.on {background:rgba(63,185,111,.15);color:var(--green);border:1px solid var(--green);}
+.pill.neu{background:rgba(216,166,55,.12);color:var(--amber);border:1px solid var(--amber);}
+.pill.off{background:rgba(229,83,75,.12); color:var(--red);  border:1px solid var(--red);}
+.sizing{color:var(--dim);font-size:14px;}
+.comp{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-top:1px solid var(--line);}
+.comp:first-of-type{margin-top:10px;}
+b.pos{color:var(--green);}b.neg{color:var(--red);}b.flat{color:var(--dim);}
+
+/* BRIEF */
+.brief p{margin-bottom:10px;font-size:15px;line-height:1.65;}
+.brief .hl{font-size:17px;font-weight:700;margin-bottom:14px;line-height:1.4;}
+.brief ul{padding-left:18px;margin:4px 0 10px;}
+.brief li{margin-bottom:6px;font-size:14.5px;}
+em.j{font-style:normal;color:var(--dim);font-size:13px;}
+.sec-head{font-weight:600;margin-top:14px !important;margin-bottom:2px !important;}
+.mini-chart{margin:4px 0 14px;}
+.mini-label{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:3px;}
+.mini-label b{color:var(--text);}
+
+/* METRIC CARDS */
+.mc{display:grid;grid-template-columns:1fr auto;gap:2px 10px;}
+.mc .mn{font-weight:600;}
+.mc .mv{font-size:20px;font-weight:700;text-align:right;}
+.mc .mchg{font-size:12.5px;text-align:right;}
+.mchg.pos{color:var(--green);}.mchg.neg{color:var(--red);}.mchg.flat{color:var(--dim);}
+.mc .sp{grid-column:1/-1;margin-top:6px;}
+details{grid-column:1/-1;margin-top:8px;font-size:13.5px;color:var(--dim);}
+summary{cursor:pointer;color:var(--blue);font-size:13px;list-style:none;}
+summary::before{content:"ⓘ ";}
+
+/* SCREEN */
+.sc{display:grid;grid-template-columns:1fr auto;gap:3px 8px;}
+.sc .sn{font-weight:600;font-size:15px;}
+.sc .speg{font-size:22px;font-weight:700;color:var(--green);text-align:right;}
+.sc .smeta{grid-column:1/-1;font-size:13px;color:var(--dim);margin-top:2px;}
+.sc .schecks{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;font-size:12px;}
+.ck-ok{color:var(--green);}.ck-no{color:var(--red);}.ck-na{color:var(--dim);}
+.star{color:var(--amber);font-size:13px;}
+
+/* FUNDS */
+.fund details summary{color:var(--text);font-weight:600;list-style:none;}
+.fund details summary::before{content:none;}
+.fund details summary::marker{display:none;}
+.ov-row{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-top:1px solid var(--line);}
+
+/* SETTINGS */
+.srow{padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;}
+.srow:first-child{border-top:none;}
+select{background:var(--card2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 10px;font-size:14px;}
+.trow{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);padding:6px 0;border-top:1px solid var(--line);}
+.trow:first-child{border-top:none;}
+
+/* TABS */
+.tab-nav{
+  position:fixed;bottom:0;left:0;right:0;max-width:640px;margin:0 auto;
+  background:var(--card);border-top:1px solid var(--line);
+  display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);
+}
+.tb{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:9px 4px 7px;gap:3px;font-size:10px;color:var(--dim);
+  cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent;
+  transition:color .15s;
+}
+.tb.on{color:var(--text);}
+.tb .ic{font-size:22px;line-height:1;}
+
+.meta,.foot{color:var(--dim);font-size:12px;text-align:center;margin-top:14px;}
+#err{color:var(--amber);text-align:center;padding:24px 10px;display:none;}
 </style>
 </head>
 <body>
 <header><h1>📡 Macro Scanner</h1><span id="week"></span></header>
-<div id="err">Couldn't load data. If you opened this file directly, serve it instead:<br>
-<code>python -m http.server</code> → open <code>localhost:8000</code></div>
+<div id="err">Couldn't load data. If running locally: <code>python -m http.server -d MacroScanner</code></div>
 <main id="app" hidden>
-  <div class="card regime">
-    <div id="pill" class="pill"></div>
-    <div class="sizing" id="sizing"></div>
-    <div id="comps"></div>
-  </div>
 
-  <h2>This week's brief</h2>
-  <div class="card brief" id="brief"><p class="sizing">No brief yet — the weekly Claude routine writes this.</p></div>
+  <!-- OVERVIEW TAB -->
+  <section id="t-ov">
+    <div class="card regime">
+      <div id="pill" class="pill"></div>
+      <div class="sizing" id="sizing"></div>
+      <div id="comps"></div>
+    </div>
+    <h2>This week's brief</h2>
+    <div class="card brief" id="brief"></div>
+    <h2>Liquidity metrics</h2>
+    <div id="metrics"></div>
+    <h2>How the score works</h2>
+    <div class="card" style="font-size:13.5px;color:var(--dim)" id="method"></div>
+    <p class="meta" id="meta"></p>
+    <p class="foot">Personal research tool · Not financial advice · Data: FRED (St. Louis Fed)</p>
+  </section>
 
-  <h2>GARP screen <span style="font-weight:400;text-transform:none;letter-spacing:0">— Lynch criteria</span></h2>
-  <div id="screen"><div class="card"><p class="sizing">No screen data yet — runs Mondays.</p></div></div>
+  <!-- SCREEN TAB -->
+  <section id="t-sc" hidden>
+    <div id="screen-wrap"></div>
+  </section>
 
-  <h2>Smart money — 13F tracker</h2>
-  <div id="funds"><div class="card"><p class="sizing">No 13F data yet — runs Mondays.</p></div></div>
+  <!-- FUNDS TAB -->
+  <section id="t-fd" hidden>
+    <div id="funds-wrap"></div>
+  </section>
 
-  <h2>Liquidity metrics</h2>
-  <div id="metrics"></div>
+  <!-- SETTINGS TAB -->
+  <section id="t-st" hidden>
+    <div id="settings-wrap"></div>
+  </section>
 
-  <h2>Methodology</h2>
-  <div class="card" style="font-size:13.5px;color:var(--dim)" id="method"></div>
-
-  <p class="meta" id="meta"></p>
-  <p class="foot">Personal research tool. Not financial advice. Data: FRED (St. Louis Fed).</p>
 </main>
-<script>
-const EXPLAIN = {
-  net_liquidity: "Fed balance sheet − reverse repo − the Treasury's checking account (TGA). A rough proxy for how many dollars are free to slosh into markets. Rising = tailwind for risk assets; falling = headwind. This is the closest thing to Druckenmiller's 'watch the liquidity, not the news'.",
-  walcl: "Total assets held by the Federal Reserve. Goes up when the Fed buys bonds (QE = printing), down when it lets them run off (QT = draining).",
-  rrp: "Cash that money-market funds park at the Fed overnight. Think of it as liquidity sitting in a waiting room — when RRP falls, that cash is flowing back out into markets.",
-  tga: "The US government's checking account at the Fed. When the Treasury builds it up (collecting taxes, issuing debt) it pulls cash OUT of markets; when it spends it down, cash flows back in.",
-  hy_oas: "The extra yield junk-rated companies must pay over Treasuries. The bond market's fear gauge: tightening = confidence, widening = stress. Above 6% historically = crisis conditions.",
-  dollar: "Broad trade-weighted dollar index. Most of the world's debt is in dollars, so a falling dollar loosens global financial conditions; a sharply rising one tightens them and breaks things.",
-  yield_curve: "10-year minus 2-year Treasury yield. Inversion (negative) has preceded every modern recession; the rapid re-steepening AFTER inversion is the classic danger window. Shown for context — not part of the score."
-};
-const fmt = (v, u) => u === "$T" ? "$" + v.toFixed(2) + "T" : u === "%" ? v.toFixed(2) + "%" : v.toFixed(1);
-const cls = s => s > 0 ? "pos" : s < 0 ? "neg" : "flat";
 
-function spark(hist, color) {
-  const w = 560, h = 64, vs = hist.map(p => p.v);
-  const min = Math.min(...vs), max = Math.max(...vs), span = (max - min) || 1;
-  const pts = vs.map((v, i) => [(i / (vs.length - 1)) * w, h - 6 - ((v - min) / span) * (h - 12)]);
-  const line = pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
-  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="100%" height="56" preserveAspectRatio="none">
+<nav class="tab-nav" style="left:50%;transform:translateX(-50%);width:100%;max-width:640px;">
+  <button class="tb on" data-tab="t-ov"><span class="ic">📊</span>Overview</button>
+  <button class="tb" data-tab="t-sc"><span class="ic">🔍</span>Screen</button>
+  <button class="tb" data-tab="t-fd"><span class="ic">🧠</span>Funds</button>
+  <button class="tb" data-tab="t-st"><span class="ic">⚙️</span>Settings</button>
+</nav>
+
+<script>
+// ── TAB SWITCHING ────────────────────────────────────────────────────────────
+document.querySelectorAll('.tb').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.tb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('section[id^="t-"]').forEach(s => s.hidden = true);
+  document.getElementById(btn.dataset.tab).hidden = false;
+}));
+
+// ── PREFS ────────────────────────────────────────────────────────────────────
+const prefs = {
+  garpCount: +(localStorage.getItem('garpCount') || 10),
+  tierFilter: localStorage.getItem('tierFilter') || 'all',
+};
+function savePref(k, v) { prefs[k] = v; localStorage.setItem(k, v); rerender(); }
+
+// ── HELPERS ──────────────────────────────────────────────────────────────────
+const fmt = (v, u) => u === '$T' ? '$' + v.toFixed(2) + 'T' : u === '%' ? v.toFixed(2) + '%' : v.toFixed(1);
+const cls = s => s > 0 ? 'pos' : s < 0 ? 'neg' : 'flat';
+
+function spark(hist, color, h = 64) {
+  const W = 560, vs = hist.map(p => p.v);
+  const mn = Math.min(...vs), mx = Math.max(...vs), sp = (mx - mn) || 1;
+  const pts = vs.map((v, i) => [(i / (vs.length - 1)) * W, h - 6 - ((v - mn) / sp) * (h - 12)]);
+  const line = pts.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ');
+  return `<svg class="sp" viewBox="0 0 ${W} ${h}" width="100%" height="${h - 8}" preserveAspectRatio="none">
     <polyline points="${line}" fill="none" stroke="${color}" stroke-width="2"/>
-    <polygon points="0,${h} ${line} ${w},${h}" fill="${color}" opacity="0.08"/></svg>`;
+    <polygon points="0,${h} ${line} ${W},${h}" fill="${color}" opacity="0.08"/></svg>`;
+}
+
+function miniSpark(hist, color) {
+  const W = 400, H = 52, recent = hist.slice(-26), vs = recent.map(p => p.v);
+  const mn = Math.min(...vs), mx = Math.max(...vs), sp = (mx - mn) || 1;
+  const pts = vs.map((v, i) => [(i / (vs.length - 1)) * W, H - 4 - ((v - mn) / sp) * (H - 8)]);
+  const line = pts.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ');
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="52" preserveAspectRatio="none">
+    <polyline points="${line}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round"/>
+    <polygon points="0,${H} ${line} ${W},${H}" fill="${color}" opacity="0.14"/></svg>`;
+}
+
+// Auto-explain jargon in brief text (adds grey note in brackets on first occurrence)
+const JARGON_DB = {
+  'reverse repo': 'cash parked overnight at the Fed by money-market funds — when it drains, money flows back into markets',
+  'RRP': 'reverse repo facility — cash parked overnight at the Fed',
+  'TGA': "US government's checking account at the Fed — when Treasury spends it down, cash flows to markets",
+  'net liquidity': "Fed assets minus reverse repo minus TGA — a proxy for how much cash is free to flow into markets",
+  'basis points': '0.01% each — 100 basis points = 1%',
+  'HY OAS': 'the extra interest junk bonds must pay above safe Treasury bonds — a market fear gauge',
+  'high-yield spread': 'the extra interest junk bonds must pay above safe Treasury bonds',
+  'yield curve': '10-year Treasury yield minus 2-year yield — when inverted (negative) it has preceded every modern US recession',
+  'QE': 'quantitative easing — Fed buying bonds to inject money into markets',
+  'QT': 'quantitative tightening — Fed letting bonds mature to drain money from markets',
+};
+function addJargon(text) {
+  let t = text, used = new Set();
+  for (const [term, def] of Object.entries(JARGON_DB)) {
+    if (used.has(term)) continue;
+    const re = new RegExp('\\b' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+    if (re.test(t)) { t = t.replace(re, `${term} <em class="j">(${def})</em>`); used.add(term); }
+  }
+  return t;
+}
+
+const METRIC_EXPLAIN = {
+  net_liquidity: "Fed balance sheet − reverse repo − Treasury's checking account (TGA). A proxy for free-floating cash in the system. Rising = tailwind for risk assets; falling = headwind. With RRP now near zero, this moves one-for-one with what the Fed and Treasury do.",
+  walcl: "Total assets held by the Federal Reserve. Goes up when the Fed buys bonds (QE = printing), down when it lets them run off (QT = draining).",
+  rrp: "Cash that money-market funds park at the Fed overnight. When RRP falls, that cash flows back out into markets — it acted as a hidden liquidity cushion for two years.",
+  tga: "The US government's checking account at the Fed. Treasury building it up pulls cash OUT of markets; spending it down pushes cash back in.",
+  hy_oas: "The extra yield junk-rated companies must pay above safe Treasuries. The bond market's fear gauge: tightening = confidence, widening = stress. Above 6% = crisis territory.",
+  dollar: "Broad trade-weighted dollar index. Most of the world's debt is in dollars, so a falling dollar loosens global conditions; a sharply rising one tightens and breaks things.",
+  yield_curve: "10-year minus 2-year Treasury yield. Inversion (negative) has preceded every modern recession; the rapid re-steepening AFTER inversion is the classic danger window.",
+};
+
+const M_COLORS = { net_liquidity: '#3fb96f', hy_oas: '#e5534b', dollar: '#5b9bd5', yield_curve: '#d8a637' };
+const M_KEYWORDS = {
+  net_liquidity: ['liquidity', 'rrp', 'reverse repo', 'fed balance', 'tga', 'treasury account', 'buffer', 'walcl'],
+  hy_oas:        ['credit', 'spread', 'high-yield', 'junk', 'stress', 'bond market', 'hy oas'],
+  dollar:        ['dollar', ' usd '],
+  yield_curve:   ['yield curve', 'inversion', '10-year', '2yr', '10yr', 'steepen'],
+};
+
+// ── RENDER BRIEF ─────────────────────────────────────────────────────────────
+function renderBrief(b, metrics) {
+  if (!b?.body?.length) return '<p class="sizing">No brief yet — Claude writes this every Monday evening.</p>';
+  const used = new Set();
+  function chartFor(para) {
+    const lc = para.toLowerCase();
+    for (const [id, kws] of Object.entries(M_KEYWORDS)) {
+      if (!used.has(id) && kws.some(k => lc.includes(k)) && metrics?.[id]?.history?.length) {
+        used.add(id);
+        const m = metrics[id], chg = m.change_13w_pct ?? m.change_13w_pp;
+        const chgTxt = chg !== undefined ? (chg > 0 ? '+' : '') + chg + (m.change_13w_pp !== undefined ? 'pp' : '%') + ' / 13w' : '';
+        const chgCls = id === 'net_liquidity' ? cls(chg) : cls(-(chg || 0));
+        return `<div class="mini-chart">${miniSpark(m.history, M_COLORS[id] || '#8b98a5')}
+          <div class="mini-label"><span>${m.name}</span><b style="color:${M_COLORS[id]||'var(--text)'}">${fmt(m.latest, m.unit)} <span class="${chgCls}" style="font-weight:400">${chgTxt}</span></b></div>
+        </div>`;
+      }
+    }
+    return '';
+  }
+  const body = (b.body || []).map(p => `<p>${addJargon(p)}</p>${chartFor(p)}`).join('');
+  const watch = b.watch?.length
+    ? `<p class="sec-head">👀 Watch next week</p><ul>${b.watch.map(w => `<li>${w}</li>`).join('')}</ul>` : '';
+  const flip = b.change_my_mind?.length
+    ? `<p class="sec-head">🔄 What would change the view</p><ul>${b.change_my_mind.map(w => `<li>${w}</li>`).join('')}</ul>` : '';
+  return `<p class="hl">${b.headline}</p>${body}${watch}${flip}
+    <p class="sizing" style="font-size:12px;margin-top:12px">✍️ Written by Claude · ${(b.written_utc || '').slice(0, 10)}</p>`;
+}
+
+// ── RENDER METRICS ───────────────────────────────────────────────────────────
+function renderMetrics(d) {
+  return Object.entries(d.metrics).map(([id, m]) => {
+    const chg = m.change_13w_pct ?? m.change_13w_pp;
+    const chgCls = id === 'net_liquidity' ? cls(chg) : cls(-(chg ?? 0));
+    const chgTxt = chg === undefined ? '' :
+      `<span class="mchg ${chgCls}">${chg > 0 ? '+' : ''}${chg}${m.change_13w_pp !== undefined ? 'pp' : '%'} / 13w</span>`;
+    return `<div class="card mc">
+      <span class="mn">${m.name}</span><span class="mv">${fmt(m.latest, m.unit)}</span>
+      <span class="sizing">2-year weekly history</span>${chgTxt}
+      ${spark(m.history, M_COLORS[id] || '#8b98a5')}
+      <details><summary>what is this?</summary>${METRIC_EXPLAIN[id] || ''}</details>
+    </div>`;
+  }).join('');
+}
+
+// ── RENDER SCREEN ────────────────────────────────────────────────────────────
+function renderScreen(s, f) {
+  if (!s?.candidates?.length)
+    return '<div class="card"><p class="sizing">No screen data yet — runs every Monday.</p></div>';
+  const smartNames = new Set();
+  if (f) for (const fd of (f.funds || []).filter(x => x.ok)) {
+    for (const h of [...(fd.top||[]),(fd.big_adds||[])]) if (h?.issuer) smartNames.add(h.issuer.split(' ')[0].toUpperCase());
+    for (const nb of fd.new_buys || []) smartNames.add(nb.split(' ')[0].toUpperCase());
+  }
+  const CK = { growth_sweet:'EPS 10–40%', peg_ok:'PEG ≤1.5', rev_confirms:'Rev ≥5%', roe_strong:'ROE ≥12%', debt_ok:'D/E ≤1.0' };
+  const cards = s.candidates.slice(0, prefs.garpCount).map(c => {
+    const smart = smartNames.has(c.name.split(' ')[0].toUpperCase());
+    const checks = Object.entries(c.checks).map(([k, v]) =>
+      `<span class="${v === true ? 'ck-ok' : v === false ? 'ck-no' : 'ck-na'}">${v === true ? '✓' : v === false ? '✗' : '–'} ${CK[k]||k}</span>`).join('');
+    return `<div class="card sc">
+      <span class="sn">${c.ticker}${smart ? ' <span class="star">★</span>' : ''} <span style="font-weight:400;font-size:14px;color:var(--dim)">${c.name}</span></span>
+      <span class="speg">PEG ${c.peg}</span>
+      <span class="smeta">${c.sector} · Score ${c.score}/5 · P/E ${c.pe} · EPS +${c.eps_growth_pct}%${c.mcap_b ? ' · $' + c.mcap_b + 'B' : ''}</span>
+      <div class="schecks">${checks}</div>
+      ${(c.rev_growth_pct != null || c.roe_pct != null) ? `<div class="schecks" style="color:var(--dim)">Rev +${c.rev_growth_pct ?? '?'}% &nbsp;ROE ${c.roe_pct ?? '?'}% &nbsp;D/E ${c.de ?? 'n/a'}</div>` : ''}
+    </div>`;
+  }).join('');
+  return `<h2>GARP screen — Lynch criteria</h2>${cards}
+    <p class="meta">Quarter ${s.quarter} · ${s.coverage.candidates} candidates from ${s.coverage.universe} stocks · ${s.coverage.no_usgaap_data} lacked US financial data (mostly foreign-listed)</p>
+    <p class="foot">★ = rough name-match to a tracked fund's holdings</p>`;
+}
+
+// ── RENDER FUNDS ─────────────────────────────────────────────────────────────
+function renderFunds(f) {
+  if (!f?.funds?.some(x => x.ok))
+    return '<div class="card"><p class="sizing">No 13F data yet — runs every Monday.</p></div>';
+  const fds = (f.funds || []).filter(fd => {
+    if (!fd.ok) return false;
+    if (prefs.tierFilter === 't1') return fd.tier === 1;
+    if (prefs.tierFilter === 't12') return fd.tier <= 2;
+    return true;
+  });
+  const ov = f.overlap?.length ? `<h2>Conviction overlap</h2><div class="card">
+    <p class="sizing" style="margin-bottom:8px">Same stock in the top-50 holdings of 3+ tracked funds:</p>
+    ${f.overlap.slice(0, 10).map(o =>
+      `<div class="ov-row"><span>${o.issuer}</span><b class="pos">${o.n} funds</b></div>`).join('')}
+    </div>` : '';
+  const cards = fds.map(fd => `<div class="card fund">
+    <details>
+      <summary>${fd.name} <span style="color:var(--dim);font-weight:400;font-size:13px">· $${fd.portfolio_b}B · Q${fd.period}</span></summary>
+      <div style="margin-top:10px">
+        <p class="sizing" style="margin-bottom:6px">Top 5 by weight:</p>
+        ${(fd.top||[]).slice(0,5).map(h=>`<div class="ov-row"><span>${h.issuer}</span><b class="flat">${h.pct}%</b></div>`).join('')}
+        ${fd.new_buys?.length ? `<p class="sizing" style="margin-top:10px"><b style="color:var(--text)">New buys this quarter:</b> ${fd.new_buys.slice(0,6).join(', ')}</p>` : ''}
+        ${fd.big_adds?.length ? `<p class="sizing" style="margin-top:6px"><b style="color:var(--text)">Added significantly:</b> ${fd.big_adds.slice(0,4).map(a=>`${a.issuer} (+${a.shares_chg_pct}%)`).join(', ')}</p>` : ''}
+        ${fd.exited?.length ? `<p class="sizing" style="margin-top:6px"><b style="color:var(--text)">Exited:</b> ${fd.exited.slice(0,4).join(', ')}</p>` : ''}
+      </div>
+    </details>
+  </div>`).join('');
+  const bad = (f.funds||[]).filter(x => !x.ok);
+  const warn = bad.length ? `<p class="meta">⚠ ${bad.length} fund(s) had CIK issues: ${bad.map(x=>x.name).join(', ')} — check pipeline/funds.py</p>` : '';
+  return `${ov}<h2>Fund tracker</h2>${cards}${warn}<p class="meta">${f.note}</p>`;
+}
+
+// ── RENDER SETTINGS ──────────────────────────────────────────────────────────
+function renderSettings(d) {
+  const t = d?.thresholds || {};
+  const thresholds = [
+    ['Net liquidity signal', `±${t.liq_pct||'0.5'}% over 13 weeks`, 'weighted 2×'],
+    ['Credit spread signal', `±${t.hy_pp||'0.3'}pp over 13 weeks`, 'tightening = bullish'],
+    ['Dollar signal', `±${t.usd_pct||'1.0'}% over 13 weeks`, 'falling dollar = bullish'],
+    ['Crisis override', `HY OAS ≥ ${t.hy_crisis||'6.0'}%`, 'forces Risk-Off'],
+    ['Regime', '≥+2 = Risk-On · ≤−2 = Risk-Off', 'else Neutral'],
+  ];
+  return `<h2>Display</h2>
+  <div class="card">
+    <div class="srow"><span>GARP candidates to show</span>
+      <select onchange="savePref('garpCount',+this.value)">
+        ${[5,10,15,20].map(n=>`<option value="${n}"${prefs.garpCount==n?' selected':''}>${n}</option>`).join('')}
+      </select></div>
+    <div class="srow"><span>Fund tiers</span>
+      <select onchange="savePref('tierFilter',this.value)">
+        <option value="all"${prefs.tierFilter==='all'?' selected':''}>All tiers</option>
+        <option value="t1"${prefs.tierFilter==='t1'?' selected':''}>Tier 1 only (conviction)</option>
+        <option value="t12"${prefs.tierFilter==='t12'?' selected':''}>Tier 1 + 2</option>
+      </select></div>
+  </div>
+  <h2>Pipeline thresholds <span style="font-weight:400;text-transform:none;letter-spacing:0">(read-only — edit pipeline/liquidity.py to change)</span></h2>
+  <div class="card" style="font-size:13.5px">
+    ${thresholds.map(([l,v,n])=>`<div class="trow"><span style="color:var(--dim)">${l}</span><span><b>${v}</b> <span style="color:var(--dim)">· ${n}</span></span></div>`).join('')}
+  </div>
+  <h2>About</h2>
+  <div class="card" style="font-size:13.5px;color:var(--dim)">
+    <p>Personal macro-thematic research tool. Inspired by Druckenmiller — watch liquidity first, fundamentals second, supply chains third. Not financial advice.</p>
+    <p style="margin-top:8px">Data: FRED (free) · SEC EDGAR (free) · Yahoo Finance (free).</p>
+    <p style="margin-top:8px">Refreshes every Monday ~7:30pm SGT via GitHub Actions.</p>
+  </div>`;
+}
+
+// ── LOAD & BOOT ──────────────────────────────────────────────────────────────
+let _d, _b, _s, _f;
+
+function rerender() {
+  document.getElementById('screen-wrap').innerHTML = renderScreen(_s, _f);
+  document.getElementById('funds-wrap').innerHTML = renderFunds(_f);
+  document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
 }
 
 async function load(path) {
-  try { const r = await fetch(path + "?t=" + Date.now()); return r.ok ? await r.json() : null; }
+  try { const r = await fetch(path + '?t=' + Date.now()); return r.ok ? r.json() : null; }
   catch { return null; }
 }
 
 (async () => {
-  const d = await load("data/liquidity.json");
-  if (!d) { document.getElementById("err").style.display = "block"; return; }
-  document.getElementById("app").hidden = false;
-  document.getElementById("week").textContent = "week of " + d.week_of;
+  [_d, _b, _s, _f] = await Promise.all([
+    load('data/liquidity.json'), load('data/brief.json'),
+    load('data/screen.json'),    load('data/funds.json'),
+  ]);
+  if (!_d) { document.getElementById('err').style.display = 'block'; return; }
+  document.getElementById('app').hidden = false;
+  document.getElementById('week').textContent = 'week of ' + _d.week_of;
 
-  const r = d.regime;
-  const pill = document.getElementById("pill");
-  pill.textContent = r.label + "  (" + (r.score > 0 ? "+" : "") + r.score + ")";
-  pill.className = "pill " + (r.label === "Risk-On" ? "on" : r.label === "Risk-Off" ? "off" : "neu");
-  document.getElementById("sizing").textContent = r.sizing_hint + (r.crisis_override ? " ⚠ credit crisis override active" : "");
-  document.getElementById("comps").innerHTML = r.components.map(c =>
-    `<div class="comp"><span>${c.name}: ${c.value > 0 ? "+" : ""}${c.value}${c.unit}</span>
-     <b class="${cls(c.signal)}">${c.contribution > 0 ? "+" + c.contribution : c.contribution} pts</b></div>`).join("");
+  // Regime pill
+  const r = _d.regime;
+  const EMOJI = { 'Risk-On':'🟢 ', 'Neutral':'🟡 ', 'Risk-Off':'🔴 ' };
+  const pill = document.getElementById('pill');
+  pill.textContent = (EMOJI[r.label]||'') + r.label + ' (' + (r.score > 0 ? '+' : '') + r.score + ')';
+  pill.className = 'pill ' + (r.label === 'Risk-On' ? 'on' : r.label === 'Risk-Off' ? 'off' : 'neu');
+  document.getElementById('sizing').textContent = r.sizing_hint + (r.crisis_override ? ' ⚠ crisis override active' : '');
+  document.getElementById('comps').innerHTML = r.components.map(c =>
+    `<div class="comp"><span>${c.name}: ${c.value > 0 ? '+' : ''}${c.value}${c.unit}</span>
+     <b class="${cls(c.signal)}">${c.contribution > 0 ? '+' + c.contribution : c.contribution} pts</b></div>`).join('');
 
-  const b = await load("data/brief.json");
-  if (b) {
-    document.getElementById("brief").innerHTML =
-      `<p class="headline">${b.headline}</p>` +
-      b.body.map(p => `<p>${p}</p>`).join("") +
-      (b.watch?.length ? `<p><b>Watching:</b></p><ul>${b.watch.map(w => `<li>${w}</li>`).join("")}</ul>` : "") +
-      (b.change_my_mind?.length ? `<p><b>What would change the regime call:</b></p><ul>${b.change_my_mind.map(w => `<li>${w}</li>`).join("")}</ul>` : "") +
-      `<p class="sizing" style="font-size:12px">Written by Claude · ${b.written_utc.slice(0, 10)}</p>`;
-  }
-
-  const s = await load("data/screen.json");
-  const f = await load("data/funds.json");
-
-  const smartNames = new Set();
-  if (f) for (const fd of f.funds.filter(x => x.ok)) {
-    for (const h of [...(fd.top || []), ...(fd.big_adds || [])]) smartNames.add(h.issuer.split(" ")[0].toUpperCase());
-    for (const nb of fd.new_buys || []) smartNames.add(nb.split(" ")[0].toUpperCase());
-  }
-
-  if (s && s.candidates?.length) {
-    const tick = c => Object.entries(c.checks).map(([k, v]) =>
-      `<span style="color:${v === true ? "var(--green)" : v === false ? "var(--red)" : "var(--dim)"}">${v === true ? "✓" : v === false ? "✗" : "–"} ${k.replace(/_/g, " ")}</span>`).join(" · ");
-    document.getElementById("screen").innerHTML = s.candidates.slice(0, 15).map(c => {
-      const smart = smartNames.has(c.name.split(" ")[0].toUpperCase());
-      return `<div class="card metric">
-        <span class="name">${c.ticker} <span style="color:var(--dim);font-weight:400">· ${c.name}</span>${smart ? " <span style='color:var(--amber)'>★</span>" : ""}</span>
-        <span class="val">PEG ${c.peg}</span>
-        <span class="sizing">${c.sector} · score ${c.score}/5${smart ? " · ★ held by tracked funds (≈name match)" : ""}</span>
-        <span class="chg flat">+${c.eps_growth_pct}% EPS</span>
-        <details><summary>details</summary>
-          P/E ${c.pe} · EPS growth ${c.eps_growth_pct}% · revenue ${c.rev_growth_pct ?? "?"}% · ROE ${c.roe_pct ?? "?"}% · D/E ${c.de ?? "?"} · mcap $${c.mcap_b ?? "?"}B<br>${tick(c)}
-        </details></div>`;
-    }).join("") + `<p class="meta">Quarter ${s.quarter} · ${s.coverage.candidates} candidates from ${s.coverage.universe} names · ${s.coverage.no_usgaap_data} lacked US-GAAP data (mostly foreign ADRs)</p>`;
-  }
-
-  if (f && f.funds?.some(x => x.ok)) {
-    const ov = f.overlap?.length ?
-      `<div class="card"><span class="name">Conviction overlap</span><p class="sizing" style="margin:4px 0 8px">Same stock in the top-50 of 3+ tracked funds:</p>${
-        f.overlap.slice(0, 10).map(o => `<div class="comp"><span>${o.issuer}</span><b class="pos">${o.n} funds</b></div>`).join("")}</div>` : "";
-    document.getElementById("funds").innerHTML = ov + f.funds.filter(x => x.ok).map(fd => `
-      <div class="card"><details><summary style="color:var(--text);font-weight:600">${fd.name} <span style="color:var(--dim);font-weight:400">· $${fd.portfolio_b}B · Q ending ${fd.period}</span></summary>
-        <div style="margin-top:8px">${fd.top.slice(0, 5).map(h => `<div class="comp"><span>${h.issuer}</span><b class="flat">${h.pct}%</b></div>`).join("")}
-        ${fd.new_buys?.length ? `<p class="sizing" style="margin-top:8px"><b>New buys:</b> ${fd.new_buys.slice(0, 6).join(", ")}</p>` : ""}
-        ${fd.big_adds?.length ? `<p class="sizing"><b>Big adds:</b> ${fd.big_adds.slice(0, 4).map(a => `${a.issuer} (+${a.shares_chg_pct}%)`).join(", ")}</p>` : ""}
-        </div></details></div>`).join("") +
-      `<p class="meta">${f.note}</p>`;
-  }
-
-  const colors = { net_liquidity: "#3fb96f", hy_oas: "#e5534b", dollar: "#5b9bd5" };
-  document.getElementById("metrics").innerHTML = Object.entries(d.metrics).map(([id, m]) => {
-    const chg = m.change_13w_pct ?? m.change_13w_pp;
-    const chgTxt = chg === undefined ? "" :
-      `<span class="chg ${cls(id === "net_liquidity" ? chg : -chg)}">${chg > 0 ? "+" : ""}${chg}${m.change_13w_pp !== undefined ? "pp" : "%"} / 13w</span>`;
-    return `<div class="card metric">
-      <span class="name">${m.name}</span><span class="val">${fmt(m.latest, m.unit)}</span>
-      <span class="sizing">2-year weekly history</span>${chgTxt}
-      ${spark(m.history, colors[id] || "#8b98a5")}
-      <details><summary>what is this?</summary>${EXPLAIN[id] || ""}</details>
-    </div>`;
-  }).join("");
-
-  const t = d.thresholds;
-  document.getElementById("method").innerHTML =
+  // Overview
+  document.getElementById('brief').innerHTML = renderBrief(_b, _d.metrics);
+  document.getElementById('metrics').innerHTML = renderMetrics(_d);
+  const t = _d.thresholds;
+  document.getElementById('method').innerHTML =
     `Score = 2×liquidity + credit + dollar, each −1/0/+1 over a ${t.lookback_weeks}-week window.<br>
-     Net liquidity: ±${t.liq_pct}% · HY spread: ±${t.hy_pp}pp (inverted) · Dollar: ±${t.usd_pct}% (inverted).<br>
-     Score ≥ +2 → Risk-On · ≤ −2 → Risk-Off · else Neutral. HY spread ≥ ${t.hy_crisis}% forces Risk-Off.<br>
-     Math runs in Python (deterministic); Claude only writes the narrative brief.`;
-  document.getElementById("meta").textContent = "Data refreshed " + d.generated_utc.replace("T", " ").slice(0, 16) + " UTC · auto-updates Mondays";
+     Triggers: liq ±${t.liq_pct}% · HY spread ±${t.hy_pp}pp · dollar ±${t.usd_pct}%. ≥+2 = Risk-On · ≤−2 = Risk-Off. HY ≥${t.hy_crisis}% → crisis override.`;
+  document.getElementById('meta').textContent =
+    'Data refreshed ' + (_d.generated_utc||'').replace('T',' ').slice(0,16) + ' UTC · auto-updates Mondays';
+
+  rerender();
 })();
 </script>
 </body>
