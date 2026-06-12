@@ -40,7 +40,7 @@ call. Teach, don't lecture. Commit as `brief: week of YYYY-MM-DD` and push.
 ## Roadmap
 - [x] Phase 1 — liquidity monitor + dashboard
 - [x] Phase 2 — GARP screener (Lynch criteria, anonymized scoring) + 13F tracker
-- [ ] Phase 3 — Damodaran health check + supply-chain bottleneck tracing (10-Ks)
+- [x] Phase 3 — Damodaran health check (pedata/roe/margin XLS → vs-industry ratios + sector concentration alert)
 - [ ] Phase 4 — guardrails: pilot-trade checklist, position-sizing discipline
 
 ## 13F watch list (Phase 2) — free via SEC EDGAR
