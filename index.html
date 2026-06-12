@@ -66,20 +66,41 @@ summary{cursor:pointer;color:var(--blue);font-size:13px;list-style:none;}
 summary::before{content:"ⓘ ";}
 
 /* SCREEN */
-.sc{display:grid;grid-template-columns:1fr auto;gap:3px 8px;}
-.sc .sn{font-weight:600;font-size:15px;}
-.sc .speg{font-size:22px;font-weight:700;color:var(--green);text-align:right;}
-.sc .smeta{grid-column:1/-1;font-size:13px;color:var(--dim);margin-top:2px;}
-.sc .schecks{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;font-size:12px;}
+.schecks{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;}
 .ck-ok{color:var(--green);}.ck-no{color:var(--red);}.ck-na{color:var(--dim);}
 .star{color:var(--amber);font-size:13px;}
-.health-badge{grid-column:1/-1;font-size:12px;margin-top:2px;}
+
+/* SCREEN — sector groups + expandable cards */
+.sector-head{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 2px;}
+.sector-head h3{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);}
+.sc-summary{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;}
+.sc-expand{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;}
+.sc-expand.open{display:block;}
+
+/* FAV BUTTON */
+.fav-btn{background:none;border:none;cursor:pointer;padding:4px;font-size:20px;color:var(--dim);line-height:1;transition:color .15s;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
+.fav-btn.on{color:#f0c330;}
 
 /* FUNDS */
 .fund details summary{color:var(--text);font-weight:600;list-style:none;}
 .fund details summary::before{content:none;}
 .fund details summary::marker{display:none;}
 .ov-row{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-top:1px solid var(--line);}
+
+/* POSITIONS */
+.kelly-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:7px 0;border-top:1px solid var(--line);}
+.kelly-row:first-child{border-top:none;}
+.kelly-num{font-size:21px;font-weight:700;}
+.tl-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-top:1px solid var(--line);}
+.tl-item:first-child{border-top:none;}
+.tl-date{font-size:12px;color:var(--dim);white-space:nowrap;min-width:50px;padding-top:3px;}
+.tl-type{font-size:10px;text-transform:uppercase;letter-spacing:.8px;padding:2px 7px;border-radius:4px;white-space:nowrap;font-weight:600;flex-shrink:0;margin-top:1px;}
+.tl-type.fomc{background:rgba(91,155,213,.15);color:var(--blue);}
+.tl-type.cpi{background:rgba(216,166,55,.15);color:var(--amber);}
+.tl-type.nfp{background:rgba(139,152,165,.15);color:var(--dim);}
+.tl-type.earn{background:rgba(63,185,111,.15);color:var(--green);}
+.tl-type.div{background:rgba(216,166,55,.15);color:var(--amber);}
+.tl-label{font-size:14px;flex:1;}
 
 /* SETTINGS */
 .srow{padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;}
@@ -96,12 +117,12 @@ select{background:var(--card2);border:1px solid var(--line);color:var(--text);bo
 }
 .tb{
   flex:1;display:flex;flex-direction:column;align-items:center;
-  padding:9px 4px 7px;gap:3px;font-size:10px;color:var(--dim);
+  padding:9px 2px 7px;gap:3px;font-size:9.5px;color:var(--dim);
   cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent;
   transition:color .15s;
 }
 .tb.on{color:var(--text);}
-.tb .ic{font-size:22px;line-height:1;}
+.tb .ic{font-size:20px;line-height:1;}
 
 .meta,.foot{color:var(--dim);font-size:12px;text-align:center;margin-top:14px;}
 #err{color:var(--amber);text-align:center;padding:24px 10px;display:none;}
@@ -140,6 +161,11 @@ select{background:var(--card2);border:1px solid var(--line);color:var(--text);bo
     <div id="funds-wrap"></div>
   </section>
 
+  <!-- POSITIONS TAB -->
+  <section id="t-po" hidden>
+    <div id="positions-wrap"></div>
+  </section>
+
   <!-- SETTINGS TAB -->
   <section id="t-st" hidden>
     <div id="settings-wrap"></div>
@@ -151,6 +177,7 @@ select{background:var(--card2);border:1px solid var(--line);color:var(--text);bo
   <button class="tb on" data-tab="t-ov"><span class="ic">📊</span>Overview</button>
   <button class="tb" data-tab="t-sc"><span class="ic">🔍</span>Screen</button>
   <button class="tb" data-tab="t-fd"><span class="ic">🧠</span>Funds</button>
+  <button class="tb" data-tab="t-po"><span class="ic">⭐</span>Positions</button>
   <button class="tb" data-tab="t-st"><span class="ic">⚙️</span>Settings</button>
 </nav>
 
@@ -161,6 +188,7 @@ document.querySelectorAll('.tb').forEach(btn => btn.addEventListener('click', ()
   btn.classList.add('on');
   document.querySelectorAll('section[id^="t-"]').forEach(s => s.hidden = true);
   document.getElementById(btn.dataset.tab).hidden = false;
+  if (btn.dataset.tab === 't-po') fetchPositionData();
 }));
 
 // ── PREFS ────────────────────────────────────────────────────────────────────
@@ -194,7 +222,6 @@ function miniSpark(hist, color) {
     <polygon points="0,${H} ${line} ${W},${H}" fill="${color}" opacity="0.14"/></svg>`;
 }
 
-// Auto-explain jargon in brief text (adds grey note in brackets on first occurrence)
 const JARGON_DB = {
   'reverse repo': 'cash parked overnight at the Fed by money-market funds — when it drains, money flows back into markets',
   'RRP': 'reverse repo facility — cash parked overnight at the Fed',
@@ -218,12 +245,12 @@ function addJargon(text) {
 }
 
 const METRIC_EXPLAIN = {
-  net_liquidity: "Fed balance sheet − reverse repo − Treasury's checking account (TGA). A proxy for free-floating cash in the system. Rising = tailwind for risk assets; falling = headwind. With RRP now near zero, this moves one-for-one with what the Fed and Treasury do.",
+  net_liquidity: "Fed balance sheet − reverse repo − Treasury's checking account (TGA). A proxy for free-floating cash in the system. Rising = tailwind for risk assets; falling = headwind.",
   walcl: "Total assets held by the Federal Reserve. Goes up when the Fed buys bonds (QE = printing), down when it lets them run off (QT = draining).",
-  rrp: "Cash that money-market funds park at the Fed overnight. When RRP falls, that cash flows back out into markets — it acted as a hidden liquidity cushion for two years.",
+  rrp: "Cash that money-market funds park at the Fed overnight. When RRP falls, that cash flows back out into markets.",
   tga: "The US government's checking account at the Fed. Treasury building it up pulls cash OUT of markets; spending it down pushes cash back in.",
   hy_oas: "The extra yield junk-rated companies must pay above safe Treasuries. The bond market's fear gauge: tightening = confidence, widening = stress. Above 6% = crisis territory.",
-  dollar: "Broad trade-weighted dollar index. Most of the world's debt is in dollars, so a falling dollar loosens global conditions; a sharply rising one tightens and breaks things.",
+  dollar: "Broad trade-weighted dollar index. A falling dollar loosens global conditions; a sharply rising one tightens and breaks things.",
   yield_curve: "10-year minus 2-year Treasury yield. Inversion (negative) has preceded every modern recession; the rapid re-steepening AFTER inversion is the classic danger window.",
 };
 
@@ -279,46 +306,127 @@ function renderMetrics(d) {
   }).join('');
 }
 
+// ── SCREENER: COMPOSITE R/R SCORE ────────────────────────────────────────────
+let _screenCandidates = {};  // ticker → candidate data (populated in renderScreen)
+const _openCards = new Set();  // set of open card IDs (persists across rerenders)
+
+function toggleCard(id) {
+  if (_openCards.has(id)) _openCards.delete(id);
+  else _openCards.add(id);
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+function rrScore(c, hc, regimeLabel) {
+  if (!c.peg || c.peg <= 0) return 0;
+  const pegFactor = 1.5 / c.peg;  // PEG 1.5 = reference 1.0; lower PEG = higher score
+  const fundamentalScore = (c.score / 5) * pegFactor;
+  const healthMult = { strong: 1.2, inline: 1.0, weak: 0.8 }[hc?.health] || 1.0;
+  const regimeMult = { 'Risk-On': 1.1, 'Neutral': 1.0, 'Risk-Off': 0.9 }[regimeLabel] || 1.0;
+  return fundamentalScore * healthMult * regimeMult;
+}
+
 // ── RENDER SCREEN ────────────────────────────────────────────────────────────
 function renderScreen(s, f, h) {
   if (!s?.candidates?.length)
     return '<div class="card"><p class="sizing">No screen data yet — runs every Monday.</p></div>';
+
   const smartNames = new Set();
   if (f) for (const fd of (f.funds || []).filter(x => x.ok)) {
     for (const hh of [...(fd.top||[]),(fd.big_adds||[])]) if (hh?.issuer) smartNames.add(hh.issuer.split(' ')[0].toUpperCase());
     for (const nb of fd.new_buys || []) smartNames.add(nb.split(' ')[0].toUpperCase());
   }
-  // health lookup by anon id
+
   const healthMap = {};
   if (h?.candidates) for (const hc of h.candidates) healthMap[hc.anon] = hc;
 
-  const HLABEL = { strong: '🟢 strong vs peers', inline: '🟡 inline with peers', weak: '🔴 lags peers', unknown: '' };
+  const regimeLabel = _d?.regime?.label || 'Neutral';
+  const HLABEL = { strong: '🟢', inline: '🟡', weak: '🔴' };
   const CK = { growth_sweet:'EPS 10–40%', peg_ok:'PEG ≤1.5', rev_confirms:'Rev ≥5%', roe_strong:'ROE ≥12%', debt_ok:'D/E ≤1.0' };
-  const cards = s.candidates.slice(0, prefs.garpCount).map(c => {
-    const smart = smartNames.has(c.name.split(' ')[0].toUpperCase());
-    const hc = healthMap[c.anon];
-    const checks = Object.entries(c.checks).map(([k, v]) =>
-      `<span class="${v === true ? 'ck-ok' : v === false ? 'ck-no' : 'ck-na'}">${v === true ? '✓' : v === false ? '✗' : '–'} ${CK[k]||k}</span>`).join('');
-    const healthBadge = hc ? `<span class="health-badge">${HLABEL[hc.health] || ''}</span>` : '';
-    const vsLine = hc?.scores && Object.keys(hc.scores).length ? (() => {
-      const parts = [];
-      if (hc.scores.pe_vs_ind)  parts.push(`P/E ${hc.scores.pe_vs_ind.toFixed(1)}× ind`);
-      if (hc.scores.peg_vs_ind) parts.push(`PEG ${hc.scores.peg_vs_ind.toFixed(1)}× ind`);
-      if (hc.scores.roe_vs_ind) parts.push(`ROE ${hc.scores.roe_vs_ind.toFixed(1)}× ind`);
-      return parts.length ? `<div class="schecks" style="color:var(--dim);font-size:12px">${parts.join(' &nbsp; ')}</div>` : '';
-    })() : '';
-    return `<div class="card sc">
-      <span class="sn">${c.ticker}${smart ? ' <span class="star">★</span>' : ''} <span style="font-weight:400;font-size:14px;color:var(--dim)">${c.name}</span></span>
-      <span class="speg">PEG ${c.peg}</span>
-      ${healthBadge}
-      <span class="smeta">${c.sector} · Score ${c.score}/5 · P/E ${c.pe} · EPS +${c.eps_growth_pct}%${c.mcap_b ? ' · $' + c.mcap_b + 'B' : ''}</span>
-      <div class="schecks">${checks}</div>
-      ${(c.rev_growth_pct != null || c.roe_pct != null) ? `<div class="schecks" style="color:var(--dim)">Rev +${c.rev_growth_pct ?? '?'}% &nbsp;ROE ${c.roe_pct ?? '?'}% &nbsp;D/E ${c.de ?? 'n/a'}</div>` : ''}
-      ${vsLine}
-    </div>`;
-  }).join('');
 
-  // GARP count selector at top of screen tab
+  // Compute R/R score, sort descending, take top N
+  const scored = [...s.candidates].map(c => ({
+    ...c, _rr: rrScore(c, healthMap[c.anon], regimeLabel)
+  })).sort((a, b) => b._rr - a._rr).slice(0, prefs.garpCount);
+
+  // Populate screen lookup for toggleFav
+  for (const c of scored) {
+    _screenCandidates[c.ticker] = {
+      ticker: c.ticker, name: c.name, sector: c.sector,
+      score: c.score, peg: c.peg, pe: c.pe,
+      eps_growth_pct: c.eps_growth_pct, rev_growth_pct: c.rev_growth_pct,
+      roe_pct: c.roe_pct, de: c.de, mcap_b: c.mcap_b, anon: c.anon,
+    };
+  }
+
+  // Group by sector (preserving R/R order within group)
+  const sectors = {};
+  for (const c of scored) {
+    const sec = c.sector || 'Other';
+    if (!sectors[sec]) sectors[sec] = [];
+    sectors[sec].push(c);
+  }
+
+  let cards = '';
+  for (const [sector, cands] of Object.entries(sectors)) {
+    cards += `<div class="sector-head">
+      <h3>${sector}</h3>
+      <span class="sizing" style="font-size:12px">${cands.length} candidate${cands.length > 1 ? 's' : ''}</span>
+    </div>`;
+
+    for (const c of cands) {
+      const fav = isFav(c.ticker);
+      const hc = healthMap[c.anon];
+      const smart = smartNames.has(c.name.split(' ')[0].toUpperCase());
+      const eid = `sc-${c.ticker}`;
+      const isOpen = _openCards.has(eid);
+
+      const checks = Object.entries(c.checks).map(([k, v]) =>
+        `<span class="${v === true ? 'ck-ok' : v === false ? 'ck-no' : 'ck-na'}">${v === true ? '✓' : v === false ? '✗' : '–'} ${CK[k]||k}</span>`).join('');
+
+      const vsLine = hc?.scores && Object.keys(hc.scores).length ? (() => {
+        const parts = [];
+        if (hc.scores.pe_vs_ind)  parts.push(`P/E ${hc.scores.pe_vs_ind.toFixed(1)}× ind`);
+        if (hc.scores.peg_vs_ind) parts.push(`PEG ${hc.scores.peg_vs_ind.toFixed(1)}× ind`);
+        if (hc.scores.roe_vs_ind) parts.push(`ROE ${hc.scores.roe_vs_ind.toFixed(1)}× ind`);
+        return parts.length ? `<div class="schecks" style="color:var(--dim);margin-top:6px">${parts.join(' &nbsp;')}</div>` : '';
+      })() : '';
+
+      cards += `<div class="card">
+        <div class="sc-summary" onclick="toggleCard('${eid}')">
+          <div style="flex:1;min-width:0">
+            <span style="font-weight:700;font-size:15px">${c.ticker}</span>
+            ${smart ? `<span class="star" style="margin-left:4px">★</span>` : ''}
+            <span style="color:var(--dim);font-size:13px;margin-left:5px">${c.name}</span>
+          </div>
+          <span style="font-size:12px;color:var(--dim);white-space:nowrap;margin-right:2px">
+            ${HLABEL[hc?.health || ''] || ''} PEG ${c.peg}
+          </span>
+          <button class="fav-btn${fav ? ' on' : ''}"
+            onclick="event.stopPropagation();toggleFav('${c.ticker}')"
+            title="${fav ? 'Remove from positions' : 'Add to positions'}">${fav ? '⭐' : '☆'}</button>
+        </div>
+        <div id="${eid}" class="sc-expand${isOpen ? ' open' : ''}">
+          <div class="schecks" style="margin-bottom:8px">${checks}</div>
+          <div style="font-size:13px;color:var(--dim);margin-bottom:4px">
+            Score ${c.score}/5 · P/E ${c.pe} · EPS +${c.eps_growth_pct}%${c.mcap_b ? ' · $' + c.mcap_b + 'B' : ''}
+          </div>
+          ${(c.rev_growth_pct != null || c.roe_pct != null) ? `<div style="font-size:13px;color:var(--dim)">Rev +${c.rev_growth_pct ?? '?'}% &nbsp;ROE ${c.roe_pct ?? '?'}% &nbsp;D/E ${c.de ?? 'n/a'}</div>` : ''}
+          ${vsLine}
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+            <span style="font-size:12px;color:var(--dim)">R/R score: ${c._rr.toFixed(2)}</span>
+            <button onclick="toggleFav('${c.ticker}')"
+              style="background:${fav ? 'rgba(240,195,48,.12)' : 'var(--card2)'};border:1px solid var(--line);
+                     border-radius:8px;color:${fav ? '#f0c330' : 'var(--dim)'};font-size:13px;
+                     padding:5px 12px;cursor:pointer">
+              ${fav ? '⭐ In positions' : '☆ Add to positions'}
+            </button>
+          </div>
+        </div>
+      </div>`;
+    }
+  }
+
   const garpCtrl = `<div class="card" style="margin-bottom:4px;margin-top:0">
     <div class="srow" style="border:none">
       <span style="font-size:14px">Candidates to show</span>
@@ -328,21 +436,19 @@ function renderScreen(s, f, h) {
     </div>
   </div>`;
 
-  // sector concentration warning
   let concWarn = '';
   if (h?.sector_concentration?.length) {
     const items = h.sector_concentration.map(x => `<b>${x.sector}</b> (${x.count})`).join(', ');
     concWarn = `<div class="card" style="border-color:var(--amber);background:rgba(216,166,55,.07)">
-      <p class="sizing">⚠ Sector concentration: ${items} — most candidates cluster here. Diversify across sectors before sizing up.</p></div>`;
+      <p class="sizing">⚠ Sector concentration: ${items} — diversify across sectors before sizing up.</p></div>`;
   }
 
-  return `<h2>GARP screen — Lynch criteria</h2>${garpCtrl}${concWarn}${cards}
+  return `<h2>GARP screen — ranked by risk/reward</h2>${garpCtrl}${concWarn}${cards}
     <p class="meta">${s.coverage.candidates} candidates from ${s.coverage.universe} stocks</p>
-    <p class="foot">★ = rough name-match to a tracked fund · vs-ind ratios from Damodaran industry benchmarks</p>`;
+    <p class="foot">★ = smart-money name-match · ☆ tap to track a position · Damodaran industry benchmarks</p>`;
 }
 
 // ── RENDER FUNDS ─────────────────────────────────────────────────────────────
-// Fund roster — always shown even when 13F data hasn't loaded yet
 const FUND_ROSTER = [
   { name:"Duquesne Family Office", manager:"Stanley Druckenmiller", tier:1,
     why:"The greatest macro trader alive. His 13F shows what he trusts enough to hold across multiple quarters — more signal per position than almost anyone else filing." },
@@ -353,7 +459,7 @@ const FUND_ROSTER = [
   { name:"Third Point LLC", manager:"Dan Loeb", tier:1,
     why:"Activist value with sharp sector rotation. Strong record on tech and healthcare turn-arounds; his quarterly letters give unusually clear reasoning for positions." },
   { name:"Greenlight Capital", manager:"David Einhorn", tier:1,
-    why:"One of the most analytically rigorous fundamental managers filing 13Fs. Famous for both long conviction (Green Brick, Consol) and spotting over-valued bubble names early." },
+    why:"One of the most analytically rigorous fundamental managers filing 13Fs. Famous for both long conviction and spotting over-valued bubble names early." },
   { name:"Baupost Group", manager:"Seth Klarman", tier:1,
     why:"The gold standard for patient, margin-of-safety value. Files rarely and every position is deliberate. Where Klarman owns is often where the 3-year risk/reward is asymmetric." },
   { name:"Lone Pine Capital", manager:"Steve Mandel (Tiger cub)", tier:1,
@@ -369,7 +475,6 @@ const FUND_ROSTER = [
 ];
 
 function renderFunds(f) {
-  // tier filter control at top
   const tierCtrl = `<div class="card" style="margin-bottom:4px;margin-top:0">
     <div class="srow" style="border:none">
       <span style="font-size:14px">Show tiers</span>
@@ -381,13 +486,11 @@ function renderFunds(f) {
     </div>
   </div>`;
 
-  // data lookup by name (for when 13F data loads)
   const dataByName = {};
   if (f?.funds) for (const fd of f.funds) dataByName[fd.name] = fd;
 
-  // conviction overlap section (only when data loaded)
   const ov = f?.overlap?.length ? `<h2>Conviction overlap</h2><div class="card">
-    <p class="sizing" style="margin-bottom:8px">Same stock in the top-50 of 3+ tracked funds (strongest confirmation signal):</p>
+    <p class="sizing" style="margin-bottom:8px">Same stock in the top-50 of 3+ tracked funds:</p>
     ${f.overlap.slice(0,10).map(o=>`<div class="ov-row"><span>${o.issuer}</span><b class="pos">${o.n} funds</b></div>`).join('')}
   </div>` : '';
 
@@ -442,8 +545,330 @@ function renderFunds(f) {
   return `${tierCtrl}${ov}<h2>Smart-money watch list</h2>${out}${note}`;
 }
 
+// ── POSITIONS ─────────────────────────────────────────────────────────────────
+function getPositions() {
+  try { return JSON.parse(localStorage.getItem('ms_positions') || '[]'); } catch { return []; }
+}
+function savePositions(arr) { localStorage.setItem('ms_positions', JSON.stringify(arr)); }
+function isFav(ticker) { return getPositions().some(p => p.ticker === ticker); }
+
+function toggleFav(ticker) {
+  const positions = getPositions();
+  const idx = positions.findIndex(p => p.ticker === ticker);
+  if (idx >= 0) {
+    positions.splice(idx, 1);
+  } else {
+    // try cached screener data first, fall back to raw _s
+    let c = _screenCandidates[ticker];
+    if (!c && _s?.candidates) {
+      const raw = _s.candidates.find(x => x.ticker === ticker);
+      if (raw) {
+        c = { ticker: raw.ticker, name: raw.name, sector: raw.sector, score: raw.score,
+               peg: raw.peg, pe: raw.pe, eps_growth_pct: raw.eps_growth_pct,
+               rev_growth_pct: raw.rev_growth_pct, roe_pct: raw.roe_pct,
+               de: raw.de, mcap_b: raw.mcap_b, anon: raw.anon };
+      }
+    }
+    if (!c) return;
+    positions.push({ ...c, favAt: new Date().toISOString() });
+  }
+  savePositions(positions);
+  rerender();
+}
+
+// ── PERSONALISATION ───────────────────────────────────────────────────────────
+function getPersonal() {
+  return {
+    birthday: localStorage.getItem('ms_birthday') || '',
+    portfolioSize: parseFloat(localStorage.getItem('ms_portfolio') || '0') || 0,
+  };
+}
+function savePersonal(key, val) {
+  localStorage.setItem(key === 'birthday' ? 'ms_birthday' : 'ms_portfolio', val);
+  document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
+  renderPositions();
+}
+
+function calcAge(birthday) {
+  if (!birthday) return null;
+  const today = new Date(), bday = new Date(birthday);
+  let age = today.getFullYear() - bday.getFullYear();
+  if (today.getMonth() - bday.getMonth() < 0 ||
+     (today.getMonth() === bday.getMonth() && today.getDate() < bday.getDate())) age--;
+  return age;
+}
+
+function horizonInfo(age) {
+  if (age == null) return null;
+  if (age < 30) return { label: '30+ yr horizon', mult: 1.0, note: 'Full quarter-Kelly sizing.' };
+  if (age < 40) return { label: '20+ yr horizon', mult: 1.0, note: 'Full quarter-Kelly sizing.' };
+  if (age < 50) return { label: '10–20 yr horizon', mult: 0.85, note: '15% Kelly reduction — capital compounding phase.' };
+  if (age < 60) return { label: '5–10 yr horizon', mult: 0.65, note: '35% Kelly reduction — preservation creeping in.' };
+  return { label: '<5 yr horizon', mult: 0.40, note: '60% Kelly reduction — capital preservation priority.' };
+}
+
+// ── KELLY SIZING ──────────────────────────────────────────────────────────────
+function kellyCalc(score, peg, winRateOverride, upsideOverride) {
+  // Win rate: score 0/5 → 45%, score 5/5 → 65%
+  const p = winRateOverride != null ? winRateOverride / 100
+    : 0.45 + (Math.min(score || 0, 5) / 5) * 0.20;
+  // Reward/risk ratio: PEG 0.3 → 3.0×, PEG 3.0 → 1.5×
+  const pegClamped = Math.max(0.3, Math.min(peg || 1.5, 3.0));
+  const b = upsideOverride != null ? upsideOverride
+    : 1.5 + (3.0 - pegClamped) / (3.0 - 0.3) * 1.5;
+  const q = 1 - p;
+  const kelly = Math.max(0, (b * p - q) / b);
+  const quarterKelly = kelly * 0.25;
+  return { p, b, kelly, quarterKelly };
+}
+
+function updatePosKelly(ticker, field, val) {
+  const positions = getPositions();
+  const pos = positions.find(p => p.ticker === ticker);
+  if (!pos) return;
+  const v = parseFloat(val);
+  if (field === 'winRate') pos.winRateOverride = isNaN(v) ? undefined : v;
+  if (field === 'upside')  pos.upsideOverride  = isNaN(v) ? undefined : v;
+  savePositions(positions);
+  renderPositions();
+}
+
+function resetPosKelly(ticker) {
+  const positions = getPositions();
+  const pos = positions.find(p => p.ticker === ticker);
+  if (!pos) return;
+  delete pos.winRateOverride;
+  delete pos.upsideOverride;
+  savePositions(positions);
+  renderPositions();
+}
+
+// ── MACRO CALENDAR (approximate — FOMC, CPI, NFP for H2 2026) ────────────────
+const MACRO_CALENDAR = [
+  { date:'2026-07-02', type:'nfp',  label:'Jobs Report (Jun data)' },
+  { date:'2026-07-14', type:'cpi',  label:'CPI Release (Jun data)' },
+  { date:'2026-07-28', type:'fomc', label:'FOMC Rate Decision' },
+  { date:'2026-08-07', type:'nfp',  label:'Jobs Report (Jul data)' },
+  { date:'2026-08-13', type:'cpi',  label:'CPI Release (Jul data)' },
+  { date:'2026-09-04', type:'nfp',  label:'Jobs Report (Aug data)' },
+  { date:'2026-09-11', type:'cpi',  label:'CPI Release (Aug data)' },
+  { date:'2026-09-16', type:'fomc', label:'FOMC Rate Decision' },
+  { date:'2026-10-02', type:'nfp',  label:'Jobs Report (Sep data)' },
+  { date:'2026-10-13', type:'cpi',  label:'CPI Release (Sep data)' },
+  { date:'2026-10-28', type:'fomc', label:'FOMC Rate Decision' },
+  { date:'2026-11-06', type:'nfp',  label:'Jobs Report (Oct data)' },
+  { date:'2026-11-12', type:'cpi',  label:'CPI Release (Oct data)' },
+  { date:'2026-12-04', type:'nfp',  label:'Jobs Report (Nov data)' },
+  { date:'2026-12-10', type:'fomc', label:'FOMC Rate Decision' },
+  { date:'2026-12-11', type:'cpi',  label:'CPI Release (Nov data)' },
+];
+
+// ── YAHOO FINANCE (browser-side) ──────────────────────────────────────────────
+async function fetchQuote(ticker) {
+  try {
+    const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&range=1d`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    return d.chart?.result?.[0]?.meta?.regularMarketPrice || null;
+  } catch { return null; }
+}
+
+async function fetchCalendar(ticker) {
+  try {
+    const r = await fetch(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(ticker)}?modules=calendarEvents`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    const cal = d.quoteSummary?.result?.[0]?.calendarEvents;
+    return {
+      earningsDate: cal?.earnings?.earningsDate?.[0]?.fmt || null,
+      divDate: cal?.dividendDate?.fmt || null,
+    };
+  } catch { return null; }
+}
+
+// ── RENDER POSITIONS ──────────────────────────────────────────────────────────
+function renderPositions() {
+  const el = document.getElementById('positions-wrap');
+  if (!el) return;
+
+  const positions = getPositions();
+  const personal = getPersonal();
+  const age = calcAge(personal.birthday);
+  const horizon = horizonInfo(age);
+  const portfolioSize = personal.portfolioSize;
+
+  if (!positions.length) {
+    el.innerHTML = `<h2>Positions</h2>
+      <div class="card" style="text-align:center;padding:32px 20px">
+        <div style="font-size:36px;margin-bottom:12px">☆</div>
+        <p style="font-size:16px;font-weight:600;margin-bottom:8px">No positions tracked yet</p>
+        <p class="sizing">Tap ☆ on any screener card to start tracking a position.</p>
+      </div>
+      ${_macroCalendarHTML()}`;
+    return;
+  }
+
+  let html = `<h2>Positions${portfolioSize ? ` · $${portfolioSize.toLocaleString()} portfolio` : ''}</h2>`;
+
+  for (const pos of positions) {
+    const { p, b, kelly, quarterKelly } = kellyCalc(pos.score, pos.peg, pos.winRateOverride, pos.upsideOverride);
+    const hmult = horizon?.mult || 1.0;
+    const finalFrac = quarterKelly * hmult;
+    const pctStr = (finalFrac * 100).toFixed(1) + '%';
+    const dollarStr = portfolioSize > 0
+      ? ` (~$${Math.round(portfolioSize * finalFrac).toLocaleString()})` : '';
+
+    html += `<div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div style="min-width:0">
+          <span style="font-weight:700;font-size:16px">${pos.ticker}</span>
+          <span style="color:var(--dim);font-size:13px;margin-left:6px">${pos.name}</span>
+          <div style="font-size:12px;color:var(--dim);margin-top:3px">${pos.sector} · Score ${pos.score}/5 · PEG ${pos.peg} · EPS +${pos.eps_growth_pct}%</div>
+        </div>
+        <button class="fav-btn on" onclick="toggleFav('${pos.ticker}')" title="Remove from positions">⭐</button>
+      </div>
+
+      <h2 style="margin-top:14px;margin-bottom:6px">Suggested sizing${horizon ? ` <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dim)">· ${horizon.label}</span>` : ''}</h2>
+      <div class="card" style="background:var(--card2);border-color:transparent;margin-bottom:0;padding:10px 14px">
+        <div class="kelly-row" style="border:none">
+          <span style="font-size:15px;font-weight:600">Position size</span>
+          <span class="kelly-num ${finalFrac > 0.03 ? 'pos' : 'flat'}">${pctStr}${dollarStr}</span>
+        </div>
+        <div class="kelly-row">
+          <span style="color:var(--dim)">Win rate (assumed)</span>
+          <span>${(p*100).toFixed(0)}%${pos.winRateOverride != null ? ' ✏' : ''}</span>
+        </div>
+        <div class="kelly-row">
+          <span style="color:var(--dim)">Reward/risk (from PEG)</span>
+          <span>${b.toFixed(1)}×${pos.upsideOverride != null ? ' ✏' : ''}</span>
+        </div>
+        <div class="kelly-row">
+          <span style="color:var(--dim)">Full Kelly → ¼ Kelly${hmult < 1 ? ` × ${hmult}` : ''}</span>
+          <span style="color:var(--dim)">${(kelly*100).toFixed(1)}% → ${pctStr}</span>
+        </div>
+      </div>
+      <details style="margin-top:8px;font-size:13px;color:var(--dim)">
+        <summary style="color:var(--blue);font-size:13px;list-style:none;cursor:pointer">✏ Override Kelly inputs</summary>
+        <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <label style="display:flex;flex-direction:column;gap:4px">
+            Win rate (%)
+            <input type="number" min="1" max="99" step="1"
+              placeholder="${(p*100).toFixed(0)}" value="${pos.winRateOverride ?? ''}"
+              style="width:70px;background:var(--card2);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:4px 8px;font-size:14px"
+              oninput="updatePosKelly('${pos.ticker}','winRate',this.value)">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:4px">
+            Upside (×)
+            <input type="number" min="0.5" max="20" step="0.5"
+              placeholder="${b.toFixed(1)}" value="${pos.upsideOverride ?? ''}"
+              style="width:70px;background:var(--card2);border:1px solid var(--line);border-radius:6px;color:var(--text);padding:4px 8px;font-size:14px"
+              oninput="updatePosKelly('${pos.ticker}','upside',this.value)">
+          </label>
+          ${(pos.winRateOverride != null || pos.upsideOverride != null) ?
+            `<button onclick="resetPosKelly('${pos.ticker}')"
+              style="background:none;border:1px solid var(--line);border-radius:6px;color:var(--dim);font-size:12px;padding:5px 10px;cursor:pointer;align-self:flex-end;margin-bottom:2px">
+              reset</button>` : ''}
+        </div>
+        <p style="margin-top:8px;color:var(--dim);font-size:12px;line-height:1.5">
+          Win rate: Lynch score-derived (${(0.45 + pos.score/5*0.2*100).toFixed(0)}% default for score ${pos.score}/5).<br>
+          Upside: inverse PEG proxy — PEG ${pos.peg} → ${b.toFixed(1)}× reward/risk default.<br>
+          Quarter-Kelly = conservative sizing; Druckenmiller uses full-Kelly on highest conviction.
+        </p>
+      </details>
+
+      <h2 style="margin-top:14px;margin-bottom:4px">Price levels</h2>
+      <div id="price-${pos.ticker}" style="color:var(--dim);font-size:13px">Fetching live price…</div>
+    </div>`;
+  }
+
+  html += _macroCalendarHTML();
+  el.innerHTML = html;
+}
+
+async function fetchPositionData() {
+  const positions = getPositions();
+  for (const pos of positions) {
+    const priceEl = document.getElementById(`price-${pos.ticker}`);
+    if (!priceEl) continue;
+
+    const [price, cal] = await Promise.all([fetchQuote(pos.ticker), fetchCalendar(pos.ticker)]);
+
+    let priceHtml = '';
+    if (price) {
+      const fairPrice = pos.peg > 0 ? price / pos.peg : null;
+      const entry = fairPrice ? fairPrice * 1.05 : null;
+      const stop = price * 0.85;
+      const atFairValue = entry ? price <= entry : false;
+
+      priceHtml += `<div class="card" style="background:var(--card2);border-color:transparent;margin-bottom:8px;padding:10px 14px">
+        <div class="kelly-row" style="border:none">
+          <span>Current price</span>
+          <b>$${price.toFixed(2)}</b>
+        </div>`;
+      if (fairPrice) {
+        priceHtml += `<div class="kelly-row">
+          <span style="color:var(--dim)">PEG=1 fair value (Lynch)</span>
+          <b class="${atFairValue ? 'pos' : 'neg'}">$${fairPrice.toFixed(2)}</b>
+        </div>
+        <div class="kelly-row">
+          <span style="color:var(--dim)">Buy under</span>
+          <b>$${entry.toFixed(2)}</b>
+        </div>`;
+      }
+      priceHtml += `<div class="kelly-row">
+          <span style="color:var(--dim)">Initial stop (−15%)</span>
+          <b class="neg">$${stop.toFixed(2)}</b>
+        </div>`;
+      if (!atFairValue && fairPrice) {
+        priceHtml += `<p style="font-size:12px;color:var(--dim);margin-top:8px;border-top:1px solid var(--line);padding-top:8px">
+          Currently ${((price/fairPrice - 1)*100).toFixed(0)}% above PEG=1 fair value.
+          Lynch rule: buy below PEG 1.0–1.2, not above. Wait for a pullback or raise conviction threshold.
+        </p>`;
+      }
+      priceHtml += `</div>`;
+    } else {
+      priceHtml = `<p style="color:var(--dim);font-size:13px">Price unavailable (market closed or CORS blocked).</p>`;
+    }
+
+    if (cal?.earningsDate || cal?.divDate) {
+      priceHtml += `<div class="card" style="background:var(--card2);border-color:transparent;margin-bottom:0;padding:10px 14px">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:4px">Key dates</p>`;
+      if (cal.earningsDate) priceHtml += `
+        <div class="tl-item">
+          <span class="tl-date">${cal.earningsDate}</span>
+          <span class="tl-type earn">EARN</span>
+          <span class="tl-label">${pos.ticker} earnings</span>
+        </div>`;
+      if (cal.divDate) priceHtml += `
+        <div class="tl-item">
+          <span class="tl-date">${cal.divDate}</span>
+          <span class="tl-type div">DIV</span>
+          <span class="tl-label">${pos.ticker} ex-dividend</span>
+        </div>`;
+      priceHtml += `</div>`;
+    }
+
+    priceEl.outerHTML = priceHtml || `<p style="color:var(--dim);font-size:13px">No data.</p>`;
+  }
+}
+
+function _macroCalendarHTML() {
+  const today = new Date().toISOString().slice(0, 10);
+  const future = MACRO_CALENDAR.filter(e => e.date >= today).slice(0, 12);
+  if (!future.length) return '';
+  return `<h2>Macro calendar</h2>
+    <div class="card">
+      ${future.map(e => `
+        <div class="tl-item">
+          <span class="tl-date">${e.date.slice(5).replace('-','/')}</span>
+          <span class="tl-type ${e.type}">${e.type.toUpperCase()}</span>
+          <span class="tl-label">${e.label}</span>
+        </div>`).join('')}
+    </div>
+    <p class="foot">Dates approximate ±3 days · FOMC / BLS CPI / BLS NFP · Add earnings via ☆ in screener</p>`;
+}
+
 // ── RENDER SETTINGS ──────────────────────────────────────────────────────────
-// localStorage keys for threshold overrides
 const THR_KEYS = { liq_pct:'ms_thr_liq', hy_pp:'ms_thr_hy', usd_pct:'ms_thr_usd', hy_crisis:'ms_thr_crisis' };
 
 function getThr(key, fallback) {
@@ -452,29 +877,53 @@ function getThr(key, fallback) {
 }
 
 function renderSettings(d) {
+  const personal = getPersonal();
+  const age = calcAge(personal.birthday);
+  const horizon = horizonInfo(age);
+
+  const personalSection = `<h2>Personalisation</h2>
+  <div class="card">
+    <div class="srow">
+      <span>Birthday</span>
+      <input type="date" value="${personal.birthday}" max="${new Date().toISOString().slice(0,10)}"
+        style="background:var(--card2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:5px 10px;font-size:14px"
+        onchange="savePersonal('birthday',this.value)">
+    </div>
+    ${horizon ? `<p class="sizing" style="padding:2px 0 10px;font-size:13px">${horizon.label} · Kelly multiplier ${(horizon.mult*100).toFixed(0)}% · ${horizon.note}</p>` : '<p class="sizing" style="padding:2px 0 10px;font-size:13px">Enter your birthday to calibrate Kelly sizing to your time horizon.</p>'}
+    <div class="srow">
+      <span>Portfolio size</span>
+      <span style="display:flex;align-items:center;gap:6px">
+        <span style="color:var(--dim)">$</span>
+        <input type="number" min="1000" step="1000" placeholder="100000"
+          value="${personal.portfolioSize || ''}"
+          style="width:120px;background:var(--card2);border:1px solid var(--line);border-radius:8px;
+                 color:var(--text);padding:5px 10px;font-size:14px;text-align:right"
+          onchange="savePersonal('portfolio',this.value)">
+      </span>
+    </div>
+    ${personal.portfolioSize ? `<p class="sizing" style="padding:2px 0 6px;font-size:13px">Dollar sizing shows in Positions tab.</p>` : ''}
+  </div>`;
+
   const base = d?.thresholds || {};
-  // Threshold definitions: [key, label, pipeline_default, unit, why]
   const THRS = [
     ['liq_pct', 'Net liquidity signal', base.liq_pct||0.5, '%',
-     '±0.5% was calibrated so that weekly noise (±0.1–0.2%) doesn\'t trigger false signals. A 13-week move of ≥0.5% represents a genuine directional shift in money flow. Weighted 2× because liquidity is the primary driver — Druckenmiller\'s framework says liquidity moves markets more than earnings.'],
+     '±0.5% was calibrated so weekly noise doesn\'t trigger false signals. A 13-week move of ≥0.5% is a genuine directional shift. Weighted 2× because liquidity moves markets more than earnings — the Druckenmiller framework.'],
     ['hy_pp', 'Credit spread signal', base.hy_pp||0.3, 'pp',
-     '±0.3pp is roughly the noise floor for high-yield spreads in a stable market. A 0.3pp tightening over 13 weeks signals lenders are genuinely more comfortable with risk — not just a daily wiggle. Credit confirms or denies what liquidity suggests.'],
+     '±0.3pp is the noise floor for HY spreads in a stable market. A 0.3pp tightening over 13 weeks signals lenders are genuinely more comfortable with risk.'],
     ['usd_pct', 'Dollar signal', base.usd_pct||1.0, '%',
-     '±1% over 13 weeks because a stronger dollar tightens global dollar-denominated credit conditions. Below 1%, the effect is too small to matter for a 1–3 year investor. Above 1%, it starts pressuring emerging markets and multinationals in a way that shows up in earnings.'],
+     '±1% over 13 weeks. A stronger dollar tightens global dollar-denominated credit — below 1% the effect is too small for a 1–3 year investor to care about.'],
     ['hy_crisis', 'Crisis override (HY OAS floor)', base.hy_crisis||6.0, '%',
-     'HY spreads above 6% have historically marked genuine crisis episodes — GFC peaked ~20%, COVID spiked ~11%, 2022 tightening cycle peaked ~6%. At 6%, credit markets are pricing meaningful default risk and no liquidity score can override that — Risk-Off regardless.'],
+     'HY spreads above 6% have marked genuine crisis episodes (GFC ~20%, COVID ~11%, 2022 ~6%). At 6%, no liquidity score can override Risk-Off.'],
   ];
 
   const rows = THRS.map(([key, label, def, unit, why]) => {
     const cur = getThr(key, def);
     const isOverridden = localStorage.getItem(THR_KEYS[key]) !== null && parseFloat(localStorage.getItem(THR_KEYS[key])) !== def;
-    const overrideBadge = isOverridden ? `<span style="color:var(--amber);font-size:11px"> (overridden)</span>` : '';
     return `<div style="padding:12px 0;border-top:1px solid var(--line)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <span style="font-size:14px;font-weight:600">${label}${overrideBadge}</span>
+        <span style="font-size:14px;font-weight:600">${label}${isOverridden ? `<span style="color:var(--amber);font-size:11px"> (overridden)</span>` : ''}</span>
         <span style="display:flex;align-items:center;gap:6px">
-          <input type="number" step="0.1" min="0.1" max="20"
-            value="${cur}" data-key="${key}" data-default="${def}"
+          <input type="number" step="0.1" min="0.1" max="20" value="${cur}" data-key="${key}"
             style="width:64px;background:var(--card2);border:1px solid var(--line);border-radius:6px;
                    color:var(--text);padding:4px 8px;font-size:14px;text-align:right"
             oninput="saveThr('${key}',this.value)">
@@ -488,23 +937,19 @@ function renderSettings(d) {
     </div>`;
   });
 
-  const pipelineNote = `<p class="meta" style="margin-top:8px">⚙ These values are stored locally in your browser.
-    To change what the Monday pipeline actually computes, edit the constants in
-    <code style="color:var(--dim)">pipeline/liquidity.py</code> and push.</p>`;
-
-  return `<h2>Pipeline thresholds</h2>
+  return `${personalSection}
+  <h2>Pipeline thresholds</h2>
   <div class="card" style="font-size:13.5px">
     <div style="padding-bottom:4px;color:var(--dim);font-size:12px">
-      Adjust to explore how different thresholds would change the regime signal.
-      Pipeline defaults are shown — edit to override your local display.
+      Adjust to explore how different thresholds change the regime signal. Changes are local only.
     </div>
     ${rows.join('')}
   </div>
-  ${pipelineNote}
+  <p class="meta" style="margin-top:8px">⚙ Stored in your browser. To change what the pipeline computes, edit <code style="color:var(--dim)">pipeline/liquidity.py</code> and push.</p>
   <h2>About</h2>
   <div class="card" style="font-size:13.5px;color:var(--dim)">
     <p>Personal macro-thematic research tool. Inspired by Druckenmiller — watch liquidity first, fundamentals second, supply chains third. Not financial advice.</p>
-    <p style="margin-top:8px">Data: FRED (free) · SEC EDGAR (free) · Yahoo Finance (free) · Damodaran/NYU (free).</p>
+    <p style="margin-top:8px">Data: FRED · SEC EDGAR · Yahoo Finance · Damodaran/NYU — all free.</p>
     <p style="margin-top:8px">Refreshes every Monday ~7:30pm SGT via GitHub Actions.</p>
   </div>`;
 }
@@ -513,11 +958,9 @@ function saveThr(key, val) {
   const v = parseFloat(val);
   if (!isNaN(v) && v > 0) {
     localStorage.setItem(THR_KEYS[key], v);
-    // re-render settings only (no full rerender needed)
     document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
   }
 }
-
 function resetThr(key) {
   localStorage.removeItem(THR_KEYS[key]);
   document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
@@ -530,6 +973,7 @@ function rerender() {
   document.getElementById('screen-wrap').innerHTML = renderScreen(_s, _f, _h);
   document.getElementById('funds-wrap').innerHTML = renderFunds(_f);
   document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
+  renderPositions();
 }
 
 async function load(path) {
@@ -547,25 +991,19 @@ async function load(path) {
   document.getElementById('app').hidden = false;
   document.getElementById('week').textContent = 'week of ' + _d.week_of;
 
-  // Version badge — show short date from generated_utc
-  // e.g. "2026-06-11" → "Jun 11"
   const genDate = (_d.generated_utc || '').slice(0, 10);
   const verLabel = genDate ? (() => {
-    const [y, m, day] = genDate.split('-');
+    const [, m, day] = genDate.split('-');
     const mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1];
     return ' · ' + mon + ' ' + +day;
   })() : '';
   document.getElementById('ver').textContent = verLabel;
 
-  // Store seen version; show toast if a newer one arrives
   const SEEN_KEY = 'macroscanner_seen_utc';
   const currentUtc = _d.generated_utc || '';
-  const seenUtc = localStorage.getItem(SEEN_KEY) || '';
-  if (currentUtc && currentUtc > seenUtc) {
-    // First visit or genuinely new data
+  if (currentUtc && currentUtc > (localStorage.getItem(SEEN_KEY) || '')) {
     localStorage.setItem(SEEN_KEY, currentUtc);
   }
-  // Poll every 5 min for a newer generated_utc (catches Monday Actions push)
   setInterval(async () => {
     const fresh = await load('data/liquidity.json');
     if (fresh && fresh.generated_utc && fresh.generated_utc > currentUtc) {
@@ -573,7 +1011,6 @@ async function load(path) {
     }
   }, 5 * 60 * 1000);
 
-  // Regime pill
   const r = _d.regime;
   const EMOJI = { 'Risk-On':'🟢 ', 'Neutral':'🟡 ', 'Risk-Off':'🔴 ' };
   const pill = document.getElementById('pill');
@@ -584,7 +1021,6 @@ async function load(path) {
     `<div class="comp"><span>${c.name}: ${c.value > 0 ? '+' : ''}${c.value}${c.unit}</span>
      <b class="${cls(c.signal)}">${c.contribution > 0 ? '+' + c.contribution : c.contribution} pts</b></div>`).join('');
 
-  // Overview
   document.getElementById('brief').innerHTML = renderBrief(_b, _d.metrics);
   document.getElementById('metrics').innerHTML = renderMetrics(_d);
   const t = _d.thresholds;
