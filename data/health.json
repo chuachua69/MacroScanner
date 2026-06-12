@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-06-12T01:48:36+00:00",
+ "generated_utc": "2026-06-12T01:55:43+00:00",
  "damodaran_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/data.html",
  "note": "vs-industry ratios >1.0 = candidate beats industry benchmark; <1.0 = lags peers. Damodaran data is updated annually each January.",
  "candidates": [
@@ -146,7 +146,7 @@
    "health": "strong",
    "scores": {
     "pe_vs_ind": 1.63,
-    "peg_vs_ind": 1.45,
+    "peg_vs_ind": 1.54,
     "roe_vs_ind": 1.33
    },
    "benchmark": {
