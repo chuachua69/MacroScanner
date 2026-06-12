@@ -2,11 +2,11 @@
 """MacroScanner — Stage 2: GARP screener via Yahoo Finance.
 
 No API key needed. Fetches P/E, PEG, EPS growth, revenue growth, ROE, D/E
-via Yahoo Finance quoteSummary (one request per ticker). Writes data/screen.json
-with anonymized candidate ids (Claude evaluates numbers before seeing names).
+via Yahoo Finance quoteSummary. Handles Yahoo's crumb/cookie auth flow so it
+works from GitHub Actions (cloud IPs need the crumb; home IPs usually don't).
 
 Why Yahoo Finance instead of SEC XBRL: GitHub Actions IPs are blocked by SEC
-at the network level (403). Yahoo Finance has no such restriction.
+at the network level (403). Yahoo Finance works from Actions with crumb auth.
 """
 from __future__ import annotations
 
@@ -32,18 +32,46 @@ CRITERIA_DOC = {
     "debt_ok": "Debt/equity ≤ 1.0 (skipped for Financials where leverage is structural)",
 }
 
-YH_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+YH_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+         "AppleWebKit/537.36 (KHTML, like Gecko) "
+         "Chrome/120.0.0.0 Safari/537.36")
+
+_CRUMB: str | None = None
 
 
-def _session() -> requests.Session:
+def _make_session() -> requests.Session:
     s = requests.Session()
-    s.headers["User-Agent"] = YH_UA
-    retry = Retry(total=3, backoff_factor=1.0, status_forcelist=[429, 500, 502, 503])
+    s.headers.update({
+        "User-Agent": YH_UA,
+        "Accept": "application/json,text/html,*/*;q=0.9",
+        "Accept-Language": "en-US,en;q=0.9",
+    })
+    retry = Retry(total=3, backoff_factor=1.5, status_forcelist=[429, 500, 502, 503])
     s.mount("https://", HTTPAdapter(max_retries=retry))
     return s
 
 
-_sess = _session()
+_sess = _make_session()
+
+
+def _get_crumb() -> str | None:
+    """Obtain Yahoo Finance session crumb (required from cloud IPs)."""
+    global _CRUMB
+    if _CRUMB is not None:
+        return _CRUMB
+    try:
+        # Step 1: establish cookie via consent/main page
+        _sess.get("https://fc.yahoo.com/", timeout=15)
+        time.sleep(0.5)
+        # Step 2: fetch crumb
+        r = _sess.get("https://query2.finance.yahoo.com/v1/test/getcrumb", timeout=15)
+        if r.status_code == 200 and r.text and "<" not in r.text:
+            _CRUMB = r.text.strip()
+            print(f"  crumb obtained: {_CRUMB[:8]}...", flush=True)
+            return _CRUMB
+    except Exception as e:
+        print(f"  WARN crumb fetch failed: {e}", file=sys.stderr)
+    return None
 
 
 def _raw(d: dict | None, *keys):
@@ -59,11 +87,24 @@ def _raw(d: dict | None, *keys):
 
 def fundamentals(ticker: str) -> dict | None:
     sym = ticker.replace(".", "-")
-    url = (f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{sym}"
-           f"?modules=financialData,defaultKeyStatistics,summaryDetail,price")
+    crumb = _get_crumb()
+    crumb_param = f"&crumb={crumb}" if crumb else ""
+    url = (f"https://query2.finance.yahoo.com/v10/finance/quoteSummary/{sym}"
+           f"?modules=financialData,defaultKeyStatistics,summaryDetail,price{crumb_param}")
     try:
         r = _sess.get(url, timeout=30)
-        time.sleep(0.25)
+        time.sleep(0.3)
+        if r.status_code == 401:
+            # crumb expired; reset and retry once
+            global _CRUMB
+            _CRUMB = None
+            new_crumb = _get_crumb()
+            if new_crumb:
+                url = (f"https://query2.finance.yahoo.com/v10/finance/quoteSummary/{sym}"
+                       f"?modules=financialData,defaultKeyStatistics,summaryDetail,price"
+                       f"&crumb={new_crumb}")
+                r = _sess.get(url, timeout=30)
+                time.sleep(0.3)
         if r.status_code != 200:
             return None
         result = (r.json().get("quoteSummary") or {}).get("result") or []
@@ -80,7 +121,7 @@ def fundamentals(ticker: str) -> dict | None:
             "mcap":       _raw(pr, "marketCap") or _raw(sd, "marketCap"),
             "pe":         _raw(sd, "trailingPE") or _raw(sd, "forwardPE"),
             "peg":        _raw(ks, "pegRatio"),
-            "eps_growth": _raw(fd, "earningsGrowth"),  # trailing quarterly YoY
+            "eps_growth": _raw(fd, "earningsGrowth"),
             "rev_growth": _raw(fd, "revenueGrowth"),
             "roe":        _raw(fd, "returnOnEquity"),
             # Yahoo reports D/E × 100 (e.g. 45.2 = 0.452); convert to ratio
@@ -94,6 +135,9 @@ def fundamentals(ticker: str) -> dict | None:
 def main() -> None:
     universe = list(csv.DictReader((ROOT / "data" / "universe.csv").open(encoding="utf-8")))
     print(f"Screening {len(universe)} tickers via Yahoo Finance...")
+
+    # prime the crumb before bulk fetching
+    _get_crumb()
 
     candidates, no_data = [], 0
     for i, row in enumerate(universe):
@@ -135,7 +179,7 @@ def main() -> None:
             "checks": checks, "score": score,
         })
         if (i + 1) % 100 == 0:
-            print(f"  {i+1}/{len(universe)} done, {len(candidates)} passing PEG gate")
+            print(f"  {i+1}/{len(universe)} done, {len(candidates)} passing PEG gate", flush=True)
 
     candidates.sort(key=lambda c: (-c["score"], c["peg"]))
     candidates = candidates[:30]
