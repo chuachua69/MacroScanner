@@ -1,20 +1,22 @@
 {
- "written_utc": "2026-06-11T00:00:00+00:00",
- "week_of": "2026-06-10",
- "headline": "Flat liquidity, calm credit — stay selective, not aggressive",
- "body": [
-  "Regime: Neutral (+1). Translation: conditions aren't hostile, but the liquidity tide isn't rising hard enough to justify full-size bets. Half-size pilot positions, and only in names with strong fundamentals.",
-  "Net liquidity sits at $5.84T — essentially flat over the past quarter (+0.48%). The Fed's balance sheet is $6.71T and the Treasury's account holds $0.88T. The big structural story: the reverse repo facility is now empty (~$0). For two years, cash draining out of RRP quietly offset the Fed's tightening and propped markets up. That cushion is gone. From here, net liquidity moves one-for-one with what the Fed and the Treasury do — there is no buffer left. Expect this gauge to get more volatile and more honest.",
-  "Credit is calm: high-yield spreads at 2.78%, having tightened another 0.31pp this quarter. The bond market sees zero stress. One honest caveat — spreads this tight are near historic lows. They confirm calm, but they can't get much calmer, so the information from here is asymmetric: little room to improve, plenty of room to snap wider.",
-  "The dollar (120.1) is drifting slightly higher but inside the noise band, and the yield curve (+0.42%) is un-inverted and modestly positive. Neither is sending a signal this week."
- ],
- "watch": [
-  "Net liquidity trend is a hair below the Risk-On threshold (+0.48% vs +0.50%). One decent week could flip the regime. Let the data confirm — don't front-run it.",
-  "Treasury General Account: with RRP empty, any Treasury cash rebuild toward $1T+ now drains markets directly. This is the main downside lever to watch.",
-  "High-yield spreads above ~3.5% would be the early-warning tripwire (the crisis override fires at 6%)."
- ],
- "change_my_mind": [
-  "To Risk-On: net liquidity rising more than +0.5% on the quarter while credit stays calm — we are one good week away.",
-  "To Risk-Off: liquidity falling more than −0.5% on the quarter plus either spreads widening +0.3pp or the dollar up over 1%. None of those are present today."
- ]
+  "written_utc": "2026-06-12T01:10:00+00:00",
+  "week_of": "2026-06-10",
+  "headline": "Neutral Holding: Liquidity Treads Water While Credit Markets Stay Calm",
+  "body": [
+    "The regime stays Neutral (score 1 out of 4) for the week ending June 10. Net liquidity \u2014 the Fed's balance sheet minus two buckets of cash that are parked and not circulating (overnight repo and the Treasury's own checking account) \u2014 barely moved, landing at $5.835T versus $5.834T last week. The 13-week trend is +0.48%, just shy of the +0.5% threshold that would flip the net liquidity signal green. Think of it like a car idling: the engine is running but you're not accelerating yet. The Fed's balance sheet itself ($6.711T) has been essentially flat since mid-May; no new injection from quantitative easing, but also no aggressive drain.",
+    "The one green signal \u2014 and the reason the overall score is 1 rather than 0 \u2014 is credit spreads. High-yield spreads (the extra interest rate risky corporate borrowers pay over safe Treasury bonds) sit at 2.78%, down 0.31 percentage points over 13 weeks. When spreads narrow, lenders are growing more comfortable with risk \u2014 a positive backdrop for equities. For context, these spreads spiked to 4.37% in April 2025 during the tariff shock; the full recovery to near-historical lows shows markets have digested that scare. The dollar (broad index 120.08) ticked up about 0.7% week-over-week, but its 13-week trend is only +0.67%, below the 1.0% threshold that would register as a headwind. A rising dollar can hurt international earnings, so we watch it, but it is not yet sending a warning.",
+    "Two structural features of the current setup are worth understanding. First, the Fed's overnight reverse repo facility (RRP) is essentially at zero \u2014 drained to nothing since late 2025. This facility was a giant parking lot for excess cash in 2023-2024; money sitting there was inert and not flowing into assets. Now empty, there is no reserve of parked liquidity waiting to be released. This is neutral, not bad, but future liquidity injections need to come from somewhere else. Second, the Treasury General Account (TGA, $0.876T) is the government's operating cash balance. When Treasury draws it down to fund spending, that cash flows into the banking system and can act as a liquidity boost \u2014 worth watching as debt ceiling dynamics evolve.",
+    "The GARP screener (which hunts for companies growing earnings 10-40% annually at a reasonable price-to-growth ratio) returned zero candidates this week out of 515 companies screened. All 515 came back with missing data, pointing to a Yahoo Finance API gap during this week's pipeline run rather than a real collapse in quality candidates. This is a known intermittent issue \u2014 treat this week's screen as a data void, not a signal. Nothing to evaluate or reveal.",
+    "The 13F tracker (which reads hedge fund quarterly disclosures to see what conviction investors are buying) could not pull data this week. The SEC's public data API rate-limits home IP addresses, returning 403 errors across all 11 tracked funds. This is expected behavior \u2014 the pipeline is designed to run from GitHub Actions IPs for this step. As always: 13Fs lag up to 45 days and cover only US long equity positions, so treat them as confirmation, never as real-time signals."
+  ],
+  "watch": [
+    "Net liquidity 13-week trend is at +0.48% vs. the +0.5% threshold. One more week of modest positive drift flips the liquidity signal green and could push the regime to Risk-On (score 3+).",
+    "Treasury General Account at $0.876T. If the debt ceiling gets resolved and Treasury draws this down, it injects cash into the banking system \u2014 a potential liquidity tailwind to watch.",
+    "High-yield credit spreads at 2.78% are near multi-year lows. Any widening back above ~3.1% (the 13-week starting point) flips the credit signal neutral and drags the regime score back to 0.",
+    "Broad dollar index at 120.08, up from its February 2026 low of ~117.5. A continued climb past 121-122 would test whether the dollar is reversing its 2025 downtrend \u2014 that matters for international earnings and emerging-market flows."
+  ],
+  "change_my_mind": [
+    "Flip to Risk-On: Net liquidity 13-week trend crosses +0.5% (currently at 0.48% \u2014 nearly there), credit spreads hold below 3.1%, and the dollar stays below 121. That would give all three signals green and push the regime score to 3-4, justifying full-size positions.",
+    "Flip to Risk-Off: Credit spreads widen back above 3.5% (requires a macro shock \u2014 think renewed tariff escalation, a surprise Fed hawkish pivot, or a credit event in a major sector). Alternatively, net liquidity turns negative on the 13-week basis while the dollar rips above 122 simultaneously. That trifecta \u2014 tightening credit, shrinking liquidity, strong dollar \u2014 is the triple bear signal."
+  ]
 }
