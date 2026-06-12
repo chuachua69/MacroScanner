@@ -3,128 +3,215 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0e1116">
+<meta name="theme-color" content="#08090f">
 <title>Macro Scanner</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230e1116'/><text x='16' y='23' text-anchor='middle' font-size='20'>📡</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%2308090f'/><text x='16' y='23' text-anchor='middle' font-size='20'>📡</text></svg>">
 <style>
-:root {
-  --bg:#0e1116; --card:#161c24; --card2:#1c2430; --line:#2a3442;
-  --text:#e6edf3; --dim:#8b98a5; --green:#3fb96f; --amber:#d8a637; --red:#e5534b; --blue:#5b9bd5;
+:root{
+  --bg:#08090f; --card:#0e1420; --card2:#141d2c; --line:rgba(255,255,255,.07);
+  --text:#e4eaf2; --dim:#62738a; --green:#2dce72; --amber:#f0aa30; --red:#f04b4b; --blue:#4d9bf5;
 }
 *{box-sizing:border-box;margin:0;}
 body{
   background:var(--bg);color:var(--text);
-  font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;
+  font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;
+  font-variant-numeric:tabular-nums;
   padding:16px 14px 0;max-width:640px;margin:0 auto;
-  padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  padding-bottom:calc(80px + env(safe-area-inset-bottom));
 }
-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
-h1{font-size:20px;letter-spacing:.3px;}
+header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;}
+h1{font-size:19px;font-weight:700;letter-spacing:-.2px;}
 #week{color:var(--dim);font-size:12px;}
-#ver{font-size:10px;color:var(--dim);opacity:.6;margin-left:6px;}
+#ver{font-size:10px;color:var(--dim);opacity:.45;margin-left:5px;}
+
 #update-toast{
-  display:none;position:fixed;bottom:calc(76px + env(safe-area-inset-bottom) + 10px);
+  display:none;position:fixed;bottom:calc(80px + env(safe-area-inset-bottom) + 12px);
   left:50%;transform:translateX(-50%);
-  background:#1c3a2a;border:1px solid var(--green);color:var(--green);
-  font-size:13px;padding:10px 18px;border-radius:10px;z-index:99;
-  box-shadow:0 4px 20px rgba(0,0,0,.5);cursor:pointer;white-space:nowrap;
+  background:rgba(20,45,35,.95);border:1px solid rgba(45,206,114,.35);color:var(--green);
+  font-size:13px;padding:11px 20px;border-radius:12px;z-index:99;
+  box-shadow:0 8px 32px rgba(0,0,0,.6),0 0 0 1px rgba(45,206,114,.1);
+  cursor:pointer;white-space:nowrap;backdrop-filter:blur(12px);
 }
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;}
-h2{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);margin:20px 2px 8px;}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:16px 18px;margin-bottom:10px;
+  box-shadow:0 2px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+h2{
+  font-size:10px;text-transform:uppercase;letter-spacing:1.8px;font-weight:600;
+  color:var(--dim);margin:26px 0 10px;
+  display:flex;align-items:center;gap:10px;
+}
+h2::after{content:'';flex:1;height:1px;background:var(--line);}
 
 /* REGIME */
-.regime{text-align:center;}
-.pill{display:inline-block;font-size:21px;font-weight:700;padding:8px 24px;border-radius:999px;margin:4px 0 8px;}
-.pill.on {background:rgba(63,185,111,.15);color:var(--green);border:1px solid var(--green);}
-.pill.neu{background:rgba(216,166,55,.12);color:var(--amber);border:1px solid var(--amber);}
-.pill.off{background:rgba(229,83,75,.12); color:var(--red);  border:1px solid var(--red);}
-.sizing{color:var(--dim);font-size:14px;}
-.comp{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-top:1px solid var(--line);}
+.regime{text-align:center;padding:6px 0 2px;}
+.pill{
+  display:inline-block;font-size:20px;font-weight:700;letter-spacing:-.3px;
+  padding:9px 28px;border-radius:999px;margin:6px 0 10px;
+}
+.pill.on{
+  background:linear-gradient(135deg,rgba(45,206,114,.16),rgba(45,206,114,.06));
+  color:var(--green);border:1px solid rgba(45,206,114,.28);
+  box-shadow:0 0 28px rgba(45,206,114,.1),inset 0 1px 0 rgba(45,206,114,.14);
+}
+.pill.neu{
+  background:linear-gradient(135deg,rgba(240,170,48,.14),rgba(240,170,48,.05));
+  color:var(--amber);border:1px solid rgba(240,170,48,.26);
+  box-shadow:0 0 24px rgba(240,170,48,.08);
+}
+.pill.off{
+  background:linear-gradient(135deg,rgba(240,75,75,.14),rgba(240,75,75,.05));
+  color:var(--red);border:1px solid rgba(240,75,75,.26);
+  box-shadow:0 0 24px rgba(240,75,75,.08);
+}
+.sizing{color:var(--dim);font-size:13.5px;}
+.comp{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid var(--line);}
 .comp:first-of-type{margin-top:10px;}
 b.pos{color:var(--green);}b.neg{color:var(--red);}b.flat{color:var(--dim);}
 
 /* BRIEF */
-.brief p{margin-bottom:10px;font-size:15px;line-height:1.65;}
-.brief .hl{font-size:17px;font-weight:700;margin-bottom:14px;line-height:1.4;}
+.brief p{margin-bottom:10px;font-size:14.5px;line-height:1.7;}
+.brief .hl{font-size:16px;font-weight:700;margin-bottom:14px;line-height:1.45;letter-spacing:-.1px;}
 .brief ul{padding-left:18px;margin:4px 0 10px;}
-.brief li{margin-bottom:6px;font-size:14.5px;}
-em.j{font-style:normal;color:var(--dim);font-size:13px;}
+.brief li{margin-bottom:6px;font-size:14px;}
+em.j{font-style:normal;color:var(--dim);font-size:12.5px;}
 .sec-head{font-weight:600;margin-top:14px !important;margin-bottom:2px !important;}
 .mini-chart{margin:4px 0 14px;}
-.mini-label{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:3px;}
+.mini-label{display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim);margin-top:4px;}
 .mini-label b{color:var(--text);}
 
 /* METRIC CARDS */
-.mc{display:grid;grid-template-columns:1fr auto;gap:2px 10px;}
-.mc .mn{font-weight:600;}
-.mc .mv{font-size:20px;font-weight:700;text-align:right;}
-.mc .mchg{font-size:12.5px;text-align:right;}
+.mc{display:grid;grid-template-columns:1fr auto;gap:3px 12px;}
+.mc .mn{font-weight:600;font-size:14px;}
+.mc .mv{font-size:22px;font-weight:700;text-align:right;letter-spacing:-.5px;}
+.mc .mchg{font-size:12px;text-align:right;}
 .mchg.pos{color:var(--green);}.mchg.neg{color:var(--red);}.mchg.flat{color:var(--dim);}
-.mc .sp{grid-column:1/-1;margin-top:6px;}
-details{grid-column:1/-1;margin-top:8px;font-size:13.5px;color:var(--dim);}
-summary{cursor:pointer;color:var(--blue);font-size:13px;list-style:none;}
+.mc .sp{grid-column:1/-1;margin-top:8px;}
+details{grid-column:1/-1;margin-top:8px;font-size:13px;color:var(--dim);}
+summary{cursor:pointer;color:var(--blue);font-size:12.5px;list-style:none;user-select:none;}
 summary::before{content:"ⓘ ";}
 
 /* SCREEN */
-.schecks{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;}
+.schecks{display:flex;flex-wrap:wrap;gap:7px;font-size:11.5px;}
 .ck-ok{color:var(--green);}.ck-no{color:var(--red);}.ck-na{color:var(--dim);}
-.star{color:var(--amber);font-size:13px;}
-
-/* SCREEN — sector groups + expandable cards */
-.sector-head{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 2px;}
-.sector-head h3{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);}
+.star{color:var(--amber);font-size:12px;}
+.sector-head{display:flex;align-items:center;justify-content:space-between;padding:6px 2px 4px;}
+.sector-head h3{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);font-weight:600;}
 .sc-summary{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;}
-.sc-expand{display:none;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;}
+.sc-expand{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
 .sc-expand.open{display:block;}
 
 /* FAV BUTTON */
-.fav-btn{background:none;border:none;cursor:pointer;padding:4px;font-size:20px;color:var(--dim);line-height:1;transition:color .15s;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
+.fav-btn{
+  background:none;border:none;cursor:pointer;padding:6px;font-size:18px;
+  color:var(--dim);line-height:1;transition:color .15s,transform .15s;
+  -webkit-tap-highlight-color:transparent;flex-shrink:0;border-radius:10px;
+}
+.fav-btn:active{transform:scale(.82);}
 .fav-btn.on{color:#f0c330;}
 
 /* FUNDS */
 .fund details summary{color:var(--text);font-weight:600;list-style:none;}
 .fund details summary::before{content:none;}
 .fund details summary::marker{display:none;}
-.ov-row{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-top:1px solid var(--line);}
+.ov-row{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-top:1px solid var(--line);}
 
 /* POSITIONS */
-.kelly-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:7px 0;border-top:1px solid var(--line);}
+.kelly-row{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;padding:8px 0;border-top:1px solid var(--line);}
 .kelly-row:first-child{border-top:none;}
-.kelly-num{font-size:21px;font-weight:700;}
-.tl-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-top:1px solid var(--line);}
+.kelly-num{font-size:22px;font-weight:700;letter-spacing:-.5px;}
+.tl-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
 .tl-item:first-child{border-top:none;}
-.tl-date{font-size:12px;color:var(--dim);white-space:nowrap;min-width:50px;padding-top:3px;}
-.tl-type{font-size:10px;text-transform:uppercase;letter-spacing:.8px;padding:2px 7px;border-radius:4px;white-space:nowrap;font-weight:600;flex-shrink:0;margin-top:1px;}
-.tl-type.fomc{background:rgba(91,155,213,.15);color:var(--blue);}
-.tl-type.cpi{background:rgba(216,166,55,.15);color:var(--amber);}
-.tl-type.nfp{background:rgba(139,152,165,.15);color:var(--dim);}
-.tl-type.earn{background:rgba(63,185,111,.15);color:var(--green);}
-.tl-type.div{background:rgba(216,166,55,.15);color:var(--amber);}
-.tl-label{font-size:14px;flex:1;}
+.tl-date{font-size:11px;color:var(--dim);white-space:nowrap;min-width:44px;}
+.tl-type{font-size:9px;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:5px;white-space:nowrap;font-weight:700;flex-shrink:0;}
+.tl-type.fomc{background:rgba(77,155,245,.14);color:var(--blue);}
+.tl-type.cpi{background:rgba(240,170,48,.13);color:var(--amber);}
+.tl-type.nfp{background:rgba(98,115,138,.14);color:var(--dim);}
+.tl-type.earn{background:rgba(45,206,114,.13);color:var(--green);}
+.tl-type.div{background:rgba(240,170,48,.13);color:var(--amber);}
+.tl-label{font-size:13.5px;flex:1;}
 
 /* SETTINGS */
-.srow{padding:10px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;}
+.srow{padding:11px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;}
 .srow:first-child{border-top:none;}
-select{background:var(--card2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 10px;font-size:14px;}
-.trow{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);padding:6px 0;border-top:1px solid var(--line);}
-.trow:first-child{border-top:none;}
+select{background:var(--card2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:6px 10px;font-size:13.5px;appearance:none;-webkit-appearance:none;padding-right:28px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2362738a'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
+.picker-trigger{background:var(--card2);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:6px 12px;font-size:13.5px;cursor:pointer;display:flex;align-items:center;gap:6px;-webkit-tap-highlight-color:transparent;}
+.picker-trigger:active{opacity:.7;}
 
 /* TABS */
 .tab-nav{
   position:fixed;bottom:0;left:0;right:0;max-width:640px;margin:0 auto;
-  background:var(--card);border-top:1px solid var(--line);
+  background:rgba(8,9,15,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid rgba(255,255,255,.07);
   display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom);
 }
 .tb{
   flex:1;display:flex;flex-direction:column;align-items:center;
-  padding:9px 2px 7px;gap:3px;font-size:9.5px;color:var(--dim);
-  cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent;
-  transition:color .15s;
+  padding:10px 2px 8px;gap:4px;font-size:9px;letter-spacing:.6px;text-transform:uppercase;
+  color:var(--dim);cursor:pointer;border:none;background:none;
+  -webkit-tap-highlight-color:transparent;transition:color .2s;
 }
 .tb.on{color:var(--text);}
-.tb .ic{font-size:20px;line-height:1;}
+.tb .ic{font-size:21px;line-height:1;transition:transform .2s;}
+.tb.on .ic{transform:scale(1.08);}
 
-.meta,.foot{color:var(--dim);font-size:12px;text-align:center;margin-top:14px;}
+/* WHEEL PICKER */
+#date-picker-overlay{
+  display:none;position:fixed;inset:0;z-index:200;align-items:flex-end;
+  justify-content:center;
+}
+.picker-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);}
+.picker-sheet{
+  position:relative;z-index:1;width:100%;max-width:640px;
+  background:var(--card);border-radius:22px 22px 0 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-bottom:calc(16px + env(safe-area-inset-bottom));
+  box-shadow:0 -8px 48px rgba(0,0,0,.6);
+}
+.picker-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 20px 14px;border-bottom:1px solid var(--line);
+}
+.picker-header span{font-size:15px;font-weight:600;}
+.picker-header button{
+  background:none;border:none;color:var(--blue);font-size:15px;
+  cursor:pointer;padding:4px 8px;-webkit-tap-highlight-color:transparent;
+}
+.picker-header button:last-child{font-weight:600;}
+.picker-wheels{
+  position:relative;display:flex;height:200px;overflow:hidden;padding:0 16px;
+}
+.picker-col{
+  flex:1;overflow-y:scroll;scroll-snap-type:y mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.picker-col::-webkit-scrollbar{display:none;}
+.picker-item{
+  height:40px;scroll-snap-align:center;display:flex;
+  align-items:center;justify-content:center;
+  font-size:17px;color:var(--text);
+}
+.picker-wheels::before,.picker-wheels::after{
+  content:'';position:absolute;left:0;right:0;height:72px;z-index:3;pointer-events:none;
+}
+.picker-wheels::before{top:0;background:linear-gradient(to bottom,var(--card) 30%,transparent);}
+.picker-wheels::after{bottom:0;background:linear-gradient(to top,var(--card) 30%,transparent);}
+.picker-selector{
+  position:absolute;top:50%;transform:translateY(-50%);
+  left:16px;right:16px;height:40px;z-index:2;pointer-events:none;
+  border-top:1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.12);
+  border-radius:8px;background:rgba(255,255,255,.04);
+}
+.picker-col-label{
+  text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
+  color:var(--dim);padding:8px 0 0;
+}
+
+.meta,.foot{color:var(--dim);font-size:11.5px;text-align:center;margin-top:14px;}
 #err{color:var(--amber);text-align:center;padding:24px 10px;display:none;}
 </style>
 </head>
@@ -172,6 +259,29 @@ select{background:var(--card2);border:1px solid var(--line);color:var(--text);bo
   </section>
 
 </main>
+
+<!-- BIRTHDAY WHEEL PICKER -->
+<div id="date-picker-overlay" style="display:none;position:fixed;inset:0;z-index:200;align-items:flex-end;justify-content:center;">
+  <div class="picker-backdrop" onclick="closeDatePicker()"></div>
+  <div class="picker-sheet">
+    <div class="picker-header">
+      <button onclick="closeDatePicker()">Cancel</button>
+      <span>Birthday</span>
+      <button onclick="confirmDatePicker()">Done</button>
+    </div>
+    <div style="display:flex;justify-content:space-around;padding:6px 28px 0;pointer-events:none;">
+      <span class="picker-col-label" style="flex:1">Day</span>
+      <span class="picker-col-label" style="flex:1">Month</span>
+      <span class="picker-col-label" style="flex:1">Year</span>
+    </div>
+    <div class="picker-wheels">
+      <div class="picker-selector"></div>
+      <div class="picker-col" id="picker-day"></div>
+      <div class="picker-col" id="picker-month"></div>
+      <div class="picker-col" id="picker-year"></div>
+    </div>
+  </div>
+</div>
 
 <nav class="tab-nav" style="left:50%;transform:translateX(-50%);width:100%;max-width:640px;">
   <button class="tb on" data-tab="t-ov"><span class="ic">📊</span>Overview</button>
@@ -578,8 +688,16 @@ function toggleFav(ticker) {
 
 // ── PERSONALISATION ───────────────────────────────────────────────────────────
 function getPersonal() {
+  const bday = localStorage.getItem('ms_birthday') || '';
+  // guard against garbage values (year < 1920 = invalid; clear it)
+  const validBday = (() => {
+    if (!bday) return '';
+    const y = parseInt(bday.split('-')[0]);
+    if (!y || y < 1920) { localStorage.removeItem('ms_birthday'); return ''; }
+    return bday;
+  })();
   return {
-    birthday: localStorage.getItem('ms_birthday') || '',
+    birthday: validBday,
     portfolioSize: parseFloat(localStorage.getItem('ms_portfolio') || '0') || 0,
   };
 }
@@ -868,6 +986,71 @@ function _macroCalendarHTML() {
     <p class="foot">Dates approximate ±3 days · FOMC / BLS CPI / BLS NFP · Add earnings via ☆ in screener</p>`;
 }
 
+// ── DATE WHEEL PICKER ────────────────────────────────────────────────────────
+const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const PICKER_H = 40;
+
+function formatBirthday(dateStr) {
+  if (!dateStr) return '';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return MONTHS_SHORT[m - 1] + ' ' + d + ', ' + y;
+}
+
+function _populateCol(id, items, selectedIdx) {
+  const col = document.getElementById(id);
+  if (!col) return;
+  const pad = `<div style="height:${PICKER_H * 3}px"></div>`;
+  col.innerHTML = pad + items.map(v => `<div class="picker-item">${v}</div>`).join('') + pad;
+  col.scrollTop = Math.max(0, selectedIdx) * PICKER_H;
+}
+
+function openDatePicker() {
+  const personal = getPersonal();
+  const [yr, mo, dy] = personal.birthday
+    ? personal.birthday.split('-').map(Number)
+    : [1990, 1, 1];
+
+  const days = Array.from({length: 31}, (_, i) => String(i + 1));
+  const months = MONTHS_LONG;
+  const curYear = new Date().getFullYear();
+  const years = Array.from({length: 82}, (_, i) => String(curYear - 18 - i)); // 18–100 yr range
+
+  _populateCol('picker-day',   days,   dy - 1);
+  _populateCol('picker-month', months, mo - 1);
+  _populateCol('picker-year',  years,  curYear - 18 - yr);
+
+  const el = document.getElementById('date-picker-overlay');
+  el.style.display = 'flex';
+  // Prevent body scroll while picker is open
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDatePicker() {
+  document.getElementById('date-picker-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function _getColIdx(id) {
+  const col = document.getElementById(id);
+  return col ? Math.round(col.scrollTop / PICKER_H) : 0;
+}
+
+function confirmDatePicker() {
+  const day   = _getColIdx('picker-day') + 1;
+  const month = _getColIdx('picker-month') + 1;
+  const curYear = new Date().getFullYear();
+  const year  = curYear - 18 - _getColIdx('picker-year');
+
+  // Clamp day to valid range for chosen month/year
+  const maxDay = new Date(year, month, 0).getDate();
+  const clampedDay = Math.min(day, maxDay);
+
+  const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(clampedDay).padStart(2, '0')}`;
+  savePersonal('birthday', dateStr);
+  closeDatePicker();
+}
+
 // ── RENDER SETTINGS ──────────────────────────────────────────────────────────
 const THR_KEYS = { liq_pct:'ms_thr_liq', hy_pp:'ms_thr_hy', usd_pct:'ms_thr_usd', hy_crisis:'ms_thr_crisis' };
 
@@ -885,11 +1068,12 @@ function renderSettings(d) {
   <div class="card">
     <div class="srow">
       <span>Birthday</span>
-      <input type="date" value="${personal.birthday}" max="${new Date().toISOString().slice(0,10)}"
-        style="background:var(--card2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:5px 10px;font-size:14px"
-        onchange="savePersonal('birthday',this.value)">
+      <button class="picker-trigger" onclick="openDatePicker()">
+        <span>${personal.birthday ? formatBirthday(personal.birthday) : 'Set date'}</span>
+        <span style="color:var(--dim);font-size:12px">›</span>
+      </button>
     </div>
-    ${horizon ? `<p class="sizing" style="padding:2px 0 10px;font-size:13px">${horizon.label} · Kelly multiplier ${(horizon.mult*100).toFixed(0)}% · ${horizon.note}</p>` : '<p class="sizing" style="padding:2px 0 10px;font-size:13px">Enter your birthday to calibrate Kelly sizing to your time horizon.</p>'}
+    ${horizon ? `<p class="sizing" style="padding:2px 0 10px;font-size:13px">${horizon.label} · Kelly multiplier ${(horizon.mult*100).toFixed(0)}% · ${horizon.note}</p>` : '<p class="sizing" style="padding:2px 0 10px;font-size:13px">Set your birthday to calibrate Kelly sizing to your time horizon.</p>'}
     <div class="srow">
       <span>Portfolio size</span>
       <span style="display:flex;align-items:center;gap:6px">
