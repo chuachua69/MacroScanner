@@ -1,37 +1,37 @@
 {
- "generated_utc": "2026-06-11T14:10:50+00:00",
+ "generated_utc": "2026-06-12T01:12:26+00:00",
  "week_of": "2026-06-10",
  "as_of": {
-  "WALCL": "2026-06-03",
-  "RRPONTSYD": "2026-06-10",
-  "WTREGEN": "2026-06-03",
-  "BAMLH0A0HYM2": "2026-06-09",
+  "WALCL": "2026-06-10",
+  "RRPONTSYD": "2026-06-11",
+  "WTREGEN": "2026-06-10",
+  "BAMLH0A0HYM2": "2026-06-10",
   "DTWEXBGS": "2026-06-05",
-  "T10Y2Y": "2026-06-10"
+  "T10Y2Y": "2026-06-11"
  },
  "regime": {
-  "label": "Neutral",
-  "score": 1,
+  "label": "Risk-On",
+  "score": 2,
   "crisis_override": false,
-  "sizing_hint": "Half-size pilots; demand stronger fundamentals.",
+  "sizing_hint": "Full pilot positions allowed (e.g. 3\u20135% starters).",
   "components": [
    {
     "id": "net_liquidity",
     "name": "Net Liquidity trend (13w)",
-    "value": 0.48,
+    "value": 1.54,
     "unit": "%",
-    "signal": 0,
+    "signal": 1,
     "weight": 2,
-    "contribution": 0
+    "contribution": 2
    },
    {
     "id": "hy_oas",
     "name": "Credit spread trend (13w)",
-    "value": -0.31,
+    "value": -0.29,
     "unit": "pp",
-    "signal": 1,
+    "signal": 0,
     "weight": 1,
-    "contribution": 1
+    "contribution": 0
    },
    {
     "id": "dollar",
@@ -48,8 +48,8 @@
   "net_liquidity": {
    "name": "Net Liquidity",
    "unit": "$T",
-   "latest": 5.835,
-   "change_13w_pct": 0.48,
+   "latest": 5.897,
+   "change_13w_pct": 1.54,
    "history": [
     {
      "d": "2024-06-19",
@@ -465,14 +465,14 @@
     },
     {
      "d": "2026-06-10",
-     "v": 5.835
+     "v": 5.897
     }
    ]
   },
   "walcl": {
    "name": "Fed Balance Sheet",
    "unit": "$T",
-   "latest": 6.711,
+   "latest": 6.725,
    "history": [
     {
      "d": "2024-06-19",
@@ -888,7 +888,7 @@
     },
     {
      "d": "2026-06-10",
-     "v": 6.711
+     "v": 6.725
     }
    ]
   },
@@ -1318,7 +1318,7 @@
   "tga": {
    "name": "Treasury General Account",
    "unit": "$T",
-   "latest": 0.876,
+   "latest": 0.828,
    "history": [
     {
      "d": "2024-06-19",
@@ -1734,15 +1734,15 @@
     },
     {
      "d": "2026-06-10",
-     "v": 0.876
+     "v": 0.828
     }
    ]
   },
   "hy_oas": {
    "name": "High-Yield Credit Spread",
    "unit": "%",
-   "latest": 2.78,
-   "change_13w_pp": -0.31,
+   "latest": 2.8,
+   "change_13w_pp": -0.29,
    "history": [
     {
      "d": "2024-06-19",
@@ -2158,7 +2158,7 @@
     },
     {
      "d": "2026-06-10",
-     "v": 2.78
+     "v": 2.8
     }
    ]
   },
