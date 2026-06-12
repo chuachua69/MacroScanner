@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests xlrd==2.0.2
       - name: Run pipelines (log captured even on failure)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -33,6 +33,7 @@ jobs:
             echo "== pipeline run $(date -u +%FT%TZ) =="
             python pipeline/liquidity.py 2>&1 || echo "LIQUIDITY FAILED exit=$?"
             python pipeline/screener.py  2>&1 || echo "SCREENER FAILED exit=$?"
+            python pipeline/health.py    2>&1 || echo "HEALTH FAILED exit=$?"
             # funds.py runs locally via the Monday Claude routine (SEC EDGAR
             # blocks GitHub Actions IPs at the network level — home IP is fine)
           } | tee data/run_log.txt

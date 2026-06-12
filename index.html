@@ -73,6 +73,7 @@ summary::before{content:"ⓘ ";}
 .sc .schecks{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;font-size:12px;}
 .ck-ok{color:var(--green);}.ck-no{color:var(--red);}.ck-na{color:var(--dim);}
 .star{color:var(--amber);font-size:13px;}
+.health-badge{grid-column:1/-1;font-size:12px;margin-top:2px;}
 
 /* FUNDS */
 .fund details summary{color:var(--text);font-weight:600;list-style:none;}
@@ -279,30 +280,55 @@ function renderMetrics(d) {
 }
 
 // ── RENDER SCREEN ────────────────────────────────────────────────────────────
-function renderScreen(s, f) {
+function renderScreen(s, f, h) {
   if (!s?.candidates?.length)
     return '<div class="card"><p class="sizing">No screen data yet — runs every Monday.</p></div>';
   const smartNames = new Set();
   if (f) for (const fd of (f.funds || []).filter(x => x.ok)) {
-    for (const h of [...(fd.top||[]),(fd.big_adds||[])]) if (h?.issuer) smartNames.add(h.issuer.split(' ')[0].toUpperCase());
+    for (const hh of [...(fd.top||[]),(fd.big_adds||[])]) if (hh?.issuer) smartNames.add(hh.issuer.split(' ')[0].toUpperCase());
     for (const nb of fd.new_buys || []) smartNames.add(nb.split(' ')[0].toUpperCase());
   }
+  // health lookup by anon id
+  const healthMap = {};
+  if (h?.candidates) for (const hc of h.candidates) healthMap[hc.anon] = hc;
+
+  const HLABEL = { strong: '🟢 strong vs peers', inline: '🟡 inline with peers', weak: '🔴 lags peers', unknown: '' };
   const CK = { growth_sweet:'EPS 10–40%', peg_ok:'PEG ≤1.5', rev_confirms:'Rev ≥5%', roe_strong:'ROE ≥12%', debt_ok:'D/E ≤1.0' };
   const cards = s.candidates.slice(0, prefs.garpCount).map(c => {
     const smart = smartNames.has(c.name.split(' ')[0].toUpperCase());
+    const hc = healthMap[c.anon];
     const checks = Object.entries(c.checks).map(([k, v]) =>
       `<span class="${v === true ? 'ck-ok' : v === false ? 'ck-no' : 'ck-na'}">${v === true ? '✓' : v === false ? '✗' : '–'} ${CK[k]||k}</span>`).join('');
+    const healthBadge = hc ? `<span class="health-badge">${HLABEL[hc.health] || ''}</span>` : '';
+    const vsLine = hc?.scores && Object.keys(hc.scores).length ? (() => {
+      const parts = [];
+      if (hc.scores.pe_vs_ind)  parts.push(`P/E ${hc.scores.pe_vs_ind.toFixed(1)}× ind`);
+      if (hc.scores.peg_vs_ind) parts.push(`PEG ${hc.scores.peg_vs_ind.toFixed(1)}× ind`);
+      if (hc.scores.roe_vs_ind) parts.push(`ROE ${hc.scores.roe_vs_ind.toFixed(1)}× ind`);
+      return parts.length ? `<div class="schecks" style="color:var(--dim);font-size:12px">${parts.join(' &nbsp; ')}</div>` : '';
+    })() : '';
     return `<div class="card sc">
       <span class="sn">${c.ticker}${smart ? ' <span class="star">★</span>' : ''} <span style="font-weight:400;font-size:14px;color:var(--dim)">${c.name}</span></span>
       <span class="speg">PEG ${c.peg}</span>
+      ${healthBadge}
       <span class="smeta">${c.sector} · Score ${c.score}/5 · P/E ${c.pe} · EPS +${c.eps_growth_pct}%${c.mcap_b ? ' · $' + c.mcap_b + 'B' : ''}</span>
       <div class="schecks">${checks}</div>
       ${(c.rev_growth_pct != null || c.roe_pct != null) ? `<div class="schecks" style="color:var(--dim)">Rev +${c.rev_growth_pct ?? '?'}% &nbsp;ROE ${c.roe_pct ?? '?'}% &nbsp;D/E ${c.de ?? 'n/a'}</div>` : ''}
+      ${vsLine}
     </div>`;
   }).join('');
-  return `<h2>GARP screen — Lynch criteria</h2>${cards}
-    <p class="meta">Quarter ${s.quarter} · ${s.coverage.candidates} candidates from ${s.coverage.universe} stocks · ${s.coverage.no_usgaap_data} lacked US financial data (mostly foreign-listed)</p>
-    <p class="foot">★ = rough name-match to a tracked fund's holdings</p>`;
+
+  // sector concentration warning
+  let concWarn = '';
+  if (h?.sector_concentration?.length) {
+    const items = h.sector_concentration.map(x => `<b>${x.sector}</b> (${x.count})`).join(', ');
+    concWarn = `<div class="card" style="border-color:var(--amber);background:rgba(216,166,55,.07)">
+      <p class="sizing">⚠ Sector concentration: ${items} — most candidates cluster here. Diversify across sectors before sizing up.</p></div>`;
+  }
+
+  return `<h2>GARP screen — Lynch criteria</h2>${concWarn}${cards}
+    <p class="meta">${s.coverage.candidates} candidates from ${s.coverage.universe} stocks</p>
+    <p class="foot">★ = rough name-match to a tracked fund · vs-ind ratios from Damodaran industry benchmarks</p>`;
 }
 
 // ── RENDER FUNDS ─────────────────────────────────────────────────────────────
@@ -373,10 +399,10 @@ function renderSettings(d) {
 }
 
 // ── LOAD & BOOT ──────────────────────────────────────────────────────────────
-let _d, _b, _s, _f;
+let _d, _b, _s, _f, _h;
 
 function rerender() {
-  document.getElementById('screen-wrap').innerHTML = renderScreen(_s, _f);
+  document.getElementById('screen-wrap').innerHTML = renderScreen(_s, _f, _h);
   document.getElementById('funds-wrap').innerHTML = renderFunds(_f);
   document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
 }
@@ -387,9 +413,10 @@ async function load(path) {
 }
 
 (async () => {
-  [_d, _b, _s, _f] = await Promise.all([
+  [_d, _b, _s, _f, _h] = await Promise.all([
     load('data/liquidity.json'), load('data/brief.json'),
     load('data/screen.json'),    load('data/funds.json'),
+    load('data/health.json'),
   ]);
   if (!_d) { document.getElementById('err').style.display = 'block'; return; }
   document.getElementById('app').hidden = false;
