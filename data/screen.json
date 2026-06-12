@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-06-12T01:55:41+00:00",
+ "generated_utc": "2026-06-12T06:25:06+00:00",
  "source": "Yahoo Finance (quarterly trailing YoY metrics)",
  "criteria": {
   "growth_sweet": "EPS growth (trailing quarterly YoY) between 10 % and 40 % \u2014 fast but not frothy (Lynch sweet spot)",
@@ -10,7 +10,7 @@
  },
  "coverage": {
   "universe": 515,
-  "no_data": 10,
+  "no_data": 7,
   "candidates": 30
  },
  "candidates": [
@@ -22,7 +22,7 @@
    "price": 811.53,
    "pe": 27.3,
    "eps_growth_pct": 30.0,
-   "peg": 0.44,
+   "peg": 0.43,
    "rev_growth_pct": 19.7,
    "roe_pct": 39.2,
    "de": 0.13,
@@ -86,7 +86,7 @@
    "sector": "Health Care",
    "mcap_b": 26.2,
    "price": 161.55,
-   "pe": 28.7,
+   "pe": 28.6,
    "eps_growth_pct": 14.6,
    "peg": 0.74,
    "rev_growth_pct": 16.3,
@@ -196,7 +196,7 @@
    "sector": "Information Technology",
    "mcap_b": 2899.6,
    "price": 390.34,
-   "pe": 23.2,
+   "pe": 23.3,
    "eps_growth_pct": 23.4,
    "peg": 1.2,
    "rev_growth_pct": 18.3,
@@ -262,9 +262,9 @@
    "sector": "Information Technology",
    "mcap_b": 1123.1,
    "price": 995.87,
-   "pe": 46.9,
+   "pe": 47.0,
    "eps_growth_pct": 756.0,
-   "peg": 0.32,
+   "peg": 0.34,
    "rev_growth_pct": 196.3,
    "roe_pct": 39.8,
    "de": 0.15,
@@ -345,6 +345,50 @@
    "anon": "CAND-15"
   },
   {
+   "ticker": "ZBH",
+   "name": "Zimmer Biomet",
+   "sector": "Health Care",
+   "mcap_b": 16.9,
+   "price": 87.14,
+   "pe": 22.6,
+   "eps_growth_pct": 34.1,
+   "peg": 0.62,
+   "rev_growth_pct": 9.3,
+   "roe_pct": 6.1,
+   "de": 0.6,
+   "checks": {
+    "growth_sweet": true,
+    "peg_ok": true,
+    "rev_confirms": true,
+    "roe_strong": false,
+    "debt_ok": true
+   },
+   "score": 4,
+   "anon": "CAND-16"
+  },
+  {
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "sector": "Information Technology",
+   "mcap_b": 4962.2,
+   "price": 204.87,
+   "pe": 31.3,
+   "eps_growth_pct": 214.5,
+   "peg": 0.63,
+   "rev_growth_pct": 85.2,
+   "roe_pct": 114.3,
+   "de": 0.07,
+   "checks": {
+    "growth_sweet": false,
+    "peg_ok": true,
+    "rev_confirms": true,
+    "roe_strong": true,
+    "debt_ok": true
+   },
+   "score": 4,
+   "anon": "CAND-17"
+  },
+  {
    "ticker": "APA",
    "name": "APA Corporation",
    "sector": "Energy",
@@ -361,50 +405,6 @@
     "peg_ok": true,
     "rev_confirms": false,
     "roe_strong": true,
-    "debt_ok": true
-   },
-   "score": 4,
-   "anon": "CAND-16"
-  },
-  {
-   "ticker": "NVDA",
-   "name": "Nvidia",
-   "sector": "Information Technology",
-   "mcap_b": 4962.2,
-   "price": 204.87,
-   "pe": 31.4,
-   "eps_growth_pct": 214.5,
-   "peg": 0.64,
-   "rev_growth_pct": 85.2,
-   "roe_pct": 114.3,
-   "de": 0.07,
-   "checks": {
-    "growth_sweet": false,
-    "peg_ok": true,
-    "rev_confirms": true,
-    "roe_strong": true,
-    "debt_ok": true
-   },
-   "score": 4,
-   "anon": "CAND-17"
-  },
-  {
-   "ticker": "ZBH",
-   "name": "Zimmer Biomet",
-   "sector": "Health Care",
-   "mcap_b": 16.9,
-   "price": 87.14,
-   "pe": 22.6,
-   "eps_growth_pct": 34.1,
-   "peg": 0.64,
-   "rev_growth_pct": 9.3,
-   "roe_pct": 6.1,
-   "de": 0.6,
-   "checks": {
-    "growth_sweet": true,
-    "peg_ok": true,
-    "rev_confirms": true,
-    "roe_strong": false,
     "debt_ok": true
    },
    "score": 4,
@@ -438,7 +438,7 @@
    "sector": "Information Technology",
    "mcap_b": 1834.4,
    "price": 385.57,
-   "pe": 63.9,
+   "pe": 64.2,
    "eps_growth_pct": 85.4,
    "peg": 0.7,
    "rev_growth_pct": 47.9,

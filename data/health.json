@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-06-12T01:55:43+00:00",
+ "generated_utc": "2026-06-12T06:25:07+00:00",
  "damodaran_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/data.html",
  "note": "vs-industry ratios >1.0 = candidate beats industry benchmark; <1.0 = lags peers. Damodaran data is updated annually each January.",
  "candidates": [
@@ -10,7 +10,7 @@
    "health": "strong",
    "scores": {
     "pe_vs_ind": 1.01,
-    "peg_vs_ind": 3.84,
+    "peg_vs_ind": 3.93,
     "roe_vs_ind": 2.13
    },
    "benchmark": {
@@ -145,7 +145,7 @@
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.63,
+    "pe_vs_ind": 1.62,
     "peg_vs_ind": 1.54,
     "roe_vs_ind": 1.33
    },
@@ -197,7 +197,7 @@
    "health": "strong",
    "scores": {
     "pe_vs_ind": 0.8,
-    "peg_vs_ind": 5.77,
+    "peg_vs_ind": 5.43,
     "roe_vs_ind": 1.56
    },
    "benchmark": {
@@ -260,6 +260,40 @@
   },
   {
    "anon": "CAND-16",
+   "ticker": "ZBH",
+   "sector": "Health Care",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 2.12,
+    "peg_vs_ind": 2.58,
+    "roe_vs_ind": 0.37
+   },
+   "benchmark": {
+    "forward_pe": 47.801,
+    "peg": 1.602,
+    "roe": 0.163,
+    "net_margin": 0.108
+   }
+  },
+  {
+   "anon": "CAND-17",
+   "ticker": "NVDA",
+   "sector": "Information Technology",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.2,
+    "peg_vs_ind": 2.93,
+    "roe_vs_ind": 4.47
+   },
+   "benchmark": {
+    "forward_pe": 37.708,
+    "peg": 1.846,
+    "roe": 0.256,
+    "net_margin": 0.197
+   }
+  },
+  {
+   "anon": "CAND-18",
    "ticker": "APA",
    "sector": "Energy",
    "health": "strong",
@@ -273,40 +307,6 @@
     "peg": 3.621,
     "roe": 0.114,
     "net_margin": 0.099
-   }
-  },
-  {
-   "anon": "CAND-17",
-   "ticker": "NVDA",
-   "sector": "Information Technology",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 1.2,
-    "peg_vs_ind": 2.88,
-    "roe_vs_ind": 4.47
-   },
-   "benchmark": {
-    "forward_pe": 37.708,
-    "peg": 1.846,
-    "roe": 0.256,
-    "net_margin": 0.197
-   }
-  },
-  {
-   "anon": "CAND-18",
-   "ticker": "ZBH",
-   "sector": "Health Care",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 2.12,
-    "peg_vs_ind": 2.5,
-    "roe_vs_ind": 0.37
-   },
-   "benchmark": {
-    "forward_pe": 47.801,
-    "peg": 1.602,
-    "roe": 0.163,
-    "net_margin": 0.108
    }
   },
   {
