@@ -1,84 +1,1186 @@
 {
- "generated_utc": "2026-06-12T01:41:04+00:00",
+ "generated_utc": "2026-06-12T06:21:38+00:00",
  "note": "13Fs lag up to 45 days; US long equities only. Confirmation, not copy-trade.",
  "funds": [
   {
    "name": "Duquesne Family Office (Druckenmiller)",
    "tier": 1,
    "cik": 1536411,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "Duquesne Family Office LLC",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 70,
+   "portfolio_b": 0.0,
+   "top": [
+    {
+     "issuer": "Natera Inc",
+     "pct": 18.1
+    },
+    {
+     "issuer": "Insmed Inc",
+     "pct": 5.6
+    },
+    {
+     "issuer": "Taiwan Semiconductor Manufac",
+     "pct": 5.0
+    },
+    {
+     "issuer": "Ishares Inc (calls)",
+     "pct": 4.8
+    },
+    {
+     "issuer": "Invesco Exchange Traded Fd T (calls)",
+     "pct": 4.7
+    },
+    {
+     "issuer": "Ypf Sociedad Anonima",
+     "pct": 4.4
+    },
+    {
+     "issuer": "Ishares Inc",
+     "pct": 3.9
+    },
+    {
+     "issuer": "Bbb Foods Inc",
+     "pct": 3.3
+    },
+    {
+     "issuer": "Alcoa Corp",
+     "pct": 2.9
+    },
+    {
+     "issuer": "Newamsterdam Pharma Company",
+     "pct": 2.9
+    }
+   ],
+   "new_buys": [
+    "Invesco Exchange Traded Fd T (calls)",
+    "Broadcom Inc",
+    "Global X Fds",
+    "Caris Life Sciences Inc",
+    "Revolution Medicines Inc",
+    "Sandisk Corp",
+    "Humana Inc",
+    "Twilio Inc",
+    "Jabil Inc",
+    "Ishares S&P Gsci Commodity-",
+    "Linde Plc",
+    "Seagate Technology Hldngs Pl"
+   ],
+   "exited": [
+    "Aeva Technologies Inc",
+    "Alphabet Inc",
+    "American Airls Group Inc",
+    "Argan Inc",
+    "Chipotle Mexican Grill Inc",
+    "Cidara Therapeutics Inc",
+    "Cogent Biosciences Inc",
+    "Delta Air Lines Inc Del",
+    "Docusign Inc",
+    "Doordash Inc",
+    "Entegris Inc",
+    "Flutter Entmt Plc"
+   ],
+   "big_adds": [
+    {
+     "issuer": "Adma Biologics Inc",
+     "shares_chg_pct": 513
+    },
+    {
+     "issuer": "Ypf Sociedad Anonima",
+     "shares_chg_pct": 433
+    },
+    {
+     "issuer": "Stmicroelectronics N V",
+     "shares_chg_pct": 238
+    },
+    {
+     "issuer": "Amazon Com Inc (calls)",
+     "shares_chg_pct": 100
+    },
+    {
+     "issuer": "Unity Software Inc",
+     "shares_chg_pct": 80
+    },
+    {
+     "issuer": "Cleveland-Cliffs Inc New",
+     "shares_chg_pct": 33
+    },
+    {
+     "issuer": "Roku Inc",
+     "shares_chg_pct": 29
+    }
+   ]
   },
   {
    "name": "Appaloosa (Tepper)",
    "tier": 1,
    "cik": 1656456,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "Appaloosa LP",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 31,
+   "portfolio_b": 5.93,
+   "top": [
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 15.2
+    },
+    {
+     "issuer": "MICRON TECHNOLOGY INC",
+     "pct": 9.5
+    },
+    {
+     "issuer": "ALPHABET INC",
+     "pct": 8.4
+    },
+    {
+     "issuer": "UBER TECHNOLOGIES INC",
+     "pct": 7.7
+    },
+    {
+     "issuer": "TAIWAN SEMICONDUCTOR MANUFAC",
+     "pct": 7.6
+    },
+    {
+     "issuer": "ALIBABA GROUP HLDG LTD",
+     "pct": 7.3
+    },
+    {
+     "issuer": "VISTRA CORP",
+     "pct": 5.1
+    },
+    {
+     "issuer": "ISHARES INC",
+     "pct": 5.0
+    },
+    {
+     "issuer": "NVIDIA CORPORATION",
+     "pct": 4.3
+    },
+    {
+     "issuer": "NRG ENERGY INC",
+     "pct": 4.3
+    }
+   ],
+   "new_buys": [
+    "SANDISK CORP"
+   ],
+   "exited": [
+    "AMERICAN AIRLS GROUP INC",
+    "DELTA AIR LINES INC DEL",
+    "GOODYEAR TIRE & RUBR CO",
+    "IQVIA HLDGS INC",
+    "ISHARES TR",
+    "MICRON TECHNOLOGY INC (calls)",
+    "MOHAWK INDS INC",
+    "OWENS CORNING NEW",
+    "UNITED AIRLS HLDGS INC"
+   ],
+   "big_adds": [
+    {
+     "issuer": "UBER TECHNOLOGIES INC",
+     "shares_chg_pct": 242
+    },
+    {
+     "issuer": "VISTRA CORP",
+     "shares_chg_pct": 114
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "shares_chg_pct": 98
+    },
+    {
+     "issuer": "ISHARES INC",
+     "shares_chg_pct": 28
+    }
+   ]
   },
   {
    "name": "Pershing Square (Ackman)",
    "tier": 1,
    "cik": 1336528,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "Pershing Square Capital Management, L.P.",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 11,
+   "portfolio_b": 13.71,
+   "top": [
+    {
+     "issuer": "BROOKFIELD CORP",
+     "pct": 17.6
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 17.4
+    },
+    {
+     "issuer": "UBER TECHNOLOGIES INC",
+     "pct": 15.7
+    },
+    {
+     "issuer": "MICROSOFT CORP",
+     "pct": 15.3
+    },
+    {
+     "issuer": "RESTAURANT BRANDS INTL INC",
+     "pct": 12.2
+    },
+    {
+     "issuer": "META PLATFORMS INC",
+     "pct": 11.1
+    },
+    {
+     "issuer": "HOWARD HUGHES HOLDINGS INC",
+     "pct": 8.7
+    },
+    {
+     "issuer": "SEAPORT ENTMT GROUP INC",
+     "pct": 0.8
+    },
+    {
+     "issuer": "ALPHABET INC",
+     "pct": 0.7
+    },
+    {
+     "issuer": "HERTZ GLOBAL HLDGS INC",
+     "pct": 0.5
+    }
+   ],
+   "new_buys": [
+    "MICROSOFT CORP"
+   ],
+   "exited": [
+    "HILTON WORLDWIDE HLDGS INC"
+   ],
+   "big_adds": []
   },
   {
    "name": "Third Point (Loeb)",
    "tier": 1,
    "cik": 1040273,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "Third Point LLC",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 33,
+   "portfolio_b": 2.08,
+   "top": [
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 19.4
+    },
+    {
+     "issuer": "TELEPHONE & DATA SYS INC",
+     "pct": 13.3
+    },
+    {
+     "issuer": "CRH PLC",
+     "pct": 9.6
+    },
+    {
+     "issuer": "SOMNIGROUP INTERNATIONAL INC",
+     "pct": 8.1
+    },
+    {
+     "issuer": "CARPENTER TECHNOLOGY CORP",
+     "pct": 5.9
+    },
+    {
+     "issuer": "MASTEC INC",
+     "pct": 4.9
+    },
+    {
+     "issuer": "DANAHER CORP DEL",
+     "pct": 4.8
+    },
+    {
+     "issuer": "TAIWAN SEMICONDUCTOR MANUFAC",
+     "pct": 4.5
+    },
+    {
+     "issuer": "API GROUP CORP",
+     "pct": 3.9
+    },
+    {
+     "issuer": "LIVE NATION ENTERTAINMENT IN",
+     "pct": 3.4
+    }
+   ],
+   "new_buys": [
+    "META PLATFORMS INC",
+    "ALPHABET INC",
+    "SPDR GOLD TR",
+    "HUT 8 CORP",
+    "TRANSDIGM GROUP INC",
+    "KLA CORP",
+    "LAM RESEARCH CORP",
+    "ASML HLDG NV",
+    "BROADCOM INC",
+    "VANECK ETF TRUST"
+   ],
+   "exited": [
+    "ALIBABA GROUP HLDG LTD",
+    "BAUSCH HEALTH COS INC",
+    "BROOKFIELD CORP",
+    "CASEYS GEN STORES INC",
+    "CHIPOTLE MEXICAN GRILL INC",
+    "COMFORT SYS USA INC",
+    "CONSTELLATION ENERGY CORP",
+    "COSTAR GROUP INC",
+    "CSX CORP",
+    "KENVUE INC",
+    "LPL FINL HLDGS INC",
+    "MICROSOFT CORP"
+   ],
+   "big_adds": [
+    {
+     "issuer": "ARS PHARMACEUTICALS INC",
+     "shares_chg_pct": 80
+    }
+   ]
   },
   {
    "name": "Greenlight Capital (Einhorn)",
    "tier": 1,
    "cik": 1079114,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "GREENLIGHT CAPITAL INC",
+   "period": "2023-12-31",
+   "filed": "2024-02-14",
+   "positions": 40,
+   "portfolio_b": 2.05,
+   "top": [
+    {
+     "issuer": "GREEN BRICK PARTNERS INC",
+     "pct": 28.9
+    },
+    {
+     "issuer": "CONSOL ENERGY INC NEW",
+     "pct": 10.3
+    },
+    {
+     "issuer": "BRIGHTHOUSE FINL INC",
+     "pct": 7.9
+    },
+    {
+     "issuer": "KYNDRYL HLDGS INC",
+     "pct": 6.4
+    },
+    {
+     "issuer": "TENET HEALTHCARE CORP",
+     "pct": 4.9
+    },
+    {
+     "issuer": "THE ODP CORP",
+     "pct": 4.8
+    },
+    {
+     "issuer": "ALIGHT INC",
+     "pct": 3.8
+    },
+    {
+     "issuer": "SPDR GOLD TR",
+     "pct": 3.6
+    },
+    {
+     "issuer": "TECK RESOURCES LTD",
+     "pct": 3.2
+    },
+    {
+     "issuer": "LIVANOVA PLC",
+     "pct": 3.1
+    }
+   ],
+   "new_buys": [
+    "ALIGHT INC",
+    "VIATRIS INC",
+    "AERCAP HOLDINGS NV",
+    "SPDR SER TR",
+    "INVESCO EXCHANGE TRADED FD T",
+    "KENVUE INC",
+    "TEVA PHARMACEUTICAL INDS LTD"
+   ],
+   "exited": [
+    "ACTIVISION BLIZZARD INC",
+    "ADVANCE AUTO PARTS INC",
+    "FINSERV ACQUISITION CORP II",
+    "ISHARES SILVER TR",
+    "RESIDEO TECHNOLOGIES INC",
+    "SOUTHWESTERN ENERGY CO"
+   ],
+   "big_adds": [
+    {
+     "issuer": "COYA THERAPEUTICS INC",
+     "shares_chg_pct": 172
+    },
+    {
+     "issuer": "DHT HOLDINGS INC",
+     "shares_chg_pct": 87
+    },
+    {
+     "issuer": "SEADRILL 2021 LTD",
+     "shares_chg_pct": 51
+    },
+    {
+     "issuer": "TENET HEALTHCARE CORP",
+     "shares_chg_pct": 44
+    },
+    {
+     "issuer": "VANECK ETF TRUST",
+     "shares_chg_pct": 33
+    },
+    {
+     "issuer": "GRAPHIC PACKAGING HLDG CO",
+     "shares_chg_pct": 32
+    }
+   ]
   },
   {
    "name": "Baupost Group (Klarman)",
    "tier": 1,
    "cik": 1061768,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "BAUPOST GROUP LLC/MA",
+   "period": "2026-03-31",
+   "filed": "2026-05-14",
+   "positions": 22,
+   "portfolio_b": 0.01,
+   "top": [
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 12.7
+    },
+    {
+     "issuer": "RESTAURANT BRANDS INTL INC",
+     "pct": 11.7
+    },
+    {
+     "issuer": "WESCO INTL INC",
+     "pct": 7.7
+    },
+    {
+     "issuer": "UNION PAC CORP",
+     "pct": 7.3
+    },
+    {
+     "issuer": "ELEVANCE HEALTH INC FORMERLY",
+     "pct": 7.3
+    },
+    {
+     "issuer": "ALPHABET INC",
+     "pct": 6.6
+    },
+    {
+     "issuer": "FERGUSON ENTERPRISES INC",
+     "pct": 6.6
+    },
+    {
+     "issuer": "WILLIS TOWERS WATSON PLC LTD",
+     "pct": 5.1
+    },
+    {
+     "issuer": "AON PLC",
+     "pct": 4.9
+    },
+    {
+     "issuer": "VISA INC",
+     "pct": 4.1
+    }
+   ],
+   "new_buys": [
+    "AON PLC",
+    "VISA INC",
+    "TELEFLEX INCORPORATED",
+    "NORWEGIAN CRUISE LINE HLDGS",
+    "VAXCYTE INC",
+    "DNOW INC"
+   ],
+   "exited": [
+    "CRH PLC",
+    "DOLLAR GEN CORP NEW",
+    "FIDELITY NATL INFORMATION SV",
+    "FISERV INC",
+    "LIBERTY GLOBAL LTD",
+    "TAMBORAN RES CORP"
+   ],
+   "big_adds": [
+    {
+     "issuer": "AMERICOLD REALTY TRUST INC",
+     "shares_chg_pct": 124
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "shares_chg_pct": 47
+    },
+    {
+     "issuer": "FERGUSON ENTERPRISES INC",
+     "shares_chg_pct": 27
+    }
+   ]
   },
   {
    "name": "Lone Pine Capital",
    "tier": 1,
    "cik": 1061165,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "LONE PINE CAPITAL LLC",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 36,
+   "portfolio_b": 12.54,
+   "top": [
+    {
+     "issuer": "VISTRA CORP",
+     "pct": 7.4
+    },
+    {
+     "issuer": "ASML HLDG NV",
+     "pct": 6.9
+    },
+    {
+     "issuer": "CARPENTER TECHNOLOGY CORP",
+     "pct": 5.7
+    },
+    {
+     "issuer": "LPL FINL HLDGS INC",
+     "pct": 4.9
+    },
+    {
+     "issuer": "APPLOVIN CORP",
+     "pct": 4.6
+    },
+    {
+     "issuer": "TALEN ENERGY CORP",
+     "pct": 4.6
+    },
+    {
+     "issuer": "TERADYNE INC",
+     "pct": 4.4
+    },
+    {
+     "issuer": "CARVANA CO",
+     "pct": 4.4
+    },
+    {
+     "issuer": "NU HLDGS LTD",
+     "pct": 4.4
+    },
+    {
+     "issuer": "MEDLINE INC",
+     "pct": 4.2
+    }
+   ],
+   "new_buys": [
+    "TERADYNE INC",
+    "CORNING INC",
+    "MASTEC INC",
+    "US FOODS HLDG CORP",
+    "PERFORMANCE FOOD GROUP CO",
+    "MCKESSON CORP",
+    "CIENA CORP",
+    "TERAWULF INC",
+    "HUT 8 CORP",
+    "ARGAN INC",
+    "ALPHABET INC"
+   ],
+   "exited": [
+    "AFFIRM HLDGS INC",
+    "AMAZON COM INC",
+    "BROADCOM INC",
+    "DOORDASH INC",
+    "MICROSOFT CORP",
+    "PHILIP MORRIS INTL INC",
+    "WINGSTOP INC"
+   ],
+   "big_adds": [
+    {
+     "issuer": "VISA INC",
+     "shares_chg_pct": 510
+    },
+    {
+     "issuer": "SPOTIFY TECHNOLOGY S A",
+     "shares_chg_pct": 288
+    },
+    {
+     "issuer": "APPLOVIN CORP",
+     "shares_chg_pct": 88
+    },
+    {
+     "issuer": "TRANSDIGM GROUP INC",
+     "shares_chg_pct": 86
+    },
+    {
+     "issuer": "HILTON WORLDWIDE HLDGS INC",
+     "shares_chg_pct": 54
+    },
+    {
+     "issuer": "TALEN ENERGY CORP",
+     "shares_chg_pct": 41
+    },
+    {
+     "issuer": "CARPENTER TECHNOLOGY CORP",
+     "shares_chg_pct": 38
+    },
+    {
+     "issuer": "NU HLDGS LTD",
+     "shares_chg_pct": 28
+    }
+   ]
   },
   {
    "name": "Tiger Global",
    "tier": 1,
    "cik": 1167483,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "TIGER GLOBAL MANAGEMENT LLC",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 54,
+   "portfolio_b": 22.85,
+   "top": [
+    {
+     "issuer": "ALPHABET INC",
+     "pct": 13.4
+    },
+    {
+     "issuer": "NVIDIA CORPORATION",
+     "pct": 9.2
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 9.1
+    },
+    {
+     "issuer": "TAIWAN SEMICONDUCTOR MANUFAC",
+     "pct": 8.2
+    },
+    {
+     "issuer": "META PLATFORMS INC",
+     "pct": 7.7
+    },
+    {
+     "issuer": "SEA LTD",
+     "pct": 5.6
+    },
+    {
+     "issuer": "BROADCOM INC",
+     "pct": 4.9
+    },
+    {
+     "issuer": "MICROSOFT CORP",
+     "pct": 4.1
+    },
+    {
+     "issuer": "GE VERNOVA INC",
+     "pct": 3.7
+    },
+    {
+     "issuer": "LAM RESEARCH CORP",
+     "pct": 3.6
+    }
+   ],
+   "new_buys": [
+    "MERCADOLIBRE INC",
+    "LUMENTUM HLDGS INC",
+    "EQUIPMENTSHARE COM INC",
+    "INTEL CORP",
+    "ROBINHOOD VENTURES FD I",
+    "PAYPAY CORP",
+    "XANADU QUANTUM TECHNOLO LTD"
+   ],
+   "exited": [
+    "CIRCLE INTERNET GROUP INC",
+    "ELASTIC N V",
+    "FLUTTER ENTMT PLC",
+    "GRAB HOLDINGS LIMITED",
+    "HINGE HEALTH INC",
+    "VEEVA SYS INC",
+    "WORKDAY INC"
+   ],
+   "big_adds": [
+    {
+     "issuer": "APPLIED MATLS INC",
+     "shares_chg_pct": 85
+    },
+    {
+     "issuer": "TAIWAN SEMICONDUCTOR MANUFAC",
+     "shares_chg_pct": 49
+    },
+    {
+     "issuer": "COUPANG INC",
+     "shares_chg_pct": 32
+    },
+    {
+     "issuer": "SPOTIFY TECHNOLOGY S A",
+     "shares_chg_pct": 25
+    }
+   ]
   },
   {
    "name": "Coatue Management",
    "tier": 2,
    "cik": 1135730,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "COATUE MANAGEMENT LLC",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 62,
+   "portfolio_b": 29.06,
+   "top": [
+    {
+     "issuer": "TAIWAN SEMICONDUCTOR MANUFAC",
+     "pct": 10.8
+    },
+    {
+     "issuer": "GE VERNOVA INC",
+     "pct": 7.7
+    },
+    {
+     "issuer": "LAM RESEARCH CORP",
+     "pct": 7.4
+    },
+    {
+     "issuer": "APPLIED MATLS INC",
+     "pct": 6.2
+    },
+    {
+     "issuer": "BROADCOM INC",
+     "pct": 5.9
+    },
+    {
+     "issuer": "EATON CORP PLC",
+     "pct": 5.8
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 5.7
+    },
+    {
+     "issuer": "META PLATFORMS INC",
+     "pct": 5.5
+    },
+    {
+     "issuer": "CONSTELLATION ENERGY CORP",
+     "pct": 4.5
+    },
+    {
+     "issuer": "ALPHABET INC",
+     "pct": 4.3
+    }
+   ],
+   "new_buys": [
+    "EQUINIX INC",
+    "ASML HLDG NV",
+    "VISA INC",
+    "QUALCOMM INC",
+    "SOLSTICE ADVANCED MATLS INC",
+    "ENPHASE ENERGY INC",
+    "MICRON TECHNOLOGY INC",
+    "ARBOR REALTY TRUST INC",
+    "THE TRADE DESK INC",
+    "NOVAVAX INC",
+    "PINTEREST INC",
+    "ZILLOW GROUP INC"
+   ],
+   "exited": [
+    "ADOBE INC",
+    "ADVANCED MICRO DEVICES INC",
+    "ARM HOLDINGS PLC",
+    "AXON ENTERPRISE INC",
+    "CHAGEE HLDGS LTD",
+    "EXPEDITORS INTL WASH INC",
+    "INFOSYS LTD",
+    "MARVELL TECHNOLOGY INC",
+    "MODERNA INC",
+    "MOODYS CORP",
+    "NAVAN INC",
+    "ORACLE CORP"
+   ],
+   "big_adds": [
+    {
+     "issuer": "SPROUTS FMRS MKT INC",
+     "shares_chg_pct": 100
+    },
+    {
+     "issuer": "C H ROBINSON WORLDWIDE IN",
+     "shares_chg_pct": 68
+    }
+   ]
   },
   {
    "name": "Altimeter Capital",
    "tier": 2,
    "cik": 1541617,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "ok": true,
+   "sec_name": "Altimeter Capital Management, LP",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 13,
+   "portfolio_b": 5.7,
+   "top": [
+    {
+     "issuer": "NVIDIA CORPORATION",
+     "pct": 28.6
+    },
+    {
+     "issuer": "META PLATFORMS INC",
+     "pct": 19.6
+    },
+    {
+     "issuer": "UBER TECHNOLOGIES INC",
+     "pct": 10.1
+    },
+    {
+     "issuer": "TAIWAN SEMICONDUCTOR MFG LTD",
+     "pct": 8.1
+    },
+    {
+     "issuer": "MICROSOFT CORP",
+     "pct": 7.7
+    },
+    {
+     "issuer": "AMAZON COM INC",
+     "pct": 7.6
+    },
+    {
+     "issuer": "COREWEAVE INC",
+     "pct": 6.1
+    },
+    {
+     "issuer": "SNOWFLAKE INC",
+     "pct": 5.1
+    },
+    {
+     "issuer": "ARM HOLDINGS PLC",
+     "pct": 4.6
+    },
+    {
+     "issuer": "AXON ENTERPRISE INC",
+     "pct": 1.1
+    }
+   ],
+   "new_buys": [
+    "ARM HOLDINGS PLC",
+    "AXON ENTERPRISE INC"
+   ],
+   "exited": [
+    "BLOOM ENERGY CORP",
+    "CONFLUENT INC",
+    "COUPANG INC",
+    "ALPHABET INC",
+    "MERCADOLIBRE INC",
+    "SHOPIFY INC",
+    "ZILLOW GROUP INC"
+   ],
+   "big_adds": [
+    {
+     "issuer": "BROADCOM INC",
+     "shares_chg_pct": 109
+    },
+    {
+     "issuer": "UBER TECHNOLOGIES INC",
+     "shares_chg_pct": 43
+    },
+    {
+     "issuer": "COREWEAVE INC",
+     "shares_chg_pct": 40
+    }
+   ]
   },
   {
    "name": "Dragoneer Investment Group",
    "tier": 2,
-   "cik": 1602119,
-   "ok": false,
-   "note": "CIK mismatch: SEC says ''"
+   "cik": 1602189,
+   "ok": true,
+   "sec_name": "Dragoneer Investment Group, LLC",
+   "period": "2026-03-31",
+   "filed": "2026-05-15",
+   "positions": 17,
+   "portfolio_b": 3.0,
+   "top": [
+    {
+     "issuer": "NVIDIA CORPORATION",
+     "pct": 21.7
+    },
+    {
+     "issuer": "COUPANG INC",
+     "pct": 17.5
+    },
+    {
+     "issuer": "META PLATFORMS INC",
+     "pct": 13.6
+    },
+    {
+     "issuer": "CARVANA CO",
+     "pct": 13.1
+    },
+    {
+     "issuer": "GLOBAL E ONLINE LTD",
+     "pct": 11.4
+    },
+    {
+     "issuer": "BLOCK INC",
+     "pct": 5.9
+    },
+    {
+     "issuer": "SAILPOINT INC",
+     "pct": 3.5
+    },
+    {
+     "issuer": "CHIME FINL INC",
+     "pct": 2.7
+    },
+    {
+     "issuer": "KLARNA GROUP PLC",
+     "pct": 2.5
+    },
+    {
+     "issuer": "NU HLDGS LTD",
+     "pct": 2.4
+    }
+   ],
+   "new_buys": [
+    "META PLATFORMS INC"
+   ],
+   "exited": [
+    "COMSTOCK RES INC",
+    "DAYFORCE INC",
+    "DUOLINGO INC",
+    "EXPAND ENERGY CORPORATION",
+    "FIGMA INC",
+    "GEMINI SPACE STA INC",
+    "JAMF HLDG CORP",
+    "MEDLINE INC",
+    "MERCADOLIBRE INC",
+    "NAVAN INC",
+    "PDD HOLDINGS INC"
+   ],
+   "big_adds": [
+    {
+     "issuer": "NVIDIA CORPORATION",
+     "shares_chg_pct": 41
+    },
+    {
+     "issuer": "COUPANG INC",
+     "shares_chg_pct": 29
+    },
+    {
+     "issuer": "CARVANA CO",
+     "shares_chg_pct": 28
+    }
+   ]
   }
  ],
- "overlap": []
+ "overlap": [
+  {
+   "issuer": "Taiwan Semiconductor Manufac",
+   "n": 7,
+   "funds": [
+    "Duquesne Family Office (Druckenmiller)",
+    "Appaloosa (Tepper)",
+    "Third Point (Loeb)",
+    "Lone Pine Capital",
+    "Tiger Global",
+    "Coatue Management",
+    "Altimeter Capital"
+   ]
+  },
+  {
+   "issuer": "AMAZON COM INC",
+   "n": 7,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Pershing Square (Ackman)",
+    "Third Point (Loeb)",
+    "Baupost Group (Klarman)",
+    "Tiger Global",
+    "Coatue Management",
+    "Altimeter Capital"
+   ]
+  },
+  {
+   "issuer": "META PLATFORMS INC",
+   "n": 7,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Pershing Square (Ackman)",
+    "Third Point (Loeb)",
+    "Tiger Global",
+    "Coatue Management",
+    "Altimeter Capital",
+    "Dragoneer Investment Group"
+   ]
+  },
+  {
+   "issuer": "NVIDIA CORPORATION",
+   "n": 6,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Third Point (Loeb)",
+    "Tiger Global",
+    "Coatue Management",
+    "Altimeter Capital",
+    "Dragoneer Investment Group"
+   ]
+  },
+  {
+   "issuer": "Broadcom Inc",
+   "n": 5,
+   "funds": [
+    "Duquesne Family Office (Druckenmiller)",
+    "Third Point (Loeb)",
+    "Tiger Global",
+    "Coatue Management",
+    "Altimeter Capital"
+   ]
+  },
+  {
+   "issuer": "MICROSOFT CORP",
+   "n": 5,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Pershing Square (Ackman)",
+    "Tiger Global",
+    "Coatue Management",
+    "Altimeter Capital"
+   ]
+  },
+  {
+   "issuer": "ALPHABET INC",
+   "n": 5,
+   "funds": [
+    "Pershing Square (Ackman)",
+    "Third Point (Loeb)",
+    "Lone Pine Capital",
+    "Tiger Global",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "ALPHABET INC",
+   "n": 4,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Pershing Square (Ackman)",
+    "Baupost Group (Klarman)",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "UBER TECHNOLOGIES INC",
+   "n": 4,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Pershing Square (Ackman)",
+    "Tiger Global",
+    "Altimeter Capital"
+   ]
+  },
+  {
+   "issuer": "LAM RESEARCH CORP",
+   "n": 4,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Third Point (Loeb)",
+    "Tiger Global",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "ASML HLDG NV",
+   "n": 4,
+   "funds": [
+    "Appaloosa (Tepper)",
+    "Third Point (Loeb)",
+    "Lone Pine Capital",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "NU HLDGS LTD",
+   "n": 4,
+   "funds": [
+    "Lone Pine Capital",
+    "Tiger Global",
+    "Coatue Management",
+    "Dragoneer Investment Group"
+   ]
+  },
+  {
+   "issuer": "Coupang Inc",
+   "n": 3,
+   "funds": [
+    "Duquesne Family Office (Druckenmiller)",
+    "Tiger Global",
+    "Dragoneer Investment Group"
+   ]
+  },
+  {
+   "issuer": "Restaurant Brands Intl Inc",
+   "n": 3,
+   "funds": [
+    "Duquesne Family Office (Druckenmiller)",
+    "Pershing Square (Ackman)",
+    "Baupost Group (Klarman)"
+   ]
+  },
+  {
+   "issuer": "MASTEC INC",
+   "n": 3,
+   "funds": [
+    "Third Point (Loeb)",
+    "Lone Pine Capital",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "VISA INC",
+   "n": 3,
+   "funds": [
+    "Baupost Group (Klarman)",
+    "Lone Pine Capital",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "APPLOVIN CORP",
+   "n": 3,
+   "funds": [
+    "Lone Pine Capital",
+    "Tiger Global",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "CARVANA CO",
+   "n": 3,
+   "funds": [
+    "Lone Pine Capital",
+    "Coatue Management",
+    "Dragoneer Investment Group"
+   ]
+  },
+  {
+   "issuer": "SPOTIFY TECHNOLOGY S A",
+   "n": 3,
+   "funds": [
+    "Lone Pine Capital",
+    "Tiger Global",
+    "Coatue Management"
+   ]
+  },
+  {
+   "issuer": "CHIME FINL INC",
+   "n": 3,
+   "funds": [
+    "Tiger Global",
+    "Coatue Management",
+    "Dragoneer Investment Group"
+   ]
+  }
+ ]
 }

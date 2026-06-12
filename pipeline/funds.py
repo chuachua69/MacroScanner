@@ -27,7 +27,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 ROOT = Path(__file__).resolve().parents[1]
-_UA = "MacroScanner/1.0 chuachua69@users.noreply.github.com"
+_UA = "MacroScanner chuazhishengczs@gmail.com"
 
 def _make_session() -> requests.Session:
     s = requests.Session()
@@ -50,7 +50,7 @@ FUNDS = [
     ("Tiger Global", 1, 1167483, "TIGER GLOBAL"),
     ("Coatue Management", 2, 1135730, "COATUE"),
     ("Altimeter Capital", 2, 1541617, "ALTIMETER"),
-    ("Dragoneer Investment Group", 2, 1602119, "DRAGONEER"),
+    ("Dragoneer Investment Group", 2, 1602189, "DRAGONEER"),
 ]
 
 
@@ -112,9 +112,14 @@ def holdings(cik: int, acc: str) -> list[dict]:
     if not raw:
         return []
     # strip XML namespaces so tag lookups are simple
-    text = re.sub(rb'xmlns(:\w+)?="[^"]*"', b"", raw)
-    text = re.sub(rb"<(/?)\w+:", rb"<\1", text)
-    root = ET.fromstring(text)
+    text = re.sub(rb'xmlns(?::\w+)?="[^"]*"\s*', b"", raw)   # xmlns declarations
+    text = re.sub(rb"<(/?)\w+:", rb"<\1", text)               # element prefixes
+    text = re.sub(rb'\s\w+:\w+="[^"]*"', b"", text)          # namespaced attrs (xsi:schemaLocation etc)
+    try:
+        root = ET.fromstring(text)
+    except ET.ParseError as exc:
+        print(f"  WARN XML parse failed: {exc}", file=sys.stderr)
+        return []
 
     agg: dict[tuple[str, str], dict] = {}
     for it in root.iter("infoTable"):
