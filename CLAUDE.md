@@ -41,7 +41,7 @@ call. Teach, don't lecture. Commit as `brief: week of YYYY-MM-DD` and push.
 - [x] Phase 1 — liquidity monitor + dashboard
 - [x] Phase 2 — GARP screener (Lynch criteria, anonymized scoring) + 13F tracker
 - [x] Phase 3 — Damodaran health check (pedata/roe/margin XLS → vs-industry ratios + sector concentration alert)
-- [ ] Phase 4 — guardrails: pilot-trade checklist, position-sizing discipline
+- [x] Phase 4 — Positions tab: favouriting, Kelly/¼-Kelly sizing, price levels, macro calendar, sector-grouped screener with composite R/R ranking
 
 ## 13F watch list (Phase 2) — free via SEC EDGAR
 - **Tier 1 (conviction):** Duquesne Family Office (Druckenmiller), Appaloosa

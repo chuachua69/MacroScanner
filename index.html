@@ -104,6 +104,10 @@ summary::before{content:"ⓘ ";}
 .sc-expand{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}
 .sc-expand.open{display:block;}
 
+/* Smart money card accents */
+.card-new{border-left:2px solid rgba(45,206,114,.45);}
+.card-add{border-left:2px solid rgba(77,155,245,.35);}
+
 /* FAV BUTTON */
 .fav-btn{
   background:none;border:none;cursor:pointer;padding:6px;font-size:18px;
@@ -436,16 +440,96 @@ function rrScore(c, hc, regimeLabel) {
   return fundamentalScore * healthMult * regimeMult;
 }
 
+// ── SMART MONEY SIGNAL MAP ────────────────────────────────────────────────────
+// Normalise a 13F issuer name / company name to a stable key for fuzzy matching
+function _normName(name) {
+  return (name || '').toUpperCase()
+    .replace(/\b(CORP(?:ORATION)?|INC(?:ORPORATED)?|LTD|LIMITED|CO(?:MPANY)?|GROUP|HOLDINGS?|INTERNATIONAL|PLC|SA|NV|AG|SE|ADR|CLASS [AB]|THE|&|AND)\b/g, '')
+    .replace(/[^A-Z0-9]/g, '')
+    .slice(0, 10);
+}
+
+// Build signal map: normKey → [{fund, manager, tier, action, detail}]
+function buildSmartMap(f) {
+  const map = {};
+  const roster = {};
+  for (const r of FUND_ROSTER) roster[r.name] = r;
+
+  if (!f?.funds) return map;
+  for (const fd of f.funds.filter(x => x.ok)) {
+    const meta = roster[fd.name] || {};
+    const base = { fund: fd.name, mgr: meta.manager || fd.name, tier: meta.tier || 3 };
+
+    // Priority 1: new buys (strongest signal — commitment of capital)
+    for (const issuer of (fd.new_buys || [])) {
+      const k = _normName(issuer);
+      if (!map[k]) map[k] = [];
+      map[k].push({ ...base, action: 'new', issuer });
+    }
+    // Priority 2: significant adds (increased conviction)
+    for (const add of (fd.big_adds || [])) {
+      const k = _normName(add.issuer);
+      if (!map[k]) map[k] = [];
+      map[k].push({ ...base, action: 'add', issuer: add.issuer, pct: add.shares_chg_pct });
+    }
+    // Priority 3: existing top holdings
+    for (const h of (fd.top || [])) {
+      const k = _normName(h.issuer);
+      if (!map[k]) map[k] = [];
+      // only add hold if no stronger signal already for this fund
+      if (!map[k].some(s => s.fund === fd.name && (s.action === 'new' || s.action === 'add'))) {
+        map[k].push({ ...base, action: 'hold', issuer: h.issuer, weight: h.pct });
+      }
+    }
+  }
+  return map;
+}
+
+function _lookupSignals(name, smartMap) {
+  const key = _normName(name);
+  const results = [];
+  for (const [k, sigs] of Object.entries(smartMap)) {
+    const len = Math.min(k.length, key.length, 8);
+    if (len >= 4 && k.slice(0, len) === key.slice(0, len)) results.push(...sigs);
+  }
+  // Sort: new > add > hold, then by tier ascending
+  results.sort((a, b) => {
+    const ap = {new:0, add:1, hold:2}[a.action], bp = {new:0, add:1, hold:2}[b.action];
+    return ap !== bp ? ap - bp : a.tier - b.tier;
+  });
+  return results;
+}
+
+function _signalTag(sigs) {
+  if (!sigs.length) return '';
+  const top = sigs[0];
+  if (top.action === 'new')
+    return `<span style="background:rgba(45,206,114,.15);color:var(--green);font-size:9px;padding:2px 6px;border-radius:5px;font-weight:700;letter-spacing:.5px;vertical-align:middle">NEW</span>`;
+  if (top.action === 'add')
+    return `<span style="background:rgba(77,155,245,.15);color:var(--blue);font-size:9px;padding:2px 6px;border-radius:5px;font-weight:700;letter-spacing:.5px;vertical-align:middle">+${top.pct}%</span>`;
+  return `<span style="color:var(--amber);font-size:13px;vertical-align:middle">★</span>`;
+}
+
+function _signalDetail(sigs) {
+  if (!sigs.length) return '';
+  const lines = sigs.map(s => {
+    const short = s.mgr.split(' ')[0];  // first name / last name
+    if (s.action === 'new')  return `<span style="color:var(--green)">⊕ New buy</span> — ${short}`;
+    if (s.action === 'add')  return `<span style="color:var(--blue)">↑ Added +${s.pct}%</span> — ${short}`;
+    return `<span style="color:var(--amber)">★ Held</span> <span style="color:var(--dim)">${s.weight ? s.weight + '% wt' : ''}</span> — ${short}`;
+  });
+  return `<div style="border-top:1px solid var(--line);margin-top:10px;padding-top:10px">
+    <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:var(--dim);margin-bottom:6px">Smart money</div>
+    ${lines.map(l => `<div style="font-size:12.5px;padding:3px 0">${l}</div>`).join('')}
+  </div>`;
+}
+
 // ── RENDER SCREEN ────────────────────────────────────────────────────────────
 function renderScreen(s, f, h) {
   if (!s?.candidates?.length)
     return '<div class="card"><p class="sizing">No screen data yet — runs every Monday.</p></div>';
 
-  const smartNames = new Set();
-  if (f) for (const fd of (f.funds || []).filter(x => x.ok)) {
-    for (const hh of [...(fd.top||[]),(fd.big_adds||[])]) if (hh?.issuer) smartNames.add(hh.issuer.split(' ')[0].toUpperCase());
-    for (const nb of fd.new_buys || []) smartNames.add(nb.split(' ')[0].toUpperCase());
-  }
+  const smartMap = buildSmartMap(f);
 
   const healthMap = {};
   if (h?.candidates) for (const hc of h.candidates) healthMap[hc.anon] = hc;
@@ -454,22 +538,26 @@ function renderScreen(s, f, h) {
   const HLABEL = { strong: '🟢', inline: '🟡', weak: '🔴' };
   const CK = { growth_sweet:'EPS 10–40%', peg_ok:'PEG ≤1.5', rev_confirms:'Rev ≥5%', roe_strong:'ROE ≥12%', debt_ok:'D/E ≤1.0' };
 
-  // Compute R/R score, sort descending, take top N
-  const scored = [...s.candidates].map(c => ({
-    ...c, _rr: rrScore(c, healthMap[c.anon], regimeLabel)
-  })).sort((a, b) => b._rr - a._rr).slice(0, prefs.garpCount);
+  // Compute R/R score; boost if smart money signal present
+  const scored = [...s.candidates].map(c => {
+    const sigs = _lookupSignals(c.name, smartMap);
+    const smBoost = sigs.some(s => s.action === 'new') ? 1.25
+      : sigs.some(s => s.action === 'add') ? 1.12 : 1.0;
+    return { ...c, _rr: rrScore(c, healthMap[c.anon], regimeLabel) * smBoost, _sigs: sigs };
+  }).sort((a, b) => b._rr - a._rr).slice(0, prefs.garpCount);
 
-  // Populate screen lookup for toggleFav
+  // Populate screen lookup for toggleFav (include signals)
   for (const c of scored) {
     _screenCandidates[c.ticker] = {
       ticker: c.ticker, name: c.name, sector: c.sector,
       score: c.score, peg: c.peg, pe: c.pe,
       eps_growth_pct: c.eps_growth_pct, rev_growth_pct: c.rev_growth_pct,
       roe_pct: c.roe_pct, de: c.de, mcap_b: c.mcap_b, anon: c.anon,
+      smartSignals: c._sigs,
     };
   }
 
-  // Group by sector (preserving R/R order within group)
+  // Group by sector
   const sectors = {};
   for (const c of scored) {
     const sec = c.sector || 'Other';
@@ -487,7 +575,7 @@ function renderScreen(s, f, h) {
     for (const c of cands) {
       const fav = isFav(c.ticker);
       const hc = healthMap[c.anon];
-      const smart = smartNames.has(c.name.split(' ')[0].toUpperCase());
+      const sigs = c._sigs || [];
       const eid = `sc-${c.ticker}`;
       const isOpen = _openCards.has(eid);
 
@@ -502,11 +590,11 @@ function renderScreen(s, f, h) {
         return parts.length ? `<div class="schecks" style="color:var(--dim);margin-top:6px">${parts.join(' &nbsp;')}</div>` : '';
       })() : '';
 
-      cards += `<div class="card">
+      cards += `<div class="card${sigs.some(s=>s.action==='new') ? ' card-new' : sigs.some(s=>s.action==='add') ? ' card-add' : ''}">
         <div class="sc-summary" onclick="toggleCard('${eid}')">
           <div style="flex:1;min-width:0">
             <span style="font-weight:700;font-size:15px">${c.ticker}</span>
-            ${smart ? `<span class="star" style="margin-left:4px">★</span>` : ''}
+            ${sigs.length ? `<span style="margin-left:5px">${_signalTag(sigs)}</span>` : ''}
             <span style="color:var(--dim);font-size:13px;margin-left:5px">${c.name}</span>
           </div>
           <span style="font-size:12px;color:var(--dim);white-space:nowrap;margin-right:2px">
@@ -523,6 +611,7 @@ function renderScreen(s, f, h) {
           </div>
           ${(c.rev_growth_pct != null || c.roe_pct != null) ? `<div style="font-size:13px;color:var(--dim)">Rev +${c.rev_growth_pct ?? '?'}% &nbsp;ROE ${c.roe_pct ?? '?'}% &nbsp;D/E ${c.de ?? 'n/a'}</div>` : ''}
           ${vsLine}
+          ${_signalDetail(sigs)}
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
             <span style="font-size:12px;color:var(--dim)">R/R score: ${c._rr.toFixed(2)}</span>
             <button onclick="toggleFav('${c.ticker}')"
@@ -555,7 +644,7 @@ function renderScreen(s, f, h) {
 
   return `<h2>GARP screen — ranked by risk/reward</h2>${garpCtrl}${concWarn}${cards}
     <p class="meta">${s.coverage.candidates} candidates from ${s.coverage.universe} stocks</p>
-    <p class="foot">★ = smart-money name-match · ☆ tap to track a position · Damodaran industry benchmarks</p>`;
+    <p class="foot"><span style="color:var(--green)">NEW</span> = new 13F position · <span style="color:var(--blue)">+X%</span> = big add vs prior 13F · ★ held · ☆ track it</p>`;
 }
 
 // ── RENDER FUNDS ─────────────────────────────────────────────────────────────
@@ -842,6 +931,16 @@ function renderPositions() {
           <span style="font-weight:700;font-size:16px">${pos.ticker}</span>
           <span style="color:var(--dim);font-size:13px;margin-left:6px">${pos.name}</span>
           <div style="font-size:12px;color:var(--dim);margin-top:3px">${pos.sector} · Score ${pos.score}/5 · PEG ${pos.peg} · EPS +${pos.eps_growth_pct}%</div>
+          ${(() => {
+            const sigs = pos.smartSignals || [];
+            if (!sigs.length) return '';
+            const top = sigs[0];
+            if (top.action === 'new')
+              return `<div style="font-size:11.5px;color:var(--green);margin-top:3px">⊕ New buy — ${sigs.map(s=>s.mgr.split(' ')[0]).join(', ')}</div>`;
+            if (top.action === 'add')
+              return `<div style="font-size:11.5px;color:var(--blue);margin-top:3px">↑ Added +${top.pct}% — ${top.mgr.split(' ')[0]}${sigs.length > 1 ? ' +' + (sigs.length-1) + ' more' : ''}</div>`;
+            return `<div style="font-size:11.5px;color:var(--amber);margin-top:3px">★ Held — ${sigs.map(s=>s.mgr.split(' ')[0]).slice(0,3).join(', ')}</div>`;
+          })()}
         </div>
         <button class="fav-btn on" onclick="toggleFav('${pos.ticker}')" title="Remove from positions">⭐</button>
       </div>
