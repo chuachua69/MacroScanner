@@ -1,7 +1,7 @@
-== pipeline run 2026-06-12T01:12:25Z ==
+== pipeline run 2026-06-12T01:18:48Z ==
 OK  Risk-On (score +2)  net liquidity $5.897T (+1.54% / 13w)  ->  /home/runner/work/MacroScanner/MacroScanner/data/liquidity.json
 Screening 515 tickers via Yahoo Finance...
-  crumb obtained: 1IrkZX7f...
-  100/515 done, 48 passing PEG gate
-  400/515 done, 163 passing PEG gate
+  crumb obtained: iWjoMIrc...
+  100/515 done, 49 passing PEG gate
+  400/515 done, 164 passing PEG gate
 OK  30 GARP candidates -> /home/runner/work/MacroScanner/MacroScanner/data/screen.json
