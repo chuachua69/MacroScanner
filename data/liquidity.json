@@ -1,13 +1,13 @@
 {
- "generated_utc": "2026-06-12T06:22:00+00:00",
+ "generated_utc": "2026-06-15T21:48:18+00:00",
  "week_of": "2026-06-10",
  "as_of": {
   "WALCL": "2026-06-10",
-  "RRPONTSYD": "2026-06-11",
+  "RRPONTSYD": "2026-06-15",
   "WTREGEN": "2026-06-10",
-  "BAMLH0A0HYM2": "2026-06-10",
-  "DTWEXBGS": "2026-06-05",
-  "T10Y2Y": "2026-06-11"
+  "BAMLH0A0HYM2": "2026-06-12",
+  "DTWEXBGS": "2026-06-12",
+  "T10Y2Y": "2026-06-15"
  },
  "regime": {
   "label": "Risk-On",
@@ -36,7 +36,7 @@
    {
     "id": "dollar",
     "name": "US Dollar trend (13w)",
-    "value": 0.67,
+    "value": 0.52,
     "unit": "%",
     "signal": 0,
     "weight": 1,
@@ -2165,8 +2165,8 @@
   "dollar": {
    "name": "Broad Dollar Index",
    "unit": "",
-   "latest": 120.08,
-   "change_13w_pct": 0.67,
+   "latest": 119.91,
+   "change_13w_pct": 0.52,
    "history": [
     {
      "d": "2024-06-19",
@@ -2582,7 +2582,7 @@
     },
     {
      "d": "2026-06-10",
-     "v": 120.08
+     "v": 119.91
     }
    ]
   },
