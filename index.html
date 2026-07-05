@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#121416">
+<meta name="theme-color" content="#14171b">
 <title>Macro Scanner</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23121416'/><circle cx='16' cy='16' r='5' fill='none' stroke='%23d4af37' stroke-width='2'/><circle cx='16' cy='16' r='2' fill='%23d4af37'/><line x1='16' y1='8' x2='16' y2='5' stroke='%23d4af37' stroke-width='2' stroke-linecap='round'/><line x1='22' y1='10' x2='24.5' y2='7.5' stroke='%23d4af37' stroke-width='2' stroke-linecap='round'/><line x1='24' y1='16' x2='27' y2='16' stroke='%23d4af37' stroke-width='2' stroke-linecap='round'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#121416; --card:#1a1d20; --card2:#1f2328; --line:rgba(255,255,255,.08);
+  --bg:#14171b; --card:#1d2126; --card2:#22262d; --line:rgba(255,255,255,.08);
   --text:#e4e7eb; --dim:#546270; --gold:#d4af37;
   --green:#00e676; --amber:#f0aa30; --red:#e84040; --blue:#4a8fd4;
 }
@@ -44,17 +44,38 @@ h1{
 
 .card{
   background:var(--card);border:1px solid var(--line);border-radius:16px;
-  padding:18px 20px;margin-bottom:10px;
+  padding:20px 24px;margin-bottom:12px;
 }
 
 h2{
   font-family:'Instrument Serif',Georgia,serif;
   font-size:15px;font-weight:400;font-style:italic;
   letter-spacing:0;text-transform:none;
-  color:var(--dim);margin:28px 0 10px;
+  color:var(--dim);margin:32px 0 12px;
   display:flex;align-items:center;gap:12px;
 }
 h2::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* BRIEF TWO-TIER */
+.brief-toggle{
+  background:none;border:1px solid var(--line);border-radius:8px;
+  color:var(--blue);font-size:13px;padding:7px 14px;cursor:pointer;
+  margin-top:14px;display:block;width:100%;text-align:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.brief-toggle:active{opacity:.7;}
+.brief-watch{padding-left:18px;margin:0;}
+.brief-watch li{margin-bottom:8px;font-size:14px;line-height:1.55;}
+
+/* SIGNAL ROWS */
+.sig-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-top:1px solid var(--line);font-size:13.5px;
+}
+.sig-row:first-child{border-top:none;}
+.sig-name{color:var(--dim);}
+.sig-val{font-weight:600;font-variant-numeric:tabular-nums;}
+.sig-label{font-size:11.5px;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.3px;}
 
 /* REGIME */
 .regime{text-align:center;padding:6px 0 2px;}
@@ -261,12 +282,12 @@ section[id^="t-"].tab-enter{
       <div class="sizing" id="sizing"></div>
       <div id="comps"></div>
     </div>
-    <h2>This week's brief</h2>
+    <h2>Market signals</h2>
+    <div class="card" id="signals-compact"></div>
+    <h2>This week</h2>
     <div class="card brief" id="brief"></div>
-    <h2>Liquidity metrics</h2>
+    <h2>Charts &amp; detail</h2>
     <div id="metrics"></div>
-    <h2>How the score works</h2>
-    <div class="card" style="font-size:13.5px;color:var(--dim)" id="method"></div>
     <p class="meta" id="meta"></p>
     <p class="foot">Personal research tool · Not financial advice · Data: FRED (St. Louis Fed)</p>
   </section>
@@ -319,7 +340,7 @@ section[id^="t-"].tab-enter{
 <nav class="tab-nav" style="left:50%;transform:translateX(-50%);width:100%;max-width:640px;">
   <button class="tb on" data-tab="t-ov"><span class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="12" width="4" height="7" rx="1" fill="currentColor" opacity=".55"/><rect x="9" y="7" width="4" height="12" rx="1" fill="currentColor"/><rect x="15" y="3" width="4" height="16" rx="1" fill="currentColor" opacity=".55"/></svg></span>Overview</button>
   <button class="tb" data-tab="t-sc"><span class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="10" cy="10" r="5.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.5 14.5L19 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>Screen</button>
-  <button class="tb" data-tab="t-fd"><span class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M2 19h18M4 19v-8M9 19v-8M13 19v-8M18 19v-8M11 4L2 10h18L11 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>Funds</button>
+  <button class="tb" data-tab="t-fd"><span class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M2 19h18M4 19v-8M9 19v-8M13 19v-8M18 19v-8M11 4L2 10h18L11 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>Smart $</button>
   <button class="tb" data-tab="t-po"><span class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5 3.5h12a1 1 0 011 1v14l-7-4.5-7 4.5v-14a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></span>Positions</button>
   <button class="tb" data-tab="t-st"><span class="ic"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 7h16M3 11h16M3 15h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="7" r="2" fill="var(--bg)" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="11" r="2" fill="var(--bg)" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="15" r="2" fill="var(--bg)" stroke="currentColor" stroke-width="1.5"/></svg></span>Settings</button>
 </nav>
@@ -408,8 +429,25 @@ const M_KEYWORDS = {
 };
 
 // ── RENDER BRIEF ─────────────────────────────────────────────────────────────
+function toggleBrief() {
+  const detail = document.getElementById('brief-detail');
+  const btn = document.getElementById('brief-toggle-btn');
+  const open = detail.style.display !== 'none';
+  detail.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? 'Read full analysis ▾' : 'Hide ▴';
+}
+
 function renderBrief(b, metrics) {
   if (!b?.body?.length) return '<p class="sizing">No brief yet — Claude writes this every Monday evening.</p>';
+
+  // Simple view: headline + watch bullets
+  const watch = b.watch?.length
+    ? `<div style="margin-top:14px">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--dim);margin-bottom:8px">Watch this week</p>
+        <ul class="brief-watch">${b.watch.map(w => `<li>${w}</li>`).join('')}</ul>
+       </div>` : '';
+
+  // Full analysis (body + change_my_mind) — hidden by default
   const used = new Set();
   function chartFor(para) {
     const lc = para.toLowerCase();
@@ -427,12 +465,73 @@ function renderBrief(b, metrics) {
     return '';
   }
   const body = (b.body || []).map(p => `<p>${addJargon(p)}</p>${chartFor(p)}`).join('');
-  const watch = b.watch?.length
-    ? `<p class="sec-head">👀 Watch next week</p><ul>${b.watch.map(w => `<li>${w}</li>`).join('')}</ul>` : '';
   const flip = b.change_my_mind?.length
-    ? `<p class="sec-head">🔄 What would change the view</p><ul>${b.change_my_mind.map(w => `<li>${w}</li>`).join('')}</ul>` : '';
-  return `<p class="hl">${b.headline}</p>${body}${watch}${flip}
-    <p class="sizing" style="font-size:12px;margin-top:12px">✍️ Written by Claude · ${(b.written_utc || '').slice(0, 10)}</p>`;
+    ? `<p class="sec-head" style="margin-top:16px">What would change the view</p>
+       <ul>${b.change_my_mind.map(w => `<li style="font-size:14px;margin-bottom:6px">${w}</li>`).join('')}</ul>` : '';
+
+  return `<p class="hl">${b.headline}</p>
+    ${watch}
+    <div id="brief-detail" style="display:none">
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line)" class="brief">
+        ${body}${flip}
+        <p class="sizing" style="font-size:12px;margin-top:14px">Written by Claude · ${(b.written_utc || '').slice(0, 10)}</p>
+      </div>
+    </div>
+    <button class="brief-toggle" id="brief-toggle-btn" onclick="toggleBrief()">Read full analysis ▾</button>`;
+}
+
+// ── RENDER SIGNALS COMPACT ───────────────────────────────────────────────────
+function renderSignalsCompact(metrics, regime) {
+  if (!metrics) return '';
+
+  const SIG_CONFIG = {
+    net_liquidity: {
+      label: 'Net liquidity',
+      good: (chg) => chg > 0,
+      goodLabel: 'Easing', badLabel: 'Tightening', flatLabel: 'Flat',
+      color: (chg) => chg > 0 ? 'var(--green)' : chg < 0 ? 'var(--red)' : 'var(--dim)',
+      bg: (chg) => chg > 0 ? 'rgba(0,230,118,.1)' : chg < 0 ? 'rgba(232,64,64,.1)' : 'rgba(84,98,112,.1)',
+    },
+    hy_oas: {
+      label: 'Credit stress',
+      goodLabel: 'Calm', badLabel: 'Stressed', flatLabel: 'Neutral',
+      color: (chg) => chg < 0 ? 'var(--green)' : chg > 0 ? 'var(--red)' : 'var(--dim)',
+      bg: (chg) => chg < 0 ? 'rgba(0,230,118,.1)' : chg > 0 ? 'rgba(232,64,64,.1)' : 'rgba(84,98,112,.1)',
+    },
+    dollar: {
+      label: 'US dollar',
+      goodLabel: 'Weak', badLabel: 'Strong', flatLabel: 'Neutral',
+      color: (chg) => chg < 0 ? 'var(--green)' : chg > 0 ? 'var(--amber)' : 'var(--dim)',
+      bg: (chg) => chg < 0 ? 'rgba(0,230,118,.1)' : chg > 0 ? 'rgba(240,170,48,.1)' : 'rgba(84,98,112,.1)',
+    },
+    yield_curve: {
+      label: 'Yield curve',
+      goodLabel: 'Positive', badLabel: 'Inverted', flatLabel: 'Flat',
+      color: (chg) => chg > 0 ? 'var(--green)' : chg < 0 ? 'var(--red)' : 'var(--dim)',
+      bg: (chg) => chg > 0 ? 'rgba(0,230,118,.1)' : chg < 0 ? 'rgba(232,64,64,.1)' : 'rgba(84,98,112,.1)',
+    },
+  };
+
+  const rows = ['net_liquidity', 'hy_oas', 'dollar', 'yield_curve'].map(id => {
+    const m = metrics[id];
+    if (!m) return '';
+    const cfg = SIG_CONFIG[id];
+    const chg = m.change_13w_pct ?? m.change_13w_pp ?? 0;
+    // invert signal for hy_oas and dollar (higher = bad)
+    const displayChg = (id === 'hy_oas' || id === 'dollar') ? -chg : chg;
+    const sigLabel = displayChg > 0.5 ? cfg.goodLabel : displayChg < -0.5 ? cfg.badLabel : cfg.flatLabel;
+    const c = cfg.color(displayChg);
+    const bg = cfg.bg(displayChg);
+    return `<div class="sig-row">
+      <span class="sig-name">${cfg.label}</span>
+      <span style="display:flex;align-items:center;gap:10px">
+        <span class="sig-val">${fmt(m.latest, m.unit)}</span>
+        <span class="sig-label" style="color:${c};background:${bg}">${sigLabel}</span>
+      </span>
+    </div>`;
+  }).join('');
+
+  return rows;
 }
 
 // ── RENDER METRICS ───────────────────────────────────────────────────────────
@@ -705,6 +804,16 @@ const FUND_ROSTER = [
 ];
 
 function renderFunds(f) {
+  const purposeCard = `<div class="card" style="margin-bottom:4px;background:rgba(212,175,55,.05);border-color:rgba(212,175,55,.18)">
+    <p style="font-size:14px;line-height:1.6">
+      <b style="color:var(--gold)">11 legendary investors, tracked quarterly.</b><br>
+      <span style="color:var(--dim)">When 3 or more of them hold the same stock, it shows up as a
+      <span style="color:var(--green);font-weight:700;font-size:11px;background:rgba(0,230,118,.1);padding:1px 6px;border-radius:4px">NEW</span>
+      or <span style="color:var(--blue);font-weight:700;font-size:11px;background:rgba(74,141,212,.1);padding:1px 6px;border-radius:4px">+X%</span>
+      badge on the Screen tab. These are the people behind those badges.</span>
+    </p>
+  </div>`;
+
   const tierCtrl = `<div class="card" style="margin-bottom:4px;margin-top:0">
     <div class="srow" style="border:none">
       <span style="font-size:14px">Show tiers</span>
@@ -772,7 +881,7 @@ function renderFunds(f) {
   }
 
   const note = f?.note ? `<p class="meta" style="margin-top:12px">${f.note}</p>` : '';
-  return `${tierCtrl}${ov}<h2>Smart-money watch list</h2>${out}${note}`;
+  return `${purposeCard}${tierCtrl}${ov}<h2>Smart-money watch list</h2>${out}${note}`;
 }
 
 // ── POSITIONS ─────────────────────────────────────────────────────────────────
@@ -1337,10 +1446,7 @@ async function load(path) {
 
   document.getElementById('brief').innerHTML = renderBrief(_b, _d.metrics);
   document.getElementById('metrics').innerHTML = renderMetrics(_d);
-  const t = _d.thresholds;
-  document.getElementById('method').innerHTML =
-    `Score = 2×liquidity + credit + dollar, each −1/0/+1 over a ${t.lookback_weeks}-week window.<br>
-     Triggers: liq ±${t.liq_pct}% · HY spread ±${t.hy_pp}pp · dollar ±${t.usd_pct}%. ≥+2 = Risk-On · ≤−2 = Risk-Off. HY ≥${t.hy_crisis}% → crisis override.`;
+  document.getElementById('signals-compact').innerHTML = renderSignalsCompact(_d.metrics, _d.regime);
   document.getElementById('meta').textContent =
     'Data refreshed ' + (_d.generated_utc||'').replace('T',' ').slice(0,16) + ' UTC · auto-updates Mondays';
 
