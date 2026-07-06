@@ -282,6 +282,8 @@ section[id^="t-"].tab-enter{
       <div class="sizing" id="sizing"></div>
       <div id="comps"></div>
     </div>
+    <h2>Historical Backtest</h2>
+    <div class="card" id="backtest" style="padding:16px 20px"></div>
     <h2>Market signals</h2>
     <div class="card" id="signals-compact"></div>
     <h2>This week</h2>
@@ -478,6 +480,53 @@ function renderBrief(b, metrics) {
       </div>
     </div>
     <button class="brief-toggle" id="brief-toggle-btn" onclick="toggleBrief()">Read full analysis ▾</button>`;
+}
+
+// ── RENDER BACKTEST ──────────────────────────────────────────────────────────
+function renderBacktest(hist) {
+  if (!hist || !hist.data || !hist.data.length) return '<p class="sizing">Backtest data not available.</p>';
+  const W = 560, H = 140;
+  const vs = hist.data.map(d => d.spy);
+  const mn = Math.min(...vs) * 0.95;
+  const mx = Math.max(...vs) * 1.05;
+  const sp = (mx - mn) || 1;
+  
+  const pts = hist.data.map((d, i) => {
+    const x = (i / (hist.data.length - 1)) * W;
+    const y = H - ((d.spy - mn) / sp) * H;
+    return [x, y];
+  });
+  const line = pts.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ');
+
+  let rects = '';
+  let startX = 0;
+  let curRegime = hist.data[0].regime;
+  
+  for (let i = 1; i <= hist.data.length; i++) {
+    const d = hist.data[i] || hist.data[i-1];
+    if (i === hist.data.length || d.regime !== curRegime) {
+      const endX = ((i-1) / (hist.data.length - 1)) * W;
+      const bg = curRegime === 'Risk-On' ? 'rgba(0,230,118,.12)' : curRegime === 'Risk-Off' ? 'rgba(232,64,64,.12)' : 'rgba(240,170,48,.1)';
+      rects += `<rect x="${startX.toFixed(1)}" y="0" width="${(endX - startX).toFixed(1)}" height="${H}" fill="${bg}" />`;
+      startX = endX;
+      curRegime = d.regime;
+    }
+  }
+
+  return `<p class="sizing" style="margin-bottom:12px;font-size:12.5px;letter-spacing:.3px">S&P 500 vs Regime Score (${hist.years} years)</p>
+    <svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none" style="border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.15);margin-bottom:6px">
+      ${rects}
+      <polyline points="${line}" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);letter-spacing:1px">
+      <span>${hist.data[0].date.slice(0,4)}</span>
+      <span>${hist.data[hist.data.length-1].date.slice(0,4)}</span>
+    </div>
+    <div style="display:flex;gap:14px;margin-top:14px;font-size:11px;color:var(--dim);justify-content:center">
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:rgba(0,230,118,.3);border-radius:2px"></span> Risk-On</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:rgba(240,170,48,.3);border-radius:2px"></span> Neutral</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;background:rgba(232,64,64,.3);border-radius:2px"></span> Risk-Off</span>
+    </div>`;
 }
 
 // ── RENDER SIGNALS COMPACT ───────────────────────────────────────────────────
@@ -1377,20 +1426,9 @@ function renderSettings(d) {
   </div>`;
 }
 
-function saveThr(key, val) {
-  const v = parseFloat(val);
-  if (!isNaN(v) && v > 0) {
-    localStorage.setItem(THR_KEYS[key], v);
-    document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
-  }
-}
-function resetThr(key) {
-  localStorage.removeItem(THR_KEYS[key]);
-  document.getElementById('settings-wrap').innerHTML = renderSettings(_d);
-}
 
 // ── LOAD & BOOT ──────────────────────────────────────────────────────────────
-let _d, _b, _s, _f, _h;
+let _d, _b, _s, _f, _h, _bt;
 
 function rerender() {
   document.getElementById('screen-wrap').innerHTML = renderScreen(_s, _f, _h);
@@ -1399,16 +1437,39 @@ function rerender() {
   renderPositions();
 }
 
+function renderBacktest(bt) {
+  if (!bt?.history?.length) return '<p class="sizing">No backtest data yet.</p>';
+  const h = bt.history.filter(x => x.sp500 > 0);
+  if (!h.length) return '<p class="sizing">No SP500 data.</p>';
+  const W = 600, H = 150;
+  const vs = h.map(x => x.sp500);
+  const mn = Math.min(...vs), mx = Math.max(...vs), sp = (mx - mn) || 1;
+  let bgRects = '';
+  const dx = W / (h.length - 1);
+  for (let i = 0; i < h.length; i++) {
+    const r = h[i].label;
+    const color = r === 'Risk-On' ? 'rgba(0,230,118,.15)' : r === 'Risk-Off' ? 'rgba(232,64,64,.15)' : 'rgba(240,170,48,.05)';
+    bgRects += `<rect x="${(i*dx).toFixed(1)}" y="0" width="${Math.ceil(dx+1)}" height="${H}" fill="${color}"/>`;
+  }
+  const pts = h.map((x, i) => [(i / (h.length - 1)) * W, H - 10 - ((x.sp500 - mn) / sp) * (H - 20)]);
+  const line = pts.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ');
+  return `<div style="font-size:12px;color:var(--dim);margin-bottom:12px;line-height:1.4">10-year S&P 500 performance vs Liquidity Regime. <span style="color:var(--green)">Green = Risk-On</span>, <span style="color:var(--red)">Red = Risk-Off</span>.</div>
+  <svg viewBox="0 0 ${W} ${H}" width="100%" height="150" preserveAspectRatio="none" style="border-radius:6px;overflow:hidden;background:var(--card2)">
+    ${bgRects}
+    <polyline points="${line}" fill="none" stroke="var(--text)" stroke-width="2" stroke-linejoin="round"/>
+  </svg>`;
+}
+
 async function load(path) {
   try { const r = await fetch(path + '?t=' + Date.now()); return r.ok ? r.json() : null; }
   catch { return null; }
 }
 
 (async () => {
-  [_d, _b, _s, _f, _h] = await Promise.all([
+  [_d, _b, _s, _f, _h, _bt] = await Promise.all([
     load('data/liquidity.json'), load('data/brief.json'),
     load('data/screen.json'),    load('data/funds.json'),
-    load('data/health.json'),
+    load('data/health.json'),    load('data/backtest.json'),
   ]);
   if (!_d) { document.getElementById('err').style.display = 'block'; return; }
   document.getElementById('app').hidden = false;
@@ -1445,6 +1506,7 @@ async function load(path) {
      <b class="${cls(c.signal)}">${c.contribution > 0 ? '+' + c.contribution : c.contribution} pts</b></div>`).join('');
 
   document.getElementById('brief').innerHTML = renderBrief(_b, _d.metrics);
+  document.getElementById('backtest').innerHTML = renderBacktest(_bt);
   document.getElementById('metrics').innerHTML = renderMetrics(_d);
   document.getElementById('signals-compact').innerHTML = renderSignalsCompact(_d.metrics, _d.regime);
   document.getElementById('meta').textContent =

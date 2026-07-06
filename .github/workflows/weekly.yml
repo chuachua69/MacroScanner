@@ -28,6 +28,9 @@ jobs:
       - name: Run pipelines (log captured even on failure)
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           {
             echo "== pipeline run $(date -u +%FT%TZ) =="
@@ -36,6 +39,9 @@ jobs:
             python pipeline/health.py    2>&1 || echo "HEALTH FAILED exit=$?"
             # funds.py runs locally via the Monday Claude routine (SEC EDGAR
             # blocks GitHub Actions IPs at the network level — home IP is fine)
+            python pipeline/backtest.py  2>&1 || echo "BACKTEST FAILED exit=$?"
+            python pipeline/generate_brief.py 2>&1 || echo "BRIEF_GEN FAILED exit=$?"
+            python pipeline/telegram_push.py 2>&1 || echo "TELEGRAM_PUSH FAILED exit=$?"
           } | tee data/run_log.txt
       - name: Commit refreshed data
         if: always()
