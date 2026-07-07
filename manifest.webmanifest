@@ -1,0 +1,19 @@
+{
+  "name": "Macro Scanner",
+  "short_name": "MacroScanner",
+  "description": "Druckenmiller-inspired macro dashboard — net-liquidity regime, GARP screen, smart-money 13F signals.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14171b",
+  "theme_color": "#14171b",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
