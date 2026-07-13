@@ -1,24 +1,24 @@
 {
- "generated_utc": "2026-07-06T18:28:59+00:00",
- "week_of": "2026-07-01",
+ "generated_utc": "2026-07-13T18:16:14+00:00",
+ "week_of": "2026-07-08",
  "as_of": {
-  "WALCL": "2026-07-01",
-  "RRPONTSYD": "2026-07-06",
-  "WTREGEN": "2026-07-01",
-  "BAMLH0A0HYM2": "2026-07-03",
-  "DTWEXBGS": "2026-06-26",
-  "T10Y2Y": "2026-07-02"
+  "WALCL": "2026-07-08",
+  "RRPONTSYD": "2026-07-13",
+  "WTREGEN": "2026-07-08",
+  "BAMLH0A0HYM2": "2026-07-10",
+  "DTWEXBGS": "2026-07-02",
+  "T10Y2Y": "2026-07-10"
  },
  "regime": {
   "label": "Neutral",
-  "score": 1,
+  "score": -1,
   "crisis_override": false,
   "sizing_hint": "Half-size pilots; demand stronger fundamentals.",
   "components": [
    {
     "id": "net_liquidity",
     "name": "Net Liquidity trend (13w)",
-    "value": 0.31,
+    "value": 0.22,
     "unit": "%",
     "signal": 0,
     "weight": 2,
@@ -27,20 +27,20 @@
    {
     "id": "hy_oas",
     "name": "Credit spread trend (13w)",
-    "value": -0.42,
+    "value": -0.24,
     "unit": "pp",
-    "signal": 1,
+    "signal": 0,
     "weight": 1,
-    "contribution": 1
+    "contribution": 0
    },
    {
     "id": "dollar",
     "name": "US Dollar trend (13w)",
-    "value": 0.64,
+    "value": 1.37,
     "unit": "%",
-    "signal": 0,
+    "signal": -1,
     "weight": 1,
-    "contribution": 0
+    "contribution": -1
    }
   ]
  },
@@ -48,13 +48,9 @@
   "net_liquidity": {
    "name": "Net Liquidity",
    "unit": "$T",
-   "latest": 5.843,
-   "change_13w_pct": 0.31,
+   "latest": 5.958,
+   "change_13w_pct": 0.22,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": 6.066
-    },
     {
      "d": "2024-07-17",
      "v": 6.057
@@ -466,18 +462,18 @@
     {
      "d": "2026-07-01",
      "v": 5.843
+    },
+    {
+     "d": "2026-07-08",
+     "v": 5.958
     }
    ]
   },
   "walcl": {
    "name": "Fed Balance Sheet",
    "unit": "$T",
-   "latest": 6.725,
+   "latest": 6.736,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": 7.224
-    },
     {
      "d": "2024-07-17",
      "v": 7.208
@@ -889,18 +885,18 @@
     {
      "d": "2026-07-01",
      "v": 6.725
+    },
+    {
+     "d": "2026-07-08",
+     "v": 6.736
     }
    ]
   },
   "rrp": {
    "name": "Reverse Repo (RRP)",
    "unit": "$T",
-   "latest": 0.001,
+   "latest": 0.003,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": 0.422
-    },
     {
      "d": "2024-07-17",
      "v": 0.399
@@ -1312,18 +1308,18 @@
     {
      "d": "2026-07-01",
      "v": 0.001
+    },
+    {
+     "d": "2026-07-08",
+     "v": 0.003
     }
    ]
   },
   "tga": {
    "name": "Treasury General Account",
    "unit": "$T",
-   "latest": 0.88,
+   "latest": 0.774,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": 0.736
-    },
     {
      "d": "2024-07-17",
      "v": 0.752
@@ -1735,19 +1731,19 @@
     {
      "d": "2026-07-01",
      "v": 0.88
+    },
+    {
+     "d": "2026-07-08",
+     "v": 0.774
     }
    ]
   },
   "hy_oas": {
    "name": "High-Yield Credit Spread",
    "unit": "%",
-   "latest": 2.74,
-   "change_13w_pp": -0.42,
+   "latest": 2.7,
+   "change_13w_pp": -0.24,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": 3.17
-    },
     {
      "d": "2024-07-17",
      "v": 3.09
@@ -2159,19 +2155,19 @@
     {
      "d": "2026-07-01",
      "v": 2.74
+    },
+    {
+     "d": "2026-07-08",
+     "v": 2.7
     }
    ]
   },
   "dollar": {
    "name": "Broad Dollar Index",
    "unit": "",
-   "latest": 120.89,
-   "change_13w_pct": 0.64,
+   "latest": 120.69,
+   "change_13w_pct": 1.37,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": 123.19
-    },
     {
      "d": "2024-07-17",
      "v": 122.52
@@ -2582,19 +2578,19 @@
     },
     {
      "d": "2026-07-01",
-     "v": 120.89
+     "v": 121.15
+    },
+    {
+     "d": "2026-07-08",
+     "v": 120.69
     }
    ]
   },
   "yield_curve": {
    "name": "Yield Curve (10y\u22122y)",
    "unit": "%",
-   "latest": 0.31,
+   "latest": 0.35,
    "history": [
-    {
-     "d": "2024-07-10",
-     "v": -0.34
-    },
     {
      "d": "2024-07-17",
      "v": -0.26
@@ -3006,6 +3002,10 @@
     {
      "d": "2026-07-01",
      "v": 0.31
+    },
+    {
+     "d": "2026-07-08",
+     "v": 0.35
     }
    ]
   }
