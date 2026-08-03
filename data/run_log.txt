@@ -1,45 +1,71 @@
-== pipeline run 2026-07-27T13:52:46Z ==
-OK  Neutral (score +1)  net liquidity $5.917T (+3.80% / 13w)  ->  /home/runner/work/MacroScanner/MacroScanner/data/liquidity.json
+== pipeline run 2026-08-03T13:57:12Z ==
+OK  Neutral (score +1)  net liquidity $5.825T (+1.88% / 13w)  ->  /home/runner/work/MacroScanner/MacroScanner/data/liquidity.json
 Screening 515 tickers via Yahoo Finance...
-  crumb obtained: h.X1wVnY...
-  100/515 done, 50 passing PEG gate
-  400/515 done, 162 passing PEG gate
+  crumb obtained: nL.TBSZj...
+  100/515 done, 36 passing PEG gate
 OK  30 GARP candidates -> /home/runner/work/MacroScanner/MacroScanner/data/screen.json
 Fetching Damodaran datasets...
   Loaded 94 Damodaran industries
-  CAND-01 (Industrials ) health=strong   pe_vs_ind=1.10x  peg_vs_ind=4.22x  roe_vs_ind=2.13x
-  CAND-02 (Information ) health=strong   pe_vs_ind=2.02x  peg_vs_ind=2.40x  roe_vs_ind=0.88x
-  CAND-03 (Health Care ) health=strong   pe_vs_ind=1.40x  peg_vs_ind=1.91x  roe_vs_ind=0.85x
-  CAND-04 (Information ) health=strong   pe_vs_ind=1.88x  peg_vs_ind=2.12x  roe_vs_ind=0.91x
-  CAND-05 (Health Care ) health=strong   pe_vs_ind=7.24x  peg_vs_ind=1.48x  roe_vs_ind=1.31x
-  CAND-06 (Information ) health=weak     pe_vs_ind=0.74x  peg_vs_ind=1.62x  roe_vs_ind=0.71x
-  CAND-07 (Energy      ) health=strong   pe_vs_ind=1.43x  peg_vs_ind=3.09x  roe_vs_ind=1.60x
-  CAND-08 (Health Care ) health=strong   pe_vs_ind=2.49x  peg_vs_ind=1.37x  roe_vs_ind=1.55x
-  CAND-09 (Information ) health=strong   pe_vs_ind=1.62x  peg_vs_ind=1.56x  roe_vs_ind=1.33x
-  CAND-10 (Industrials ) health=strong   pe_vs_ind=1.49x  peg_vs_ind=1.37x  roe_vs_ind=0.67x
-  CAND-11 (Information ) health=strong   pe_vs_ind=0.75x  peg_vs_ind=1.37x  roe_vs_ind=1.55x
-  CAND-12 (Information ) health=strong   pe_vs_ind=1.58x  peg_vs_ind=1.33x  roe_vs_ind=0.72x
-  CAND-13 (Financials  ) health=strong   pe_vs_ind=1.31x  peg_vs_ind=7.79x  roe_vs_ind=1.52x
-  CAND-14 (Information ) health=strong   pe_vs_ind=1.80x  peg_vs_ind=13.18x  roe_vs_ind=2.60x
-  CAND-15 (Industrials ) health=strong   pe_vs_ind=1.92x  peg_vs_ind=8.04x  roe_vs_ind=1.09x
-  CAND-16 (Industrials ) health=inline   pe_vs_ind=0.98x  peg_vs_ind=5.28x  roe_vs_ind=0.60x
-  CAND-17 (Information ) health=strong   pe_vs_ind=0.59x  peg_vs_ind=4.29x  roe_vs_ind=1.46x
-  CAND-18 (Information ) health=strong   pe_vs_ind=1.23x  peg_vs_ind=4.01x  roe_vs_ind=3.36x
-  CAND-19 (Information ) health=weak     pe_vs_ind=0.28x  peg_vs_ind=3.48x  roe_vs_ind=0.72x
-  CAND-20 (Health Care ) health=strong   pe_vs_ind=2.50x  peg_vs_ind=2.91x  roe_vs_ind=0.90x
-  CAND-21 (Information ) health=strong   pe_vs_ind=1.22x  peg_vs_ind=3.24x  roe_vs_ind=4.47x
-  CAND-22 (Information ) health=strong   pe_vs_ind=2.81x  peg_vs_ind=2.98x  roe_vs_ind=2.46x
-  CAND-23 (Information ) health=strong   pe_vs_ind=1.80x  peg_vs_ind=2.84x  roe_vs_ind=2.09x
-  CAND-24 (Health Care ) health=strong   pe_vs_ind=1.98x  peg_vs_ind=2.46x  roe_vs_ind=0.37x
-  CAND-25 (Information ) health=weak     pe_vs_ind=0.30x  peg_vs_ind=2.75x  roe_vs_ind=0.61x
-  CAND-26 (Energy      ) health=strong   pe_vs_ind=2.45x  peg_vs_ind=5.25x  roe_vs_ind=2.30x
-  CAND-27 (Information ) health=strong   pe_vs_ind=3.70x  peg_vs_ind=2.49x  roe_vs_ind=0.58x
-  CAND-28 (Information ) health=strong   pe_vs_ind=1.19x  peg_vs_ind=2.31x  roe_vs_ind=1.97x
-  CAND-29 (Industrials ) health=strong   pe_vs_ind=0.02x  peg_vs_ind=2.11x  roe_vs_ind=1.84x
-  CAND-30 (Energy      ) health=strong   pe_vs_ind=1.17x  peg_vs_ind=4.42x  roe_vs_ind=1.31x
-  CONCENTRATION ALERT: ['Information Technology=16', 'Industrials=5', 'Health Care=5', 'Energy=3']
-OK  26/30 strong vs industry -> /home/runner/work/MacroScanner/MacroScanner/data/health.json
-Fetching data since 2016-04-06...
-OK generated 520 backtest weeks -> /home/runner/work/MacroScanner/MacroScanner/data/backtest.json
+  CAND-01 (Industrials ) health=strong   pe_vs_ind=1.12x  peg_vs_ind=4.02x  roe_vs_ind=2.19x
+  CAND-02 (Information ) health=strong   pe_vs_ind=1.89x  peg_vs_ind=2.25x  roe_vs_ind=0.88x
+  CAND-03 (Health Care ) health=strong   pe_vs_ind=4.16x  peg_vs_ind=1.93x  roe_vs_ind=1.03x
+  CAND-04 (Information ) health=strong   pe_vs_ind=1.89x  peg_vs_ind=2.07x  roe_vs_ind=0.91x
+  CAND-05 (Health Care ) health=strong   pe_vs_ind=1.29x  peg_vs_ind=1.74x  roe_vs_ind=0.85x
+  CAND-06 (Information ) health=weak     pe_vs_ind=0.58x  peg_vs_ind=1.72x  roe_vs_ind=0.66x
+  CAND-07 (Information ) health=weak     pe_vs_ind=0.74x  peg_vs_ind=1.62x  roe_vs_ind=0.71x
+  CAND-08 (Energy      ) health=strong   pe_vs_ind=1.42x  peg_vs_ind=3.04x  roe_vs_ind=1.60x
+  CAND-09 (Industrials ) health=strong   pe_vs_ind=1.40x  peg_vs_ind=1.42x  roe_vs_ind=0.71x
+  CAND-10 (Health Care ) health=strong   pe_vs_ind=6.83x  peg_vs_ind=1.33x  roe_vs_ind=1.28x
+  CAND-11 (Health Care ) health=strong   pe_vs_ind=2.29x  peg_vs_ind=1.27x  roe_vs_ind=1.55x
+  CAND-12 (Information ) health=strong   pe_vs_ind=0.80x  peg_vs_ind=1.44x  roe_vs_ind=1.55x
+  CAND-13 (Information ) health=strong   pe_vs_ind=0.77x  peg_vs_ind=1.34x  roe_vs_ind=2.54x
+  CAND-14 (Information ) health=strong   pe_vs_ind=1.18x  peg_vs_ind=1.28x  roe_vs_ind=0.77x
+  CAND-15 (Financials  ) health=strong   pe_vs_ind=1.30x  peg_vs_ind=7.79x  roe_vs_ind=1.52x
+  CAND-16 (Industrials ) health=inline   pe_vs_ind=0.95x  peg_vs_ind=4.69x  roe_vs_ind=0.60x
+  CAND-17 (Information ) health=strong   pe_vs_ind=0.60x  peg_vs_ind=4.19x  roe_vs_ind=1.46x
+  CAND-18 (Information ) health=strong   pe_vs_ind=1.63x  peg_vs_ind=3.36x  roe_vs_ind=0.72x
+  CAND-19 (Information ) health=strong   pe_vs_ind=1.22x  peg_vs_ind=3.36x  roe_vs_ind=4.47x
+  CAND-20 (Information ) health=inline   pe_vs_ind=0.86x  peg_vs_ind=3.36x  roe_vs_ind=1.09x
+  CAND-21 (Information ) health=weak     pe_vs_ind=0.31x  peg_vs_ind=2.84x  roe_vs_ind=0.61x
+  CAND-22 (Health Care ) health=strong   pe_vs_ind=2.41x  peg_vs_ind=2.39x
+  CAND-23 (Health Care ) health=strong   pe_vs_ind=1.92x  peg_vs_ind=2.39x  roe_vs_ind=0.37x
+  CAND-24 (Information ) health=strong   pe_vs_ind=2.53x  peg_vs_ind=2.71x  roe_vs_ind=2.46x
+  CAND-25 (Information ) health=strong   pe_vs_ind=2.88x  peg_vs_ind=2.71x  roe_vs_ind=17.31x
+  CAND-26 (Information ) health=strong   pe_vs_ind=1.58x  peg_vs_ind=2.53x  roe_vs_ind=2.09x
+  CAND-27 (Energy      ) health=strong   pe_vs_ind=1.23x  peg_vs_ind=4.58x  roe_vs_ind=1.31x
+  CAND-28 (Industrials ) health=strong   pe_vs_ind=0.67x  peg_vs_ind=2.11x  roe_vs_ind=3.01x
+  CAND-29 (Industrials ) health=strong   pe_vs_ind=0.42x  peg_vs_ind=2.11x  roe_vs_ind=1.84x
+  CAND-30 (Information ) health=strong   pe_vs_ind=0.97x  peg_vs_ind=2.25x  roe_vs_ind=2.58x
+  CONCENTRATION ALERT: ['Information Technology=16', 'Health Care=6', 'Industrials=5']
+OK  25/30 strong vs industry -> /home/runner/work/MacroScanner/MacroScanner/data/health.json
+Fetching data since 2016-04-13...
+Traceback (most recent call last):
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/backtest.py", line 170, in <module>
+    main()
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/backtest.py", line 80, in main
+    raw[sid] = liquidity.fetch(sid, start_date)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 55, in fetch
+    with urllib.request.urlopen(req, timeout=90) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 502: Bad Gateway
+BACKTEST FAILED exit=1
 WARN: ANTHROPIC_API_KEY not set. Skipping automated brief generation.
 WARN: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set. Skipping push.
