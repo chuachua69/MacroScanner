@@ -1,44 +1,44 @@
-== pipeline run 2026-08-10T12:07:31Z ==
-OK  Neutral (score -1)  net liquidity $5.840T (+0.16% / 13w)  ->  /home/runner/work/MacroScanner/MacroScanner/data/liquidity.json
+== pipeline run 2026-08-17T11:49:39Z ==
+OK  Risk-Off (score -2)  net liquidity $5.795T (-1.54% / 13w)  ->  /home/runner/work/MacroScanner/MacroScanner/data/liquidity.json
 Screening 515 tickers via Yahoo Finance...
-  crumb obtained: eJQ/FMGe...
-  100/515 done, 46 passing PEG gate
+  crumb obtained: jDZBWbCx...
+  100/515 done, 47 passing PEG gate
 OK  30 GARP candidates -> /home/runner/work/MacroScanner/MacroScanner/data/screen.json
 Fetching Damodaran datasets...
   Loaded 94 Damodaran industries
-  CAND-01 (Industrials ) health=strong   pe_vs_ind=1.09x  peg_vs_ind=4.12x  roe_vs_ind=2.19x
-  CAND-02 (Health Care ) health=strong   pe_vs_ind=2.39x  peg_vs_ind=2.26x  roe_vs_ind=0.94x
-  CAND-03 (Energy      ) health=strong   pe_vs_ind=2.58x  peg_vs_ind=5.03x  roe_vs_ind=2.35x
-  CAND-04 (Industrials ) health=strong   pe_vs_ind=0.46x  peg_vs_ind=2.11x  roe_vs_ind=1.89x
-  CAND-05 (Information ) health=strong   pe_vs_ind=1.90x  peg_vs_ind=2.20x  roe_vs_ind=0.88x
-  CAND-06 (Health Care ) health=strong   pe_vs_ind=4.09x  peg_vs_ind=1.88x  roe_vs_ind=1.03x
-  CAND-07 (Information ) health=inline   pe_vs_ind=0.22x  peg_vs_ind=1.98x  roe_vs_ind=0.91x
-  CAND-08 (Health Care ) health=strong   pe_vs_ind=1.17x  peg_vs_ind=1.54x  roe_vs_ind=0.85x
-  CAND-09 (Industrials ) health=strong   pe_vs_ind=1.43x  peg_vs_ind=1.43x  roe_vs_ind=0.71x
-  CAND-10 (Information ) health=inline   pe_vs_ind=0.93x  peg_vs_ind=1.55x  roe_vs_ind=0.99x
-  CAND-11 (Information ) health=weak     pe_vs_ind=0.69x  peg_vs_ind=1.51x  roe_vs_ind=0.71x
-  CAND-12 (Information ) health=strong   pe_vs_ind=0.74x  peg_vs_ind=1.50x  roe_vs_ind=1.55x
-  CAND-13 (Health Care ) health=strong   pe_vs_ind=6.73x  peg_vs_ind=1.27x  roe_vs_ind=1.28x
-  CAND-14 (Information ) health=weak     pe_vs_ind=0.49x  peg_vs_ind=1.45x  roe_vs_ind=0.66x
-  CAND-15 (Information ) health=strong   pe_vs_ind=1.19x  peg_vs_ind=1.29x  roe_vs_ind=0.77x
-  CAND-16 (Information ) health=strong   pe_vs_ind=0.70x  peg_vs_ind=1.27x  roe_vs_ind=2.54x
-  CAND-17 (Financials  ) health=strong   pe_vs_ind=1.30x  peg_vs_ind=7.79x  roe_vs_ind=1.52x
-  CAND-18 (Information ) health=weak     pe_vs_ind=0.71x  peg_vs_ind=7.38x  roe_vs_ind=0.32x
-  CAND-19 (Industrials ) health=inline   pe_vs_ind=0.94x  peg_vs_ind=4.69x  roe_vs_ind=0.60x
-  CAND-20 (Information ) health=strong   pe_vs_ind=0.53x  peg_vs_ind=3.84x  roe_vs_ind=1.46x
-  CAND-21 (Information ) health=inline   pe_vs_ind=0.79x  peg_vs_ind=3.18x  roe_vs_ind=1.09x
-  CAND-22 (Information ) health=strong   pe_vs_ind=1.10x  peg_vs_ind=2.98x  roe_vs_ind=4.47x
-  CAND-23 (Information ) health=strong   pe_vs_ind=2.48x  peg_vs_ind=2.88x  roe_vs_ind=2.46x
-  CAND-24 (Health Care ) health=strong   pe_vs_ind=2.01x  peg_vs_ind=2.36x  roe_vs_ind=5.94x
-  CAND-25 (Information ) health=strong   pe_vs_ind=1.48x  peg_vs_ind=2.71x  roe_vs_ind=0.72x
-  CAND-26 (Information ) health=strong   pe_vs_ind=2.79x  peg_vs_ind=2.71x  roe_vs_ind=17.31x
-  CAND-27 (Information ) health=inline   pe_vs_ind=1.09x  peg_vs_ind=2.64x  roe_vs_ind=0.60x
-  CAND-28 (Information ) health=weak     pe_vs_ind=0.28x  peg_vs_ind=2.60x  roe_vs_ind=0.61x
-  CAND-29 (Energy      ) health=strong   pe_vs_ind=1.13x  peg_vs_ind=5.03x  roe_vs_ind=1.07x
-  CAND-30 (Industrials ) health=strong   pe_vs_ind=0.66x  peg_vs_ind=2.28x  roe_vs_ind=3.01x
-  CONCENTRATION ALERT: ['Information Technology=17', 'Industrials=5', 'Health Care=5']
+  CAND-01 (Industrials ) health=strong   pe_vs_ind=1.06x  peg_vs_ind=4.02x  roe_vs_ind=2.19x
+  CAND-02 (Health Care ) health=strong   pe_vs_ind=2.28x  peg_vs_ind=2.16x  roe_vs_ind=0.94x
+  CAND-03 (Energy      ) health=strong   pe_vs_ind=2.40x  peg_vs_ind=4.70x  roe_vs_ind=2.35x
+  CAND-04 (Industrials ) health=strong   pe_vs_ind=0.02x  peg_vs_ind=2.11x  roe_vs_ind=1.89x
+  CAND-05 (Health Care ) health=strong   pe_vs_ind=4.09x  peg_vs_ind=1.88x  roe_vs_ind=1.03x
+  CAND-06 (Information ) health=strong   pe_vs_ind=1.79x  peg_vs_ind=2.05x  roe_vs_ind=0.88x
+  CAND-07 (Information ) health=strong   pe_vs_ind=1.78x  peg_vs_ind=1.98x  roe_vs_ind=0.91x
+  CAND-08 (Health Care ) health=inline   pe_vs_ind=1.10x  peg_vs_ind=1.46x  roe_vs_ind=0.85x
+  CAND-09 (Industrials ) health=strong   pe_vs_ind=1.42x  peg_vs_ind=1.41x  roe_vs_ind=0.71x
+  CAND-10 (Health Care ) health=strong   pe_vs_ind=6.93x  peg_vs_ind=1.30x  roe_vs_ind=1.28x
+  CAND-11 (Information ) health=weak     pe_vs_ind=0.49x  peg_vs_ind=1.45x  roe_vs_ind=0.66x
+  CAND-12 (Information ) health=weak     pe_vs_ind=0.66x  peg_vs_ind=1.44x  roe_vs_ind=0.71x
+  CAND-13 (Information ) health=strong   pe_vs_ind=1.17x  peg_vs_ind=1.28x  roe_vs_ind=0.77x
+  CAND-14 (Financials  ) health=strong   pe_vs_ind=1.35x  peg_vs_ind=7.79x  roe_vs_ind=1.52x
+  CAND-15 (Information ) health=weak     pe_vs_ind=0.70x  peg_vs_ind=7.10x  roe_vs_ind=0.32x
+  CAND-16 (Industrials ) health=inline   pe_vs_ind=1.00x  peg_vs_ind=4.97x  roe_vs_ind=0.60x
+  CAND-17 (Information ) health=strong   pe_vs_ind=0.58x  peg_vs_ind=4.19x  roe_vs_ind=1.46x
+  CAND-18 (Information ) health=inline   pe_vs_ind=0.81x  peg_vs_ind=3.24x  roe_vs_ind=1.09x
+  CAND-19 (Information ) health=strong   pe_vs_ind=1.64x  peg_vs_ind=3.03x  roe_vs_ind=0.72x
+  CAND-20 (Information ) health=strong   pe_vs_ind=1.09x  peg_vs_ind=2.98x  roe_vs_ind=4.47x
+  CAND-21 (Information ) health=strong   pe_vs_ind=2.50x  peg_vs_ind=2.88x  roe_vs_ind=2.46x
+  CAND-22 (Health Care ) health=strong   pe_vs_ind=2.05x  peg_vs_ind=2.46x  roe_vs_ind=5.94x
+  CAND-23 (Information ) health=weak     pe_vs_ind=0.26x  peg_vs_ind=2.75x  roe_vs_ind=0.61x
+  CAND-24 (Information ) health=strong   pe_vs_ind=2.67x  peg_vs_ind=2.71x  roe_vs_ind=17.31x
+  CAND-25 (Information ) health=inline   pe_vs_ind=1.09x  peg_vs_ind=2.64x  roe_vs_ind=0.60x
+  CAND-26 (Energy      ) health=inline   pe_vs_ind=1.06x  peg_vs_ind=4.70x  roe_vs_ind=1.07x
+  CAND-27 (Industrials ) health=strong   pe_vs_ind=0.63x  peg_vs_ind=2.16x  roe_vs_ind=3.01x
+  CAND-28 (Information ) health=strong   pe_vs_ind=0.83x  peg_vs_ind=2.25x  roe_vs_ind=2.58x
+  CAND-29 (Energy      ) health=strong   pe_vs_ind=1.13x  peg_vs_ind=4.31x  roe_vs_ind=1.31x
+  CAND-30 (Information ) health=strong   pe_vs_ind=1.46x  peg_vs_ind=2.17x  roe_vs_ind=2.09x
+  CONCENTRATION ALERT: ['Information Technology=16', 'Industrials=5', 'Health Care=5', 'Energy=3']
 OK  21/30 strong vs industry -> /home/runner/work/MacroScanner/MacroScanner/data/health.json
-Fetching data since 2016-04-20...
+Fetching data since 2016-04-27...
 OK generated 520 backtest weeks -> /home/runner/work/MacroScanner/MacroScanner/data/backtest.json
 WARN: ANTHROPIC_API_KEY not set. Skipping automated brief generation.
 WARN: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set. Skipping push.

@@ -1,33 +1,33 @@
 {
- "generated_utc": "2026-08-10T12:07:33+00:00",
- "week_of": "2026-08-05",
+ "generated_utc": "2026-08-17T11:49:41+00:00",
+ "week_of": "2026-08-12",
  "as_of": {
-  "WALCL": "2026-08-05",
-  "RRPONTSYD": "2026-08-07",
-  "WTREGEN": "2026-08-05",
-  "BAMLH0A0HYM2": "2026-08-06",
-  "DTWEXBGS": "2026-07-31",
-  "T10Y2Y": "2026-08-07"
+  "WALCL": "2026-08-12",
+  "RRPONTSYD": "2026-08-14",
+  "WTREGEN": "2026-08-12",
+  "BAMLH0A0HYM2": "2026-08-13",
+  "DTWEXBGS": "2026-08-07",
+  "T10Y2Y": "2026-08-14"
  },
  "regime": {
-  "label": "Neutral",
-  "score": -1,
+  "label": "Risk-Off",
+  "score": -2,
   "crisis_override": false,
-  "sizing_hint": "Half-size pilots; demand stronger fundamentals.",
+  "sizing_hint": "Watchlist only \u2014 no new pilot positions, build cash.",
   "components": [
    {
     "id": "net_liquidity",
     "name": "Net Liquidity trend (13w)",
-    "value": 0.16,
+    "value": -1.54,
     "unit": "%",
-    "signal": 0,
+    "signal": -1,
     "weight": 2,
-    "contribution": 0
+    "contribution": -2
    },
    {
     "id": "hy_oas",
     "name": "Credit spread trend (13w)",
-    "value": 0.0,
+    "value": -0.11,
     "unit": "pp",
     "signal": 0,
     "weight": 1,
@@ -36,11 +36,11 @@
    {
     "id": "dollar",
     "name": "US Dollar trend (13w)",
-    "value": 1.36,
+    "value": 0.5,
     "unit": "%",
-    "signal": -1,
+    "signal": 0,
     "weight": 1,
-    "contribution": -1
+    "contribution": 0
    }
   ]
  },
@@ -48,13 +48,9 @@
   "net_liquidity": {
    "name": "Net Liquidity",
    "unit": "$T",
-   "latest": 5.84,
-   "change_13w_pct": 0.16,
+   "latest": 5.795,
+   "change_13w_pct": -1.54,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": 6.055
-    },
     {
      "d": "2024-08-21",
      "v": 6.082
@@ -466,18 +462,18 @@
     {
      "d": "2026-08-05",
      "v": 5.84
+    },
+    {
+     "d": "2026-08-12",
+     "v": 5.795
     }
    ]
   },
   "walcl": {
    "name": "Fed Balance Sheet",
    "unit": "$T",
-   "latest": 6.749,
+   "latest": 6.76,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": 7.178
-    },
     {
      "d": "2024-08-21",
      "v": 7.14
@@ -889,18 +885,18 @@
     {
      "d": "2026-08-05",
      "v": 6.749
+    },
+    {
+     "d": "2026-08-12",
+     "v": 6.76
     }
    ]
   },
   "rrp": {
    "name": "Reverse Repo (RRP)",
    "unit": "$T",
-   "latest": 0.002,
+   "latest": 0.001,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": 0.328
-    },
     {
      "d": "2024-08-21",
      "v": 0.321
@@ -1312,18 +1308,18 @@
     {
      "d": "2026-08-05",
      "v": 0.002
+    },
+    {
+     "d": "2026-08-12",
+     "v": 0.001
     }
    ]
   },
   "tga": {
    "name": "Treasury General Account",
    "unit": "$T",
-   "latest": 0.907,
+   "latest": 0.964,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": 0.794
-    },
     {
      "d": "2024-08-21",
      "v": 0.736
@@ -1735,19 +1731,19 @@
     {
      "d": "2026-08-05",
      "v": 0.907
+    },
+    {
+     "d": "2026-08-12",
+     "v": 0.964
     }
    ]
   },
   "hy_oas": {
    "name": "High-Yield Credit Spread",
    "unit": "%",
-   "latest": 2.75,
-   "change_13w_pp": 0.0,
+   "latest": 2.71,
+   "change_13w_pp": -0.11,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": 3.46
-    },
     {
      "d": "2024-08-21",
      "v": 3.27
@@ -2159,19 +2155,19 @@
     {
      "d": "2026-08-05",
      "v": 2.75
+    },
+    {
+     "d": "2026-08-12",
+     "v": 2.71
     }
    ]
   },
   "dollar": {
    "name": "Broad Dollar Index",
    "unit": "",
-   "latest": 119.7,
-   "change_13w_pct": 1.36,
+   "latest": 119.06,
+   "change_13w_pct": 0.5,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": 122.43
-    },
     {
      "d": "2024-08-21",
      "v": 121.85
@@ -2582,19 +2578,19 @@
     },
     {
      "d": "2026-08-05",
-     "v": 119.7
+     "v": 119.39
+    },
+    {
+     "d": "2026-08-12",
+     "v": 119.06
     }
    ]
   },
   "yield_curve": {
    "name": "Yield Curve (10y\u22122y)",
    "unit": "%",
-   "latest": 0.45,
+   "latest": 0.48,
    "history": [
-    {
-     "d": "2024-08-14",
-     "v": -0.11
-    },
     {
      "d": "2024-08-21",
      "v": -0.13
@@ -3006,6 +3002,10 @@
     {
      "d": "2026-08-05",
      "v": 0.45
+    },
+    {
+     "d": "2026-08-12",
+     "v": 0.48
     }
    ]
   }
