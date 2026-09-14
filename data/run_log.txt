@@ -1,44 +1,71 @@
-== pipeline run 2026-09-07T16:35:24Z ==
-OK  Risk-Off (score -2)  net liquidity $5.769T (-1.11% / 13w)  ->  /home/runner/work/MacroScanner/MacroScanner/data/liquidity.json
+== pipeline run 2026-09-14T16:59:59Z ==
+Traceback (most recent call last):
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 214, in <module>
+    main()
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 117, in main
+    raw[sid] = fetch(sid, start)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/MacroScanner/MacroScanner/pipeline/liquidity.py", line 55, in fetch
+    with urllib.request.urlopen(req, timeout=90) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 500: Internal Server Error
+LIQUIDITY FAILED exit=1
 Screening 515 tickers via Yahoo Finance...
-  crumb obtained: 3cNkAAcC...
+  crumb obtained: TZfi00Wc...
   100/515 done, 54 passing PEG gate
 OK  30 GARP candidates -> /home/runner/work/MacroScanner/MacroScanner/data/screen.json
 Fetching Damodaran datasets...
   Loaded 94 Damodaran industries
-  CAND-01 (Industrials ) health=strong   pe_vs_ind=1.18x  peg_vs_ind=5.45x  roe_vs_ind=2.19x
-  CAND-02 (Health Care ) health=strong   pe_vs_ind=2.46x  peg_vs_ind=2.43x  roe_vs_ind=0.94x
-  CAND-03 (Health Care ) health=strong   pe_vs_ind=4.09x  peg_vs_ind=2.08x  roe_vs_ind=1.03x
-  CAND-04 (Industrials ) health=strong   pe_vs_ind=0.49x  peg_vs_ind=2.11x  roe_vs_ind=1.89x
-  CAND-05 (Industrials ) health=strong   pe_vs_ind=1.63x  peg_vs_ind=1.92x  roe_vs_ind=0.71x
-  CAND-06 (Information ) health=strong   pe_vs_ind=1.84x  peg_vs_ind=2.05x  roe_vs_ind=0.91x
-  CAND-07 (Information ) health=weak     pe_vs_ind=0.53x  peg_vs_ind=2.01x  roe_vs_ind=0.66x
-  CAND-08 (Health Care ) health=strong   pe_vs_ind=6.93x  peg_vs_ind=1.41x  roe_vs_ind=1.28x
-  CAND-09 (Energy      ) health=strong   pe_vs_ind=2.26x  peg_vs_ind=3.15x  roe_vs_ind=2.35x
-  CAND-10 (Health Care ) health=inline   pe_vs_ind=1.06x  peg_vs_ind=1.30x  roe_vs_ind=0.88x
-  CAND-11 (Information ) health=strong   pe_vs_ind=1.21x  peg_vs_ind=1.32x  roe_vs_ind=0.77x
-  CAND-12 (Information ) health=strong   pe_vs_ind=0.70x  peg_vs_ind=1.29x  roe_vs_ind=2.54x
-  CAND-13 (Communicatio) health=strong   pe_vs_ind=1.46x  peg_vs_ind=3.21x  roe_vs_ind=5.06x
-  CAND-14 (Industrials ) health=strong   pe_vs_ind=1.19x  peg_vs_ind=1.13x  roe_vs_ind=0.81x
-  CAND-15 (Financials  ) health=strong   pe_vs_ind=1.34x  peg_vs_ind=7.79x  roe_vs_ind=1.52x
-  CAND-16 (Information ) health=strong   pe_vs_ind=1.64x  peg_vs_ind=12.30x  roe_vs_ind=2.60x
-  CAND-17 (Information ) health=weak     pe_vs_ind=0.78x  peg_vs_ind=10.86x  roe_vs_ind=0.32x
-  CAND-18 (Industrials ) health=strong   pe_vs_ind=1.12x  peg_vs_ind=8.89x  roe_vs_ind=0.60x
-  CAND-19 (Industrials ) health=strong   pe_vs_ind=2.08x  peg_vs_ind=8.04x  roe_vs_ind=1.09x
-  CAND-20 (Information ) health=strong   pe_vs_ind=0.83x  peg_vs_ind=5.27x  roe_vs_ind=1.73x
-  CAND-21 (Information ) health=strong   pe_vs_ind=2.99x  peg_vs_ind=4.86x  roe_vs_ind=0.72x
-  CAND-22 (Information ) health=strong   pe_vs_ind=1.93x  peg_vs_ind=4.10x  roe_vs_ind=1.09x
-  CAND-23 (Information ) health=inline   pe_vs_ind=0.87x  peg_vs_ind=3.42x  roe_vs_ind=0.48x
-  CAND-24 (Industrials ) health=strong   pe_vs_ind=0.70x  peg_vs_ind=3.13x  roe_vs_ind=3.01x
-  CAND-25 (Information ) health=weak     pe_vs_ind=0.52x  peg_vs_ind=3.36x  roe_vs_ind=0.61x
-  CAND-26 (Information ) health=strong   pe_vs_ind=1.29x  peg_vs_ind=3.13x  roe_vs_ind=4.58x
-  CAND-27 (Materials   ) health=strong   pe_vs_ind=2.39x  peg_vs_ind=2.59x  roe_vs_ind=2.90x
-  CAND-28 (Information ) health=strong   pe_vs_ind=1.14x  peg_vs_ind=3.03x  roe_vs_ind=0.60x
-  CAND-29 (Information ) health=strong   pe_vs_ind=2.48x  peg_vs_ind=2.84x  roe_vs_ind=2.46x
-  CAND-30 (Information ) health=inline   pe_vs_ind=0.85x  peg_vs_ind=2.84x  roe_vs_ind=0.82x
-  CONCENTRATION ALERT: ['Information Technology=15', 'Industrials=7', 'Health Care=4']
-OK  24/30 strong vs industry -> /home/runner/work/MacroScanner/MacroScanner/data/health.json
-Fetching data since 2016-05-18...
+  CAND-01 (Industrials ) health=strong   pe_vs_ind=1.19x  peg_vs_ind=5.28x  roe_vs_ind=2.19x
+  CAND-02 (Health Care ) health=strong   pe_vs_ind=2.64x  peg_vs_ind=2.67x  roe_vs_ind=0.94x
+  CAND-03 (Information ) health=strong   pe_vs_ind=2.55x  peg_vs_ind=3.03x  roe_vs_ind=2.42x
+  CAND-04 (Health Care ) health=strong   pe_vs_ind=4.02x  peg_vs_ind=2.11x  roe_vs_ind=1.03x
+  CAND-05 (Industrials ) health=strong   pe_vs_ind=0.56x  peg_vs_ind=2.11x  roe_vs_ind=1.89x
+  CAND-06 (Industrials ) health=strong   pe_vs_ind=1.66x  peg_vs_ind=1.96x  roe_vs_ind=0.71x
+  CAND-07 (Information ) health=strong   pe_vs_ind=1.90x  peg_vs_ind=2.03x  roe_vs_ind=0.91x
+  CAND-08 (Information ) health=weak     pe_vs_ind=0.56x  peg_vs_ind=1.86x  roe_vs_ind=0.66x
+  CAND-09 (Health Care ) health=inline   pe_vs_ind=1.10x  peg_vs_ind=1.37x  roe_vs_ind=0.88x
+  CAND-10 (Health Care ) health=strong   pe_vs_ind=6.83x  peg_vs_ind=1.36x  roe_vs_ind=1.28x
+  CAND-11 (Energy      ) health=strong   pe_vs_ind=2.12x  peg_vs_ind=3.02x  roe_vs_ind=2.35x
+  CAND-12 (Information ) health=strong   pe_vs_ind=0.78x  peg_vs_ind=1.33x  roe_vs_ind=2.54x
+  CAND-13 (Communicatio) health=strong   pe_vs_ind=1.41x  peg_vs_ind=3.26x  roe_vs_ind=5.06x
+  CAND-14 (Industrials ) health=strong   pe_vs_ind=1.21x  peg_vs_ind=1.15x  roe_vs_ind=0.81x
+  CAND-15 (Information ) health=strong   pe_vs_ind=1.15x  peg_vs_ind=1.26x  roe_vs_ind=0.77x
+  CAND-16 (Financials  ) health=strong   pe_vs_ind=1.35x  peg_vs_ind=7.79x  roe_vs_ind=1.52x
+  CAND-17 (Information ) health=strong   pe_vs_ind=1.80x  peg_vs_ind=13.18x  roe_vs_ind=2.60x
+  CAND-18 (Information ) health=weak     pe_vs_ind=0.79x  peg_vs_ind=10.86x  roe_vs_ind=0.32x
+  CAND-19 (Industrials ) health=strong   pe_vs_ind=1.12x  peg_vs_ind=8.89x  roe_vs_ind=0.60x
+  CAND-20 (Industrials ) health=strong   pe_vs_ind=2.09x  peg_vs_ind=8.04x  roe_vs_ind=1.09x
+  CAND-21 (Information ) health=strong   pe_vs_ind=0.85x  peg_vs_ind=5.13x  roe_vs_ind=1.73x
+  CAND-22 (Information ) health=strong   pe_vs_ind=2.92x  peg_vs_ind=4.73x  roe_vs_ind=0.72x
+  CAND-23 (Information ) health=strong   pe_vs_ind=1.40x  peg_vs_ind=4.01x  roe_vs_ind=4.58x
+  CAND-24 (Information ) health=strong   pe_vs_ind=1.94x  peg_vs_ind=3.93x  roe_vs_ind=1.09x
+  CAND-25 (Industrials ) health=strong   pe_vs_ind=0.71x  peg_vs_ind=3.01x  roe_vs_ind=3.01x
+  CAND-26 (Information ) health=inline   pe_vs_ind=0.87x  peg_vs_ind=3.24x  roe_vs_ind=0.48x
+  CAND-27 (Information ) health=strong   pe_vs_ind=1.17x  peg_vs_ind=3.13x  roe_vs_ind=0.60x
+  CAND-28 (Materials   ) health=strong   pe_vs_ind=2.44x  peg_vs_ind=2.59x  roe_vs_ind=2.90x
+  CAND-29 (Health Care ) health=strong   pe_vs_ind=1.99x  peg_vs_ind=2.39x  roe_vs_ind=5.94x
+  CAND-30 (Information ) health=inline   pe_vs_ind=0.86x  peg_vs_ind=2.75x  roe_vs_ind=0.82x
+  CONCENTRATION ALERT: ['Information Technology=14', 'Industrials=7', 'Health Care=5']
+OK  25/30 strong vs industry -> /home/runner/work/MacroScanner/MacroScanner/data/health.json
+Fetching data since 2016-05-25...
 OK generated 520 backtest weeks -> /home/runner/work/MacroScanner/MacroScanner/data/backtest.json
 WARN: ANTHROPIC_API_KEY not set. Skipping automated brief generation.
 WARN: TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set. Skipping push.
