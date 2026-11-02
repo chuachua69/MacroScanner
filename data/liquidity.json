@@ -1,24 +1,24 @@
 {
- "generated_utc": "2026-10-26T17:30:55+00:00",
- "week_of": "2026-10-21",
+ "generated_utc": "2026-11-02T20:50:57+00:00",
+ "week_of": "2026-10-28",
  "as_of": {
-  "WALCL": "2026-10-21",
-  "RRPONTSYD": "2026-10-23",
-  "WTREGEN": "2026-10-21",
-  "BAMLH0A0HYM2": "2026-10-23",
-  "DTWEXBGS": "2026-10-16",
-  "T10Y2Y": "2026-10-23"
+  "WALCL": "2026-10-28",
+  "RRPONTSYD": "2026-11-02",
+  "WTREGEN": "2026-10-28",
+  "BAMLH0A0HYM2": "2026-10-30",
+  "DTWEXBGS": "2026-10-23",
+  "T10Y2Y": "2026-10-30"
  },
  "regime": {
   "label": "Risk-Off",
-  "score": -3,
+  "score": -2,
   "crisis_override": false,
   "sizing_hint": "Watchlist only \u2014 no new pilot positions, build cash.",
   "components": [
    {
     "id": "net_liquidity",
     "name": "Net Liquidity trend (13w)",
-    "value": -1.96,
+    "value": -1.36,
     "unit": "%",
     "signal": -1,
     "weight": 2,
@@ -27,16 +27,16 @@
    {
     "id": "hy_oas",
     "name": "Credit spread trend (13w)",
-    "value": 0.59,
+    "value": 0.27,
     "unit": "pp",
-    "signal": -1,
+    "signal": 0,
     "weight": 1,
-    "contribution": -1
+    "contribution": 0
    },
    {
     "id": "dollar",
     "name": "US Dollar trend (13w)",
-    "value": 0.69,
+    "value": 0.44,
     "unit": "%",
     "signal": 0,
     "weight": 1,
@@ -48,13 +48,9 @@
   "net_liquidity": {
    "name": "Net Liquidity",
    "unit": "$T",
-   "latest": 5.801,
-   "change_13w_pct": -1.96,
+   "latest": 5.746,
+   "change_13w_pct": -1.36,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 5.949
-    },
     {
      "d": "2024-11-06",
      "v": 5.974
@@ -466,18 +462,18 @@
     {
      "d": "2026-10-21",
      "v": 5.801
+    },
+    {
+     "d": "2026-10-28",
+     "v": 5.746
     }
    ]
   },
   "walcl": {
    "name": "Fed Balance Sheet",
    "unit": "$T",
-   "latest": 6.754,
+   "latest": 6.746,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 7.013
-    },
     {
      "d": "2024-11-06",
      "v": 6.994
@@ -889,6 +885,10 @@
     {
      "d": "2026-10-21",
      "v": 6.754
+    },
+    {
+     "d": "2026-10-28",
+     "v": 6.746
     }
    ]
   },
@@ -897,10 +897,6 @@
    "unit": "$T",
    "latest": 0.0,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 0.229
-    },
     {
      "d": "2024-11-06",
      "v": 0.178
@@ -1312,18 +1308,18 @@
     {
      "d": "2026-10-21",
      "v": 0.0
+    },
+    {
+     "d": "2026-10-28",
+     "v": 0.0
     }
    ]
   },
   "tga": {
    "name": "Treasury General Account",
    "unit": "$T",
-   "latest": 0.952,
+   "latest": 1.0,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 0.835
-    },
     {
      "d": "2024-11-06",
      "v": 0.842
@@ -1735,19 +1731,19 @@
     {
      "d": "2026-10-21",
      "v": 0.952
+    },
+    {
+     "d": "2026-10-28",
+     "v": 1.0
     }
    ]
   },
   "hy_oas": {
    "name": "High-Yield Credit Spread",
    "unit": "%",
-   "latest": 3.27,
-   "change_13w_pp": 0.59,
+   "latest": 3.14,
+   "change_13w_pp": 0.27,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 2.8
-    },
     {
      "d": "2024-11-06",
      "v": 2.74
@@ -2159,19 +2155,19 @@
     {
      "d": "2026-10-21",
      "v": 3.27
+    },
+    {
+     "d": "2026-10-28",
+     "v": 3.14
     }
    ]
   },
   "dollar": {
    "name": "Broad Dollar Index",
    "unit": "",
-   "latest": 121.4,
-   "change_13w_pct": 0.69,
+   "latest": 121.32,
+   "change_13w_pct": 0.44,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 124.82
-    },
     {
      "d": "2024-11-06",
      "v": 125.7
@@ -2582,19 +2578,19 @@
     },
     {
      "d": "2026-10-21",
-     "v": 121.4
+     "v": 121.34
+    },
+    {
+     "d": "2026-10-28",
+     "v": 121.32
     }
    ]
   },
   "yield_curve": {
    "name": "Yield Curve (10y\u22122y)",
    "unit": "%",
-   "latest": 0.32,
+   "latest": 0.38,
    "history": [
-    {
-     "d": "2024-10-30",
-     "v": 0.14
-    },
     {
      "d": "2024-11-06",
      "v": 0.15
@@ -3006,6 +3002,10 @@
     {
      "d": "2026-10-21",
      "v": 0.32
+    },
+    {
+     "d": "2026-10-28",
+     "v": 0.38
     }
    ]
   }

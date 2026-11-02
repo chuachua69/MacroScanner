@@ -1,33 +1,16 @@
 {
- "generated_utc": "2026-10-26T17:34:33+00:00",
+ "generated_utc": "2026-11-02T20:54:11+00:00",
  "damodaran_url": "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/data.html",
  "note": "vs-industry ratios >1.0 = candidate beats industry benchmark; <1.0 = lags peers. Damodaran data is updated annually each January.",
  "candidates": [
   {
    "anon": "CAND-01",
-   "ticker": "EME",
-   "sector": "Industrials",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 1.34,
-    "peg_vs_ind": 5.28,
-    "roe_vs_ind": 2.19
-   },
-   "benchmark": {
-    "forward_pe": 27.652,
-    "peg": 1.688,
-    "roe": 0.184,
-    "net_margin": 0.074
-   }
-  },
-  {
-   "anon": "CAND-02",
    "ticker": "ADBE",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 2.66,
-    "peg_vs_ind": 2.88,
+    "pe_vs_ind": 2.69,
+    "peg_vs_ind": 3.08,
     "roe_vs_ind": 2.42
    },
    "benchmark": {
@@ -38,64 +21,13 @@
    }
   },
   {
-   "anon": "CAND-03",
-   "ticker": "BSX",
-   "sector": "Health Care",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 2.61,
-    "peg_vs_ind": 2.5,
-    "roe_vs_ind": 0.94
-   },
-   "benchmark": {
-    "forward_pe": 47.801,
-    "peg": 1.602,
-    "roe": 0.163,
-    "net_margin": 0.108
-   }
-  },
-  {
-   "anon": "CAND-04",
-   "ticker": "GLW",
-   "sector": "Information Technology",
-   "health": "weak",
-   "scores": {
-    "pe_vs_ind": 0.64,
-    "peg_vs_ind": 2.49,
-    "roe_vs_ind": 0.66
-   },
-   "benchmark": {
-    "forward_pe": 37.708,
-    "peg": 1.846,
-    "roe": 0.256,
-    "net_margin": 0.197
-   }
-  },
-  {
-   "anon": "CAND-05",
-   "ticker": "HWM",
-   "sector": "Industrials",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 0.66,
-    "peg_vs_ind": 2.11,
-    "roe_vs_ind": 1.89
-   },
-   "benchmark": {
-    "forward_pe": 27.652,
-    "peg": 1.688,
-    "roe": 0.184,
-    "net_margin": 0.074
-   }
-  },
-  {
-   "anon": "CAND-06",
+   "anon": "CAND-02",
    "ticker": "CI",
    "sector": "Health Care",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 3.79,
-    "peg_vs_ind": 1.91,
+    "pe_vs_ind": 3.92,
+    "peg_vs_ind": 1.95,
     "roe_vs_ind": 1.03
    },
    "benchmark": {
@@ -106,47 +38,13 @@
    }
   },
   {
-   "anon": "CAND-07",
-   "ticker": "HII",
-   "sector": "Industrials",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 1.66,
-    "peg_vs_ind": 2.01,
-    "roe_vs_ind": 0.71
-   },
-   "benchmark": {
-    "forward_pe": 27.652,
-    "peg": 1.688,
-    "roe": 0.184,
-    "net_margin": 0.074
-   }
-  },
-  {
-   "anon": "CAND-08",
-   "ticker": "TEL",
-   "sector": "Information Technology",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 1.79,
-    "peg_vs_ind": 2.07,
-    "roe_vs_ind": 0.91
-   },
-   "benchmark": {
-    "forward_pe": 37.708,
-    "peg": 1.846,
-    "roe": 0.256,
-    "net_margin": 0.197
-   }
-  },
-  {
-   "anon": "CAND-09",
+   "anon": "CAND-03",
    "ticker": "VEEV",
    "sector": "Health Care",
    "health": "inline",
    "scores": {
-    "pe_vs_ind": 0.92,
-    "peg_vs_ind": 1.28,
+    "pe_vs_ind": 0.95,
+    "peg_vs_ind": 1.32,
     "roe_vs_ind": 0.88
    },
    "benchmark": {
@@ -157,14 +55,14 @@
    }
   },
   {
-   "anon": "CAND-10",
-   "ticker": "UHS",
+   "anon": "CAND-04",
+   "ticker": "RMD",
    "sector": "Health Care",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 6.46,
-    "peg_vs_ind": 1.27,
-    "roe_vs_ind": 1.28
+    "pe_vs_ind": 2.25,
+    "peg_vs_ind": 1.3,
+    "roe_vs_ind": 1.62
    },
    "benchmark": {
     "forward_pe": 47.801,
@@ -174,13 +72,30 @@
    }
   },
   {
-   "anon": "CAND-11",
+   "anon": "CAND-05",
+   "ticker": "TEL",
+   "sector": "Information Technology",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.91,
+    "peg_vs_ind": 1.5,
+    "roe_vs_ind": 0.96
+   },
+   "benchmark": {
+    "forward_pe": 37.708,
+    "peg": 1.846,
+    "roe": 0.256,
+    "net_margin": 0.197
+   }
+  },
+  {
+   "anon": "CAND-06",
    "ticker": "APA",
    "sector": "Energy",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.85,
-    "peg_vs_ind": 2.72,
+    "pe_vs_ind": 1.98,
+    "peg_vs_ind": 2.79,
     "roe_vs_ind": 2.35
    },
    "benchmark": {
@@ -191,12 +106,29 @@
    }
   },
   {
-   "anon": "CAND-12",
+   "anon": "CAND-07",
+   "ticker": "AZN",
+   "sector": "Health Care",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.8,
+    "peg_vs_ind": 1.21,
+    "roe_vs_ind": 1.39
+   },
+   "benchmark": {
+    "forward_pe": 47.801,
+    "peg": 1.602,
+    "roe": 0.163,
+    "net_margin": 0.108
+   }
+  },
+  {
+   "anon": "CAND-08",
    "ticker": "WAB",
    "sector": "Industrials",
-   "health": "inline",
+   "health": "weak",
    "scores": {
-    "pe_vs_ind": 0.8,
+    "pe_vs_ind": 0.77,
     "peg_vs_ind": 1.23,
     "roe_vs_ind": 0.66
    },
@@ -208,30 +140,30 @@
    }
   },
   {
-   "anon": "CAND-13",
-   "ticker": "KLAC",
-   "sector": "Information Technology",
-   "health": "strong",
+   "anon": "CAND-09",
+   "ticker": "DOV",
+   "sector": "Industrials",
+   "health": "inline",
    "scores": {
-    "pe_vs_ind": 0.92,
-    "peg_vs_ind": 1.33,
-    "roe_vs_ind": 3.42
+    "pe_vs_ind": 1.1,
+    "peg_vs_ind": 1.21,
+    "roe_vs_ind": 0.83
    },
    "benchmark": {
-    "forward_pe": 37.708,
-    "peg": 1.846,
-    "roe": 0.256,
-    "net_margin": 0.197
+    "forward_pe": 27.652,
+    "peg": 1.688,
+    "roe": 0.184,
+    "net_margin": 0.074
    }
   },
   {
-   "anon": "CAND-14",
+   "anon": "CAND-10",
    "ticker": "ABNB",
    "sector": "Consumer Discretionary",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 0.75,
-    "peg_vs_ind": 3.03,
+    "pe_vs_ind": 0.74,
+    "peg_vs_ind": 3.11,
     "roe_vs_ind": 1.66
    },
    "benchmark": {
@@ -242,29 +174,63 @@
    }
   },
   {
-   "anon": "CAND-15",
-   "ticker": "HIG",
-   "sector": "Financials",
+   "anon": "CAND-11",
+   "ticker": "TT",
+   "sector": "Industrials",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.32,
-    "peg_vs_ind": 7.79,
-    "roe_vs_ind": 1.52
+    "pe_vs_ind": 0.96,
+    "peg_vs_ind": 1.17,
+    "roe_vs_ind": 2.01
    },
    "benchmark": {
-    "forward_pe": 12.825,
-    "peg": 0.935,
-    "roe": 0.145,
-    "net_margin": 0.255
+    "forward_pe": 27.652,
+    "peg": 1.688,
+    "roe": 0.184,
+    "net_margin": 0.074
    }
   },
   {
-   "anon": "CAND-16",
+   "anon": "CAND-12",
+   "ticker": "EME",
+   "sector": "Industrials",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.41,
+    "peg_vs_ind": 1.16,
+    "roe_vs_ind": 2.21
+   },
+   "benchmark": {
+    "forward_pe": 27.652,
+    "peg": 1.688,
+    "roe": 0.184,
+    "net_margin": 0.074
+   }
+  },
+  {
+   "anon": "CAND-13",
+   "ticker": "FTNT",
+   "sector": "Information Technology",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 0.92,
+    "peg_vs_ind": 1.23,
+    "roe_vs_ind": 5.98
+   },
+   "benchmark": {
+    "forward_pe": 37.708,
+    "peg": 1.846,
+    "roe": 0.256,
+    "net_margin": 0.197
+   }
+  },
+  {
+   "anon": "CAND-14",
    "ticker": "MU",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 3.07,
+    "pe_vs_ind": 3.37,
     "peg_vs_ind": 11.53,
     "roe_vs_ind": 3.45
    },
@@ -276,12 +242,12 @@
    }
   },
   {
-   "anon": "CAND-17",
+   "anon": "CAND-15",
    "ticker": "ON",
    "sector": "Information Technology",
-   "health": "weak",
+   "health": "inline",
    "scores": {
-    "pe_vs_ind": 0.79,
+    "pe_vs_ind": 0.83,
     "peg_vs_ind": 11.53,
     "roe_vs_ind": 0.32
    },
@@ -293,29 +259,12 @@
    }
   },
   {
-   "anon": "CAND-18",
-   "ticker": "LUV",
-   "sector": "Industrials",
-   "health": "strong",
-   "scores": {
-    "pe_vs_ind": 1.33,
-    "peg_vs_ind": 8.44,
-    "roe_vs_ind": 0.76
-   },
-   "benchmark": {
-    "forward_pe": 27.652,
-    "peg": 1.688,
-    "roe": 0.184,
-    "net_margin": 0.074
-   }
-  },
-  {
-   "anon": "CAND-19",
+   "anon": "CAND-16",
    "ticker": "DAL",
    "sector": "Industrials",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.76,
+    "pe_vs_ind": 1.67,
     "peg_vs_ind": 8.04,
     "roe_vs_ind": 0.86
    },
@@ -327,13 +276,30 @@
    }
   },
   {
-   "anon": "CAND-20",
+   "anon": "CAND-17",
+   "ticker": "LUV",
+   "sector": "Industrials",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.29,
+    "peg_vs_ind": 7.67,
+    "roe_vs_ind": 0.76
+   },
+   "benchmark": {
+    "forward_pe": 27.652,
+    "peg": 1.688,
+    "roe": 0.184,
+    "net_margin": 0.074
+   }
+  },
+  {
+   "anon": "CAND-18",
    "ticker": "NVDA",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.38,
-    "peg_vs_ind": 7.1,
+    "pe_vs_ind": 1.47,
+    "peg_vs_ind": 7.38,
     "roe_vs_ind": 4.58
    },
    "benchmark": {
@@ -344,14 +310,14 @@
    }
   },
   {
-   "anon": "CAND-21",
+   "anon": "CAND-19",
    "ticker": "FSLR",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 3.63,
-    "peg_vs_ind": 6.15,
-    "roe_vs_ind": 0.72
+    "pe_vs_ind": 3.59,
+    "peg_vs_ind": 5.95,
+    "roe_vs_ind": 0.73
    },
    "benchmark": {
     "forward_pe": 37.708,
@@ -361,12 +327,12 @@
    }
   },
   {
-   "anon": "CAND-22",
+   "anon": "CAND-20",
    "ticker": "AVGO",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 0.89,
+    "pe_vs_ind": 0.91,
     "peg_vs_ind": 5.77,
     "roe_vs_ind": 1.73
    },
@@ -378,13 +344,30 @@
    }
   },
   {
-   "anon": "CAND-23",
+   "anon": "CAND-21",
+   "ticker": "STX",
+   "sector": "Information Technology",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.22,
+    "peg_vs_ind": 4.99,
+    "roe_vs_ind": 10.14
+   },
+   "benchmark": {
+    "forward_pe": 37.708,
+    "peg": 1.846,
+    "roe": 0.256,
+    "net_margin": 0.197
+   }
+  },
+  {
+   "anon": "CAND-22",
    "ticker": "FIX",
    "sector": "Industrials",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.02,
-    "peg_vs_ind": 4.33,
+    "pe_vs_ind": 1.07,
+    "peg_vs_ind": 4.44,
     "roe_vs_ind": 3.19
    },
    "benchmark": {
@@ -395,14 +378,31 @@
    }
   },
   {
+   "anon": "CAND-23",
+   "ticker": "TER",
+   "sector": "Information Technology",
+   "health": "strong",
+   "scores": {
+    "pe_vs_ind": 1.26,
+    "peg_vs_ind": 4.01,
+    "roe_vs_ind": 1.67
+   },
+   "benchmark": {
+    "forward_pe": 37.708,
+    "peg": 1.846,
+    "roe": 0.256,
+    "net_margin": 0.197
+   }
+  },
+  {
    "anon": "CAND-24",
    "ticker": "NXPI",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 1.78,
-    "peg_vs_ind": 4.1,
-    "roe_vs_ind": 1.09
+    "pe_vs_ind": 1.85,
+    "peg_vs_ind": 3.55,
+    "roe_vs_ind": 1.12
    },
    "benchmark": {
     "forward_pe": 37.708,
@@ -417,8 +417,8 @@
    "sector": "Materials",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 2.6,
-    "peg_vs_ind": 2.99,
+    "pe_vs_ind": 2.63,
+    "peg_vs_ind": 2.93,
     "roe_vs_ind": 2.9
    },
    "benchmark": {
@@ -430,13 +430,13 @@
   },
   {
    "anon": "CAND-26",
-   "ticker": "TER",
+   "ticker": "WDC",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 0.87,
-    "peg_vs_ind": 3.24,
-    "roe_vs_ind": 1.43
+    "pe_vs_ind": 3.17,
+    "peg_vs_ind": 3.48,
+    "roe_vs_ind": 5.07
    },
    "benchmark": {
     "forward_pe": 37.708,
@@ -447,30 +447,30 @@
   },
   {
    "anon": "CAND-27",
-   "ticker": "ADI",
-   "sector": "Information Technology",
-   "health": "weak",
+   "ticker": "TMUS",
+   "sector": "Communication Services",
+   "health": "strong",
    "scores": {
-    "pe_vs_ind": 0.78,
-    "peg_vs_ind": 3.18,
-    "roe_vs_ind": 0.48
+    "pe_vs_ind": 2.33,
+    "peg_vs_ind": 8.47,
+    "roe_vs_ind": 1.98
    },
    "benchmark": {
-    "forward_pe": 37.708,
-    "peg": 1.846,
-    "roe": 0.256,
-    "net_margin": 0.197
+    "forward_pe": 35.867,
+    "peg": 4.658,
+    "roe": 0.098,
+    "net_margin": 0.067
    }
   },
   {
    "anon": "CAND-28",
-   "ticker": "GDDY",
+   "ticker": "ZBRA",
    "sector": "Information Technology",
    "health": "strong",
    "scores": {
-    "pe_vs_ind": 2.33,
-    "peg_vs_ind": 2.98,
-    "roe_vs_ind": 17.31
+    "pe_vs_ind": 1.14,
+    "peg_vs_ind": 3.18,
+    "roe_vs_ind": 0.6
    },
    "benchmark": {
     "forward_pe": 37.708,
@@ -481,13 +481,13 @@
   },
   {
    "anon": "CAND-29",
-   "ticker": "KEYS",
+   "ticker": "WDAY",
    "sector": "Information Technology",
    "health": "inline",
    "scores": {
-    "pe_vs_ind": 0.85,
-    "peg_vs_ind": 2.98,
-    "roe_vs_ind": 0.82
+    "pe_vs_ind": 0.94,
+    "peg_vs_ind": 3.08,
+    "roe_vs_ind": 0.63
    },
    "benchmark": {
     "forward_pe": 37.708,
@@ -498,40 +498,41 @@
   },
   {
    "anon": "CAND-30",
-   "ticker": "STT",
-   "sector": "Financials",
+   "ticker": "KEYS",
+   "sector": "Information Technology",
    "health": "inline",
    "scores": {
-    "pe_vs_ind": 0.92,
-    "peg_vs_ind": 1.51,
-    "roe_vs_ind": 0.9
+    "pe_vs_ind": 0.93,
+    "peg_vs_ind": 3.03,
+    "roe_vs_ind": 0.82
    },
    "benchmark": {
-    "forward_pe": 12.825,
-    "peg": 0.935,
-    "roe": 0.145,
-    "net_margin": 0.255
+    "forward_pe": 37.708,
+    "peg": 1.846,
+    "roe": 0.256,
+    "net_margin": 0.197
    }
   }
  ],
  "sector_concentration": [
   {
    "sector": "Information Technology",
-   "count": 14,
+   "count": 15,
    "tickers": [
     "ADBE",
-    "GLW",
     "TEL",
-    "KLAC",
+    "FTNT",
     "MU",
     "ON",
     "NVDA",
     "FSLR",
     "AVGO",
-    "NXPI",
+    "STX",
     "TER",
-    "ADI",
-    "GDDY",
+    "NXPI",
+    "WDC",
+    "ZBRA",
+    "WDAY",
     "KEYS"
    ]
   },
@@ -539,12 +540,12 @@
    "sector": "Industrials",
    "count": 7,
    "tickers": [
-    "EME",
-    "HWM",
-    "HII",
     "WAB",
-    "LUV",
+    "DOV",
+    "TT",
+    "EME",
     "DAL",
+    "LUV",
     "FIX"
    ]
   },
@@ -552,21 +553,14 @@
    "sector": "Health Care",
    "count": 4,
    "tickers": [
-    "BSX",
     "CI",
     "VEEV",
-    "UHS"
+    "RMD",
+    "AZN"
    ]
   }
  ],
  "sector_benchmarks": {
-  "Industrials": {
-   "forward_pe": 27.652,
-   "peg": 1.688,
-   "roe": 0.184,
-   "net_margin": 0.074,
-   "n_firms": 436
-  },
   "Information Technology": {
    "forward_pe": 37.708,
    "peg": 1.846,
@@ -588,6 +582,13 @@
    "net_margin": 0.099,
    "n_firms": 266
   },
+  "Industrials": {
+   "forward_pe": 27.652,
+   "peg": 1.688,
+   "roe": 0.184,
+   "net_margin": 0.074,
+   "n_firms": 436
+  },
   "Consumer Discretionary": {
    "forward_pe": 28.968,
    "peg": 4.391,
@@ -595,19 +596,19 @@
    "net_margin": 0.062,
    "n_firms": 361
   },
-  "Financials": {
-   "forward_pe": 12.825,
-   "peg": 0.935,
-   "roe": 0.145,
-   "net_margin": 0.255,
-   "n_firms": 812
-  },
   "Materials": {
    "forward_pe": 23.648,
    "peg": 1.553,
    "roe": 0.103,
    "net_margin": 0.063,
    "n_firms": 186
+  },
+  "Communication Services": {
+   "forward_pe": 35.867,
+   "peg": 4.658,
+   "roe": 0.098,
+   "net_margin": 0.067,
+   "n_firms": 212
   }
  }
 }
