@@ -1,33 +1,33 @@
 {
- "generated_utc": "2026-11-09T21:32:47+00:00",
- "week_of": "2026-11-04",
+ "generated_utc": "2026-11-16T21:09:27+00:00",
+ "week_of": "2026-11-11",
  "as_of": {
-  "WALCL": "2026-11-04",
-  "RRPONTSYD": "2026-11-09",
-  "WTREGEN": "2026-11-04",
-  "BAMLH0A0HYM2": "2026-11-06",
+  "WALCL": "2026-11-11",
+  "RRPONTSYD": "2026-11-16",
+  "WTREGEN": "2026-11-11",
+  "BAMLH0A0HYM2": "2026-11-13",
   "DTWEXBGS": "2026-11-06",
-  "T10Y2Y": "2026-11-06"
+  "T10Y2Y": "2026-11-13"
  },
  "regime": {
-  "label": "Risk-Off",
-  "score": -4,
+  "label": "Neutral",
+  "score": 0,
   "crisis_override": false,
-  "sizing_hint": "Watchlist only \u2014 no new pilot positions, build cash.",
+  "sizing_hint": "Half-size pilots; demand stronger fundamentals.",
   "components": [
    {
     "id": "net_liquidity",
     "name": "Net Liquidity trend (13w)",
-    "value": -0.84,
+    "value": 0.85,
     "unit": "%",
-    "signal": -1,
+    "signal": 1,
     "weight": 2,
-    "contribution": -2
+    "contribution": 2
    },
    {
     "id": "hy_oas",
     "name": "Credit spread trend (13w)",
-    "value": 0.57,
+    "value": 0.59,
     "unit": "pp",
     "signal": -1,
     "weight": 1,
@@ -36,7 +36,7 @@
    {
     "id": "dollar",
     "name": "US Dollar trend (13w)",
-    "value": 1.68,
+    "value": 2.32,
     "unit": "%",
     "signal": -1,
     "weight": 1,
@@ -48,13 +48,9 @@
   "net_liquidity": {
    "name": "Net Liquidity",
    "unit": "$T",
-   "latest": 5.791,
-   "change_13w_pct": -0.84,
+   "latest": 5.844,
+   "change_13w_pct": 0.85,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 5.897
-    },
     {
      "d": "2024-11-20",
      "v": 5.954
@@ -466,18 +462,18 @@
     {
      "d": "2026-11-04",
      "v": 5.791
+    },
+    {
+     "d": "2026-11-11",
+     "v": 5.844
     }
    ]
   },
   "walcl": {
    "name": "Fed Balance Sheet",
    "unit": "$T",
-   "latest": 6.748,
+   "latest": 6.759,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 6.967
-    },
     {
      "d": "2024-11-20",
      "v": 6.924
@@ -889,6 +885,10 @@
     {
      "d": "2026-11-04",
      "v": 6.748
+    },
+    {
+     "d": "2026-11-11",
+     "v": 6.759
     }
    ]
   },
@@ -897,10 +897,6 @@
    "unit": "$T",
    "latest": 0.0,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 0.238
-    },
     {
      "d": "2024-11-20",
      "v": 0.218
@@ -1312,18 +1308,18 @@
     {
      "d": "2026-11-04",
      "v": 0.0
+    },
+    {
+     "d": "2026-11-11",
+     "v": 0.0
     }
    ]
   },
   "tga": {
    "name": "Treasury General Account",
    "unit": "$T",
-   "latest": 0.957,
+   "latest": 0.914,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 0.832
-    },
     {
      "d": "2024-11-20",
      "v": 0.752
@@ -1735,19 +1731,19 @@
     {
      "d": "2026-11-04",
      "v": 0.957
+    },
+    {
+     "d": "2026-11-11",
+     "v": 0.914
     }
    ]
   },
   "hy_oas": {
    "name": "High-Yield Credit Spread",
    "unit": "%",
-   "latest": 3.32,
-   "change_13w_pp": 0.57,
+   "latest": 3.3,
+   "change_13w_pp": 0.59,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 2.64
-    },
     {
      "d": "2024-11-20",
      "v": 2.67
@@ -2159,19 +2155,19 @@
     {
      "d": "2026-11-04",
      "v": 3.32
+    },
+    {
+     "d": "2026-11-11",
+     "v": 3.3
     }
    ]
   },
   "dollar": {
    "name": "Broad Dollar Index",
    "unit": "",
-   "latest": 121.4,
-   "change_13w_pct": 1.68,
+   "latest": 121.88,
+   "change_13w_pct": 2.32,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 126.96
-    },
     {
      "d": "2024-11-20",
      "v": 126.88
@@ -2583,18 +2579,18 @@
     {
      "d": "2026-11-04",
      "v": 121.4
+    },
+    {
+     "d": "2026-11-11",
+     "v": 121.88
     }
    ]
   },
   "yield_curve": {
    "name": "Yield Curve (10y\u22122y)",
    "unit": "%",
-   "latest": 0.32,
+   "latest": 0.25,
    "history": [
-    {
-     "d": "2024-11-13",
-     "v": 0.17
-    },
     {
      "d": "2024-11-20",
      "v": 0.1
@@ -3006,6 +3002,10 @@
     {
      "d": "2026-11-04",
      "v": 0.32
+    },
+    {
+     "d": "2026-11-11",
+     "v": 0.25
     }
    ]
   }
